@@ -31,19 +31,16 @@ public class DBContext {
     private final String instance="";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
     private final String userID = "sa";
     private final String password = "816570";
-    */
-	// mysql://b2878b09d91f51:4da99eb2@us-cdbr-east-06.cleardb.net/heroku_7ceacf08c297035?reconnect=true
-	//private static String DB_URL = "jdbc:mysql://localhost:3306/shopshoes_test";
-	/*
-	private static String DB_URL = "jdbc:mysql://b344f457c2fba7:3e3fdf5f@us-cdbr-east-06.cleardb.net/heroku_a6e7885fa904cbb?reconnect=true";
-    private static String USER_NAME = "b344f457c2fba7";
-    private static String PASSWORD = "3e3fdf5f";
-    */
-    
+    /*
 	private static String DB_URL = "jdbc:mysql://shopshoes.cyb6i27dmcxd.ap-northeast-1.rds.amazonaws.com:3306/dbshopshoes";
     private static String USER_NAME = "admin";
     private static String PASSWORD = "23456789";
-   
+   */
+
+    private static String DB_URL = "jdbc:mysql://b344f457c2fba7:3e3fdf5f@us-cdbr-east-06.cleardb.net/heroku_a6e7885fa904cbb?reconnect=true";
+    private static String USER_NAME = "b344f457c2fba7";
+    private static String PASSWORD = "3e3fdf5f";
+    
     public Connection getConnection() throws Exception {
     	Class.forName("com.mysql.cj.jdbc.Driver");
     	return DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD); 
