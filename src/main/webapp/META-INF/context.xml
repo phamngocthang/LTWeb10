@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+	<Resource 
+		name="jdbc/shoes" 
+		auth="Container" 
+		type="javax.sql.DataSource"
+		maxActive="50" 
+		maxIdle="30" 
+		maxWait="10000"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+	    url="jdbc:mysql://b344f457c2fba7:3e3fdf5f@us-cdbr-east-06.cleardb.net/heroku_a6e7885fa904cbb?reconnect=true" 
+	    username="b344f457c2fba7" password="3e3fdf5f" />
+
+</Context>
