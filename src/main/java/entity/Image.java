@@ -50,4 +50,10 @@ public class Image {
 		super();
 		this.path_middle = path_middle;
 	}
+	public Image(String path_middle, String path_left, String path_right) {
+		super();
+		this.path_middle = path_middle;
+		this.path_left = path_left;
+		this.path_right = path_right;
+	}
 }

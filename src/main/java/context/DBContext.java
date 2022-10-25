@@ -36,16 +36,28 @@ public class DBContext {
     private static String USER_NAME = "admin";
     private static String PASSWORD = "23456789";
    */
-
-    private static String DB_URL = "jdbc:mysql://b344f457c2fba7:3e3fdf5f@us-cdbr-east-06.cleardb.net/heroku_a6e7885fa904cbb?reconnect=true";
+	private static String DB_URL = "jdbc:mysql://localhost:3306/dbshopshoes";
+	private static String USER_NAME = "root";
+	private static String PASSWORD = "";
+    /*private static String DB_URL = "jdbc:mysql://b344f457c2fba7:3e3fdf5f@us-cdbr-east-06.cleardb.net/heroku_a6e7885fa904cbb?reconnect=true";
     private static String USER_NAME = "b344f457c2fba7";
-    private static String PASSWORD = "3e3fdf5f";
+    private static String PASSWORD = "3e3fdf5f";*/
     
     public Connection getConnection() throws Exception {
     	Class.forName("com.mysql.cj.jdbc.Driver");
     	return DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD); 
     }
+    public static void main(String[] args) throws SQLException {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD);
+			System.out.println("connect successfully!");
 
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 
  

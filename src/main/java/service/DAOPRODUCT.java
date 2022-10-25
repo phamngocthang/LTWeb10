@@ -35,7 +35,6 @@ public class DAOPRODUCT {
 				list.add(new Product(rs.getInt(1), rs.getString(2), rs.getDouble(3),
 						new Image(rs.getString(4))));
 			}
-			System.out.println(list);
 			rs.close();
 			ps.close();
 			conn.close();
@@ -78,7 +77,6 @@ public class DAOPRODUCT {
 		  
 		String query = "Select DISTINCT Product.id_P, Product.name_P, Product.price, Image.path_middle from Product, Image WHERE\r\n"
 				+ "	Product.id_P = Image.id_P AND " + fillTotal +" ";
-		System.out.println(query);
     	List<Product> list = new ArrayList<>();
     	try {
     		conn = new DBContext().getConnection();
