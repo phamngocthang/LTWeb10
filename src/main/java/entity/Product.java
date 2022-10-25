@@ -20,6 +20,7 @@ public class Product implements Serializable {
 	private String detail_desc;
 	private String infor;
 	private Image img;
+	
 	public int getId_P() {
 		return id_P;
 	}
@@ -104,7 +105,7 @@ public class Product implements Serializable {
 	public void setImg(Image img) {
 		this.img = img;
 	}
-	
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -132,6 +133,20 @@ public class Product implements Serializable {
 		this.id_P = id_P;
 		this.name_P = name_P;
 		this.price = price;
+		this.img = img;
+	}
+	public Product(int id_P, String name_P,double price, String color, String size,
+			int amount, String description, String detail_desc, String infor, Image img) {
+		super();
+		this.id_P = id_P;
+		this.name_P = name_P;
+		this.price = price;
+		this.color = color;
+		this.size = size;
+		this.amount = amount;
+		this.description = description;
+		this.detail_desc = detail_desc;
+		this.infor = infor;
 		this.img = img;
 	}
 	@Override

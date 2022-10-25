@@ -213,7 +213,7 @@
 	                                </div>
 	                            </div>
 	                            <div class="text-center py-4">
-	                                <a class="h6 text-decoration-none text-truncate" href="">${o.name_P}</a>
+	                                <a class="h6 text-decoration-none text-truncate" href="https://www.facebook.com/">${o.name_P}</a>
 	                                <div class="d-flex align-items-center justify-content-center mt-2">
 	                                    <h5>${o.price} VNĐ</h5>
 	                                </div>
