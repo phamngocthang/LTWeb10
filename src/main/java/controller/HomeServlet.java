@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import service.DAOPRODUCT;
+import service.ProductService;
 import entity.Product;
 
 
@@ -20,16 +20,15 @@ public class HomeServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-        //b1: get data from dao
-        DAOPRODUCT dao = new DAOPRODUCT();
-        List<Product> list = dao.getRecentProduct();
         
-        //b2: set data to jsp
+        ProductService pService = new ProductService();
+        // Get 4 Recent Product
+        List<Product> list = pService.getRecentProduct();
+        
+       
         HttpSession session = request.getSession();
         session.setAttribute("listNP", list);
         request.getRequestDispatcher("index.jsp").forward(request, response);
-        //404 -> url
-        //500 -> jsp properties
     }
 
     @Override

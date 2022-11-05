@@ -1,53 +1,76 @@
 package entity;
 
-public class Image {
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the image database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Image.findAll", query="SELECT i FROM Image i")
+public class Image implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
 	private int id_P;
-	private String path_middle;
-	private String path_left;
-	private String path_right;
-	public int getId_P() {
-		return id_P;
+
+	@Column(name="path_left")
+	private String pathLeft;
+
+	@Column(name="path_middle")
+	private String pathMiddle;
+
+	@Column(name="path_right")
+	private String pathRight;
+
+	//bi-directional one-to-one association to Product
+	@OneToOne
+	@JoinColumn(name="id_P")
+	private Product product;
+
+	public Image() {
 	}
+
+	public int getId_P() {
+		return this.id_P;
+	}
+
 	public void setId_P(int id_P) {
 		this.id_P = id_P;
 	}
-	public String getPath_middle() {
-		return path_middle;
+
+	public String getPathLeft() {
+		return this.pathLeft;
 	}
-	public void setPath_middle(String path_middle) {
-		this.path_middle = path_middle;
+
+	public void setPathLeft(String pathLeft) {
+		this.pathLeft = pathLeft;
 	}
-	public String getPath_left() {
-		return path_left;
+
+	public String getPathMiddle() {
+		return this.pathMiddle;
 	}
-	public void setPath_left(String path_left) {
-		this.path_left = path_left;
+
+	public void setPathMiddle(String pathMiddle) {
+		this.pathMiddle = pathMiddle;
 	}
-	public String getPath_right() {
-		return path_right;
+
+	public String getPathRight() {
+		return this.pathRight;
 	}
-	public void setPath_right(String path_right) {
-		this.path_right = path_right;
+
+	public void setPathRight(String pathRight) {
+		this.pathRight = pathRight;
 	}
-	@Override
-	public String toString() {
-		return "Image [id_P=" + id_P + ", path_middle=" + path_middle + ", path_left=" + path_left + ", path_right="
-				+ path_right + "]";
+
+	public Product getProduct() {
+		return this.product;
 	}
-	public Image(int id_P, String path_middle, String path_left, String path_right) {
-		super();
-		this.id_P = id_P;
-		this.path_middle = path_middle;
-		this.path_left = path_left;
-		this.path_right = path_right;
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-	public Image() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Image(String path_middle) {
-		super();
-		this.path_middle = path_middle;
-	}
+
 }

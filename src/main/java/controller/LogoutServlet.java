@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import service.DAOACCOUNT;
 import entity.Account;
 @WebServlet("/Logout")
 public class LogoutServlet extends HttpServlet {

@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import service.DAOPRODUCT;
+
+import service.ProductService;
 import entity.Image;
 import entity.Product;
 
@@ -18,11 +19,12 @@ import entity.Product;
 
 @WebServlet(name = "HomeControl", urlPatterns = {"/shop"})
 public class ProductServlet extends HttpServlet {
-	DAOPRODUCT dao = new DAOPRODUCT();
-	
-	private int getEndPage(String show) {
+	ProductService pService = new ProductService();
+	private int getEndPage(String subcateID, String show) {
 		int showPage = Integer.parseInt(show);
-		int count = dao.getCountAccount();
+
+		int count = pService.getCountAccount(subcateID);
+
 		int endP = count / showPage;
 		if(count % showPage != 0)
 		{
@@ -35,21 +37,23 @@ public class ProductServlet extends HttpServlet {
 		try
 		{
 	        response.setContentType("text/html;charset=UTF-8");
-	        // Get Parameter and Convert to INT
+	        // Get Parameter and Convert to 
+	        String subcateID = request.getParameter("subcateID");
 	        String show = request.getParameter("showP");
 	        String indexP = request.getParameter("index");
 	        int showPage = Integer.parseInt(show);
 			int indexPage = Integer.parseInt(indexP);
-	        // End Page Product
-	        int endP = getEndPage(show);
-			request.setAttribute("endP", endP);
-			// Display Product
-			List<Product> listA = dao.pagingAccount(indexPage, showPage);
-			HttpSession session = request.getSession();
-			session.setAttribute("listP", listA);
+	        int endP = getEndPage(subcateID, show);
+	        
+	        //List<Product> listA = dao.pagingAccount(subcateID, indexPage, showPage);
+	        List<Product> listA = pService.pagingAccount(subcateID, indexPage, showPage);
+	        request.setAttribute("endP", endP);
+			request.setAttribute("listP", listA);
+			
 			// Send endP end showtag
-			session.setAttribute("tag", indexPage);
-			session.setAttribute("showtag", showPage);
+			request.setAttribute("tag", indexPage);
+			request.setAttribute("showtag", showPage);
+			request.setAttribute("subcateID", subcateID);
 	        request.getRequestDispatcher("shop.jsp").forward(request, response);
 		}
 		catch(Exception e) {
