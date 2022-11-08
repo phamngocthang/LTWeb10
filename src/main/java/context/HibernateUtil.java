@@ -55,18 +55,19 @@ public class HibernateUtil {
     
 	private final static SessionFactory FACTORY;
 	
-	
 	static {
 		Configuration conf = new Configuration ();
 		Properties pros = new Properties();
-		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 		pros.put (Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
 		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
 		pros.put (Environment.USER, "root");
-		pros.put (Environment.PASS, "816570");
+		pros.put (Environment.PASS, "20110687");
 		pros.put (Environment.SHOW_SQL, "true");
-		pros.put (Environment.AUTOCOMMIT, "true");
-		conf.setProperties (pros);
+		pros.put(Environment.AUTOCOMMIT, "true");
+		
+		conf.setProperties(pros);
+		
 		conf.addAnnotatedClass(Product.class);
 		conf.addAnnotatedClass(Image.class);
 		conf.addAnnotatedClass(Account.class);
@@ -78,6 +79,7 @@ public class HibernateUtil {
 		
 		ServiceRegistry registry = new StandardServiceRegistryBuilder()
 				.applySettings(conf.getProperties()).build();
+
 		FACTORY  = conf.buildSessionFactory(registry);
 		
 	}
