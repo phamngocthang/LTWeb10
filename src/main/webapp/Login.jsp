@@ -24,14 +24,14 @@
                 <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
                 <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
             </div>
-            <%
-				String err = request.getParameter("err");
-				if ("1".equals(err)) {
-				out.print("<center> <h6 style=\"color: red;\">Login fail! Username or Password is incorrect</h6> </center>");
-				}
-			%>
+            	<%
+		String err = request.getParameter("err");
+		if ("1".equals(err)) {
+			out.print("<center> <h6 style=\"color: red;\">Login fail! Username or Password is incorrect</h6> </center>");
+			}
+		%>
             <p style="text-align:center"> OR  </p>
-            <input name="user" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <input name="user" type="text" id="inputUsername" class="form-control" placeholder="Email address" required="" autofocus="">
             <input name="pass" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
             
             <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
