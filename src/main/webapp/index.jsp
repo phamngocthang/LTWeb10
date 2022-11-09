@@ -304,8 +304,8 @@
     <div class="container-fluid pt-5 pb-3">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
         <div class="row px-xl-5">
-        	<c:forEach items="${listNP}" var="o">
-	            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+        	<c:forEach items="${listNP}" var="o" >
+	            <div class="col-lg-3 col-md-4 col-sm-6 pb-1" >
 	                <div class="product-item bg-light mb-4">
 	                    <div class="product-img position-relative overflow-hidden">
 	                    	<c:set var="img_o" value="${o.image}" />
@@ -318,7 +318,7 @@
 	                        </div>
 	                    </div>
 	                    <div class="text-center py-4">
-	                        <a class="h6 text-decoration-none text-truncate" href="/WebApp/detail?id=${o.id_P}">${o.name_P}</a>
+	                        <a class="h6 text-decoration-none text-truncate" href="${pageContext.request.contextPath}/detail?id=${o.id_P}&brand=${o.brand}">${o.name_P}</a>
 	                        <div class="d-flex align-items-center justify-content-center mt-2">
 	                            <h5>${o.price} VNĐ</h5>
 	                        </div>

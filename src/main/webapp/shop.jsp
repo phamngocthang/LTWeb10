@@ -201,12 +201,12 @@
 	                                </div>
 	                            </div>
 	                            <div class="text-center py-4">
-	                                <a class="h6 text-decoration-none text-truncate" href="">${o.name_P}</a>
+	                                <a class="h6 text-decoration-none text-truncate" href="${pageContext.request.contextPath}/detail?id=${o.id_P}&brand=${o.brand}">${o.name_P}</a>
 	                                <div class="d-flex align-items-center justify-content-center mt-2">
 	                                    <h5>${o.price} VNĐ</h5>
 	                                </div>
 	                                <div class="d-flex align-items-center justify-content-center mt-2">
-	                                    <h6>Size: M</h6>
+	                                    <h6>Size: ${o.size}</h6>
 	                                </div>
 	                                <div class="d-flex align-items-center justify-content-center mb-1">
 	                                    <small class="fa fa-star text-primary mr-1"></small>
