@@ -11,7 +11,8 @@
   import javax.servlet.http.HttpSession;
 
 import entity.Account;
-import entity.Product; 
+import entity.Product;
+import service.ProductService;
 import service.ShopDetailService;
   
  /**
@@ -19,14 +20,21 @@ import service.ShopDetailService;
 	 */
 @WebServlet(name = "DetailProductServlet", urlPatterns = {"/detail"}) 
 public class DetailProductServlet extends HttpServlet {
-		protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+		{
 		  response.setContentType("text/html;charset=UTF-8"); 
 		  ShopDetailService dp = new ShopDetailService(); 
-		  String id = request.getParameter("id"); 
+		  int id = Integer.parseInt(request.getParameter("id"));
+		  String brand = request.getParameter("brand"); 
 		  Product detail = dp.getProductByID(id); 
+	      // Get 5 Recent Product
+	      List<Product> list = dp.getAllProductByBrand(brand, id);
+	      System.out.print(brand);
 		  HttpSession session = request.getSession();
+		  session.setAttribute("listNP", list);
 		  session.setAttribute("detail", detail);
-		  request.getRequestDispatcher("detail.jsp").forward(request, response); }
+		  request.getRequestDispatcher("detail.jsp").forward(request, response);
+		}
 		  
 		  @Override protected void doGet(HttpServletRequest request,
 		  HttpServletResponse response) throws ServletException, IOException {
