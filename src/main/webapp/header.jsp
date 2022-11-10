@@ -65,15 +65,15 @@
             <div class="col-lg-4 col-6 text-left">
             </div>
             <div class="col-lg-4 col-6 text-right">
-            	<c:if test="${sessionScope.account == null }">
+            	<c:if test="${sessionScope.user == null }">
             		<div class="btn-group mx-2">
-                    	<button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" onclick="location.href='Login';" >Login</button>
+                    	<button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" onclick="location.href='Login.jsp';" >Login</button>
                 	</div>
             	</c:if>
                 
-                <c:if test="${sessionScope.account != null }">
+                <c:if test="${sessionScope.user != null }">
 	                <div class="btn-group">
-	                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.account.username}</button>
+	                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.user.userName}</button>
 	                    <div class="dropdown-menu dropdown-menu-right">
 	                        <button class="dropdown-item" type="button">Tài khoản của tôi</button>
 	                        <button class="dropdown-item" type="button" onclick="location.href='Logout';">Logout</button>

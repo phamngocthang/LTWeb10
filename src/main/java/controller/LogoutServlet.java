@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entity.Account;
+
 @WebServlet("/Logout")
 public class LogoutServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -17,7 +18,7 @@ public class LogoutServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession();
-        session.removeAttribute("account");
+        session.removeAttribute("user");
         response.sendRedirect("home");
     }
 
