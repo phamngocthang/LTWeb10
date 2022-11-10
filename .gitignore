@@ -27,7 +27,7 @@ nb-configuration.xml
 .classpath
 .project
 .settings/
-/HibernateUtil.java
+src/main/java/context/HibernateUtil.java
 # Intellij
 .idea/
 *.iml
