@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../dist/output.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+
+<body>
+  <main class='grid grid-cols-[200px_1fr] p-4 min-h-screen gap-4 max-w-[1200px] mx-auto pt-10'>
+    <aside>
+      <nav>
+        <ul>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-gauge"></i>
+            <a href="DashboardHome.html">Dashboard</a>
+          </li>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-money-bill"></i>
+            <a href="Bill.html">Hóa đơn</a>
+          </li>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-user"></i>
+            <a href="./Manage.html">Quản lý tài khoản</a>
+          </li>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-shoe-prints"></i>
+            <a href="DashboardHome.html">Quản lý sản phẩm</a>
+          </li>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-chart-simple"></i>
+            <a href="./Top.html">Top 10</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <article>
+      <div class='grid grid-cols-2 gap-4'>
+
+        <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>
+          <div class='text-3xl'>
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <p class='text-lg'>Tổng số khách hàng</p>
+            <p class='text-3xl'>1345</p>
+          </div>
+        </div>
+        <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>
+          <div class='text-3xl'>
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <p class='text-lg'>Tổng số danh mục sản phẩm</p>
+            <p class='text-3xl'>23</p>
+          </div>
+        </div>
+        <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>
+          <div class='text-3xl'>
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <p class='text-lg'>Tổng số sản phẩm</p>
+            <p class='text-3xl'>2344</p>
+          </div>
+        </div>
+        <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>
+          <div class='text-3xl'>
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div>
+            <p class='text-lg'>Tổng số đơn đặt hàng</p>
+            <p class='text-3xl'>5678</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+</body>
+
+</html>

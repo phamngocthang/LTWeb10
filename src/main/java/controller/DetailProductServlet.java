@@ -33,7 +33,7 @@ public class DetailProductServlet extends HttpServlet {
 		  HttpSession session = request.getSession();
 		  session.setAttribute("listNP", list);
 		  session.setAttribute("detail", detail);
-		  request.getRequestDispatcher("detail.jsp").forward(request, response);
+		  request.getRequestDispatcher("Client/detail.jsp").forward(request, response);
 		}
 		  
 		  @Override protected void doGet(HttpServletRequest request,

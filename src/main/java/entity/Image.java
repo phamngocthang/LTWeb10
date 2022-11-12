@@ -30,6 +30,11 @@ public class Image implements Serializable {
 	@JoinColumn(name="id_P")
 	private Product product;
 
+	public Image(String pathMiddle) {
+		super();
+		this.pathMiddle = pathMiddle;
+	}
+
 	public Image() {
 	}
 

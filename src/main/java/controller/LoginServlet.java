@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("home");
         }
         else {
-        	response.sendRedirect("Login.jsp?err=1");
+        	response.sendRedirect("Client/Login.jsp?err=1");
         }
     }
     @Override

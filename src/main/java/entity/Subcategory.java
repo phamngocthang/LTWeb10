@@ -77,7 +77,4 @@ public class Subcategory implements Serializable {
 		this.category = category;
 	}
 
-	public int getProductCount() {
-		return this.products.size();
-	}
 }

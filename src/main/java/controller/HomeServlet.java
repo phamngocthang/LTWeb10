@@ -63,7 +63,7 @@ public class HomeServlet extends HttpServlet {
         session.setAttribute("recentProducts", recentProducts);
         session.setAttribute("countProduct", countProduct);
         
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("Client/index.jsp").forward(request, response);
     }
 
     @Override

@@ -67,7 +67,7 @@
             <div class="col-lg-4 col-6 text-right">
             	<c:if test="${sessionScope.user == null }">
             		<div class="btn-group mx-2">
-                    	<button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" onclick="location.href='Login.jsp';" >Login</button>
+                    	<button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" onclick="location.href='Client/Login.jsp';" >Login</button>
                 	</div>
             	</c:if>
                 
@@ -131,15 +131,7 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="home" class="nav-item nav-link">Home</a>
                             <a href="shop?subcateID=-1&index=1&showP=3" class="nav-item nav-link">Shop</a>
-                            <a href="detail.jsp" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.jsp" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.jsp" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
-                            <a href="contact.jsp" class="nav-item nav-link">Contact</a>
+                            <a href="${pageContext.request.contextPath}/Client/contact.jsp" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">

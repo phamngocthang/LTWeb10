@@ -96,7 +96,7 @@ public class SearchProductByPrice extends HttpServlet {
 					+ "	                                </div>\r\n"
 					+ "	                            </div>\r\n"
 					+ "	                            <div class=\"text-center py-4\">\r\n"
-					+ "	                                <a class=\"h6 text-decoration-none text-truncate\" href=\"\">"+o.getName_P()+"</a>\r\n"
+					+ "	                                <a class=\"h6 text-decoration-none text-truncate\" href=\"detail?id="+o.getId_P()+"&brand="+o.getBrand()+"\">"+o.getName_P()+"</a>\r\n"
 					+ "	                                <div class=\"d-flex align-items-center justify-content-center mt-2\">\r\n"
 					+ "	                                    <h5>"+o.getPrice()+" VNĐ</h5>\r\n"
 					+ "	                                </div>\r\n"

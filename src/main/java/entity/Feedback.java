@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -17,6 +18,9 @@ public class Feedback implements Serializable {
 	private int id_FB;
 
 	private String content;
+
+	@Temporal(TemporalType.DATE)
+	private Date date;
 
 	private int rate;
 
@@ -47,6 +51,14 @@ public class Feedback implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public int getRate() {

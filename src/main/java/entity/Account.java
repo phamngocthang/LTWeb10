@@ -21,6 +21,14 @@ public class Account implements Serializable {
 
 	private String passWord;
 
+	//bi-directional many-to-one association to Bill
+	@OneToMany(mappedBy="account")
+	private List<Bill> bills;
+
+	//bi-directional many-to-one association to Cart
+	@OneToMany(mappedBy="account")
+	private List<Cart> carts;
+
 	//bi-directional one-to-one association to Customer
 	@OneToOne(mappedBy="account")
 	private Customer customer;
@@ -54,6 +62,50 @@ public class Account implements Serializable {
 
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
+	}
+
+	public List<Bill> getBills() {
+		return this.bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
+	}
+
+	public Bill addBill(Bill bill) {
+		getBills().add(bill);
+		bill.setAccount(this);
+
+		return bill;
+	}
+
+	public Bill removeBill(Bill bill) {
+		getBills().remove(bill);
+		bill.setAccount(null);
+
+		return bill;
+	}
+
+	public List<Cart> getCarts() {
+		return this.carts;
+	}
+
+	public void setCarts(List<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public Cart addCart(Cart cart) {
+		getCarts().add(cart);
+		cart.setAccount(this);
+
+		return cart;
+	}
+
+	public Cart removeCart(Cart cart) {
+		getCarts().remove(cart);
+		cart.setAccount(null);
+
+		return cart;
 	}
 
 	public Customer getCustomer() {

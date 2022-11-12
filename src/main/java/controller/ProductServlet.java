@@ -54,7 +54,7 @@ public class ProductServlet extends HttpServlet {
 			request.setAttribute("tag", indexPage);
 			request.setAttribute("showtag", showPage);
 			request.setAttribute("subcateID", subcateID);
-	        request.getRequestDispatcher("shop.jsp").forward(request, response);
+	        request.getRequestDispatcher("Client/shop.jsp").forward(request, response);
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());

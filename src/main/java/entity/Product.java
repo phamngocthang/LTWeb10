@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
-import entity.Spyeuthich;
+
 
 /**
  * The persistent class for the product database table.
@@ -31,6 +31,14 @@ public class Product implements Serializable {
 
 	private String size;
 
+	//bi-directional many-to-one association to Billdetail
+	@OneToMany(mappedBy="product")
+	private List<Billdetail> billdetails;
+
+	//bi-directional many-to-one association to Cart
+	@OneToMany(mappedBy="product")
+	private List<Cart> carts;
+
 	//bi-directional many-to-one association to Feedback
 	@OneToMany(mappedBy="product")
 	private List<Feedback> feedbacks;
@@ -40,12 +48,12 @@ public class Product implements Serializable {
 	private Image image;
 
 	//bi-directional many-to-one association to Category
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_Cate")
 	private Category category;
 
 	//bi-directional many-to-one association to Subcategory
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_SubCate")
 	private Subcategory subcategory;
 
@@ -54,6 +62,13 @@ public class Product implements Serializable {
 	private List<Spyeuthich> spyeuthiches;
 
 	public Product() {
+	}
+
+	public Product(String name_P, double price, Image image) {
+		super();
+		this.name_P = name_P;
+		this.price = price;
+		this.image = image;
 	}
 
 	public int getId_P() {
@@ -118,6 +133,50 @@ public class Product implements Serializable {
 
 	public void setSize(String size) {
 		this.size = size;
+	}
+
+	public List<Billdetail> getBilldetails() {
+		return this.billdetails;
+	}
+
+	public void setBilldetails(List<Billdetail> billdetails) {
+		this.billdetails = billdetails;
+	}
+
+	public Billdetail addBilldetail(Billdetail billdetail) {
+		getBilldetails().add(billdetail);
+		billdetail.setProduct(this);
+
+		return billdetail;
+	}
+
+	public Billdetail removeBilldetail(Billdetail billdetail) {
+		getBilldetails().remove(billdetail);
+		billdetail.setProduct(null);
+
+		return billdetail;
+	}
+
+	public List<Cart> getCarts() {
+		return this.carts;
+	}
+
+	public void setCarts(List<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public Cart addCart(Cart cart) {
+		getCarts().add(cart);
+		cart.setProduct(this);
+
+		return cart;
+	}
+
+	public Cart removeCart(Cart cart) {
+		getCarts().remove(cart);
+		cart.setProduct(null);
+
+		return cart;
 	}
 
 	public List<Feedback> getFeedbacks() {
