@@ -12,14 +12,15 @@ import javax.servlet.http.HttpSession;
 
 import entity.Account;
 import entity.Cart;
+import entity.Favoriteproduct;
 import entity.Product;
-import service.CartService;
+import service.FavoriteProductService;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class ManagerFavoriteProductServlet
  */
-@WebServlet("/managerCart")
-public class ManagerCartServlet extends HttpServlet {
+@WebServlet("/managerFavoriteProduct")
+public class ManagerFavoriteProductServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -31,41 +32,16 @@ public class ManagerCartServlet extends HttpServlet {
         	return;
         }
         String userName = a.getUserName();
-        CartService cartservice = new CartService();
+        FavoriteProductService fproductservice = new FavoriteProductService();
         
-        List<Cart> listCart = cartservice.getCartByUserName(userName);
-        List<Product> listProduct = cartservice.getProductByPIDAndUserName(userName);
-        session.setAttribute("listCart", listCart);   
+        List<Favoriteproduct> listfproduct = fproductservice.getFavoriteProductByUserName(userName);
+        List<Product> listProduct = fproductservice.getProductByPIDAndUserName(userName);
+        session.setAttribute("listfproduct", listfproduct);   
         session.setAttribute("listProduct", listProduct);
-        session.setAttribute("amountCart", listCart.size());
-        double totalPrice=0;
-        for(Cart c : listCart) {
-        	for(Product p : listProduct) {
-        		if(c.getProduct().getId_P()==p.getId_P()) {
-        			totalPrice=totalPrice+p.getPrice()*c.getAmount();
-        		}
-        	}
-        }
-        session.setAttribute("subTotal", Math.round(totalPrice));
-        totalPrice = totalPrice+35000;
-        session.setAttribute("totalPrice", Math.round(totalPrice));
-        request.getRequestDispatcher("Client/cart.jsp").forward(request, response);
-        /*
-        double totalMoney=0;
-        
-        for(Cart o : list) {
-        	for(Product p : list2) {
-        		if(o.getProductID()==p.getId()) {
-        			totalMoney=totalMoney+(p.getPrice()*o.getAmount());
-        		}
-        	}
-        }
-        
-        double totalMoneyVAT=totalMoney+totalMoney*0.1;
-        */
+        request.getRequestDispatcher("Client/favoriteproduct.jsp").forward(request, response);
+      
     }
-
-    @Override
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
