@@ -106,7 +106,7 @@
                     <div class="nav nav-tabs mb-4">
                         <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
                         <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
-                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                        <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews </a>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
@@ -154,54 +154,48 @@
                         </div>
                         <div class="tab-pane fade" id="tab-pane-3">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <h4 class="mb-4">1 review for "Product Name"</h4>
-                                    <div class="media mb-4">
-                                        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                        <div class="media-body">
-                                            <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                            <div class="text-primary mb-2">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half-alt"></i>
-                                                <i class="far fa-star"></i>
-                                            </div>
-                                            <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                        </div>
-                                    </div>
+                                <div class="col-md-6" id="reviews">
+                                    <h4 class="mb-4">Review for Product</h4>
+                                    <c:forEach items="${feedback}" var="fb">
+                                    
+                                    	<c:set var="user" value="${fb.customer}" />
+                                    	<div class="media mb-4">
+	                                        <div class="media-body">
+	                                            <h6>${user.userName }<small> - <i>${fb.date}</i></small></h6>
+	                                            <p>${fb.content}</p>
+	                                        </div>
+                                    	</div>
+                                    </c:forEach>
                                 </div>
-                                <div class="col-md-6">
-                                    <h4 class="mb-4">Leave a review</h4>
-                                    <small>Your email address will not be published. Required fields are marked *</small>
-                                    <div class="d-flex my-3">
-                                        <p class="mb-0 mr-2">Your Rating * :</p>
-                                        <div class="text-primary">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                    </div>
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="message">Your Review *</label>
-                                            <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="name">Your Name *</label>
-                                            <input type="text" class="form-control" id="name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">Your Email *</label>
-                                            <input type="email" class="form-control" id="email">
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
-                                        </div>
-                                    </form>
-                                </div>
+                                <c:choose>
+	                                <c:when test="${sessionScope.user != null}">
+		                                <div class="col-md-6">
+		                                    <h4 class="mb-4">Leave a review</h4>
+		                                    <small>Your email address will not be published. Required fields are marked *</small>
+		                                    <form>
+		                                        <div class="form-group">
+		                                            <label for="message">Your Review *</label>
+		                                            <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+		                                        </div>
+		                                        <div class="form-group mb-0">
+		                                            <input value="Leave Your Review" class="btn btn-primary px-3" onclick="AddReviews(${detail.id_P})">
+		                                        </div>
+		                                    </form>
+		                                </div>
+	                                </c:when>
+	                                <c:otherwise>
+		                                <div class="col-md-6" style="left:150px;">
+		                                    <h4 class="mb-4">Login to view Reviews</h4>
+		                                    <small>Your email address will not be published. Required fields are marked *</small>
+		                                    <form action="Login" method="get">
+		                                        <div class="form-group mb-0" style="margin-left:150px; margin-top:20px">
+		                                            <input type="submit" value="   Login  " class="btn btn-primary px-3">
+		                                        </div>
+		                                    </form>
+	                                	</div>
+	                                </c:otherwise>
+	                            </c:choose>
+                                
                             </div>
                         </div>
                     </div>
@@ -243,6 +237,27 @@
     <!-- Products End -->
 
     <%@ include file="footer.jsp" %>
+    
+    <script>
+		function AddReviews(pID){﻿
+	        
+	        $.ajax({
+	            url: location.origin + "/WebApp/AddReviews",
+	            type: "get", //send it through get method
+	            data: {
+	            	message: document.getElementById("message").value,
+	            	productID: pID
+	            },
+	            success: function (data) {
+	                var row = document.getElementById("reviews");
+	                row.innerHTML += data;
+	            },
+	            error: function (xhr) {
+	                //Do Something to handle error
+	            }
+	        });
+	    }
+    </script>
 </body>
 
 </html>

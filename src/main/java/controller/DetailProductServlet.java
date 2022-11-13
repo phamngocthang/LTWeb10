@@ -11,8 +11,10 @@
   import javax.servlet.http.HttpSession;
 
 import entity.Account;
+import entity.Feedback;
 import entity.Product;
 import service.ProductService;
+import service.ReviewService;
 import service.ShopDetailService;
   
  /**
@@ -29,10 +31,17 @@ public class DetailProductServlet extends HttpServlet {
 		  Product detail = dp.getProductByID(id); 
 	      // Get 5 Recent Product
 	      List<Product> list = dp.getAllProductByBrand(brand, id);
+	      
+	      // Get FeedBack
+	      ReviewService reviewService = new ReviewService();
+	      List<Feedback> fb = reviewService.showReview(id);
+	      //int countFeedBack = reviewService.countFBByPID(id);
 	      System.out.print(brand);
-		  HttpSession session = request.getSession();
-		  session.setAttribute("listNP", list);
-		  session.setAttribute("detail", detail);
+		  
+		  request.setAttribute("listNP", list);
+		  request.setAttribute("detail", detail);
+		  request.setAttribute("feedback", fb);
+		  //session.setAttribute("countfeedback", countFeedBack);
 		  request.getRequestDispatcher("Client/detail.jsp").forward(request, response);
 		}
 		  

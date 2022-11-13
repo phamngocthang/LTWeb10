@@ -22,36 +22,28 @@ import context.HibernateUtil;
 import entity.Account;
 import entity.Bill;
 import entity.Cart;
+import entity.Feedback;
 import entity.Image;
 import entity.Product;
 
-public class DaoBill {
+public class DaoReview {
 	
-	public int getMaxIDBill(String HQL) {
-    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
-    		int count = (Integer)session.createQuery(HQL).uniqueResult();
-
-    		return count++;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-    	return -1;
-    }
-
 	
 	private static java.sql.Date getCurrentDate() {
         java.util.Date today = new java.util.Date();
         return new java.sql.Date(today.getTime());
     }
 	
-	public void insertBill(String HQL, String userName, int totalPrice) {
+	public void insertReview(String HQL, String productID, String userName, String content) {
     	Session session = HibernateUtil.getSessionFactory().openSession();
     	EntityTransaction trans = session.getTransaction();
     	Query query = session.createNativeQuery(HQL);
     	trans.begin();
     	try {
+    		query.setParameter("id_P", productID);
     		query.setParameter("userName", userName);
-    		query.setParameter("totalPrice", totalPrice);
+    		query.setParameter("rate", 5);
+    		query.setParameter("content", content);
     		query.setParameter("date", getCurrentDate());
     		query.executeUpdate();
         	trans.commit();
@@ -64,29 +56,23 @@ public class DaoBill {
 		}
 	}
 	
-	public void insertBillDeTail(String HQL, int idBill, int productID, int amount) {
-    	Session session = HibernateUtil.getSessionFactory().openSession();
-    	EntityTransaction trans = session.getTransaction();
-    	Query query = session.createNativeQuery(HQL);
-    	trans.begin();
+	
+	public List<Feedback> showReview(String HQL) {
+    	
+    	List<Feedback> fb = new ArrayList<>();
     	try {
-    		query.setParameter("idBill", idBill);
-    		query.setParameter("id_P", productID);
-    		query.setParameter("amount", amount);
-    		query.executeUpdate();
-        	trans.commit();
+    		Session session = HibernateUtil.getSessionFactory().openSession();
+    		fb = session.createQuery(HQL, Feedback.class).getResultList();
+    		session.close();
     	}
     	catch (Exception e) {
-			trans.rollback();
+    		System.out.println(e.getMessage());
 		}
-    	finally {
-			session.close();
-		}
+    	return fb;
 	}
 	
-	
 	public static void main (String[] args) { 
-		DaoBill dao = new DaoBill();
+		DaoReview dao = new DaoReview();
 		String name = "'pntnoah'";
 		String id = "1";
 		

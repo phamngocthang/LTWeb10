@@ -65,7 +65,7 @@ public class PlaceOrderServlet extends HttpServlet {
 		        //old code
 				Email email =new Email();
 				email.setFrom("20110728@student.hcmute.edu.vn"); //chinh lai email quan tri tai day [chu y dung email con hoat dong]
-				email.setFromPassword("xxxxxxxxxxx"); //mat khau email tren
+				email.setFromPassword("Vaylagi123@"); //mat khau email tren
 				email.setTo(emailAddress);
 				email.setSubject("Dat hang thanh cong tu Shoes Family");
 				StringBuilder sb = new StringBuilder();
@@ -103,7 +103,7 @@ public class PlaceOrderServlet extends HttpServlet {
     
         // ------------------------------------------ SEND MAIL --------------------------------------------------
         request.setAttribute("mess", "Đặt Hàng Thành Công! Kiểm Tra Đơn Hàng Tài Email Của Bạn");
-        request.getRequestDispatcher("home").forward(request, response);
+        request.getRequestDispatcher("managerCart").forward(request, response);
         
     }
 	

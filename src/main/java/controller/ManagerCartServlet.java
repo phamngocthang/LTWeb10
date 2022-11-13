@@ -37,6 +37,7 @@ public class ManagerCartServlet extends HttpServlet {
         List<Product> listProduct = cartservice.getProductByPIDAndUserName(userName);
         session.setAttribute("listCart", listCart);   
         session.setAttribute("listProduct", listProduct);
+        session.setAttribute("amountCart", listCart.size());
         double totalPrice=0;
         for(Cart c : listCart) {
         	for(Product p : listProduct) {

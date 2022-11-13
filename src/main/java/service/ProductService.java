@@ -13,7 +13,7 @@ public class ProductService {
 	public List<Product> getRecentProduct() {
     	List<Product> list = new ArrayList<>();
     	String HQL = "From Product P ORDER BY P.id_P DESC";
-    	list = daoProduct.getRecentProduct(HQL, 12);
+    	list = daoProduct.getRecentProduct(HQL, 4);
     	return list;
 	}
 	

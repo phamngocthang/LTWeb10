@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,11 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import service.CartService;
 import service.CategoryService;
 import service.ProductService;
+import entity.Account;
 import entity.Product;
 import entity.Subcategory;
-import entity.Category;
 
 @WebServlet(name = "HomeServlet", urlPatterns = {"/home"})
 public class HomeServlet extends HttpServlet {
@@ -58,10 +58,17 @@ public class HomeServlet extends HttpServlet {
         List<Product> recentProducts = getRecentProduct();
         HashMap<Integer, Integer> countProduct = countProduct(categories);
 
+        
+        request.setAttribute("allCategories", categories);
+        request.setAttribute("recentProducts", recentProducts);
+        request.setAttribute("countProduct", countProduct);
+        
+        CartService cartservice = new CartService();
         HttpSession session = request.getSession();
-        session.setAttribute("allCategories", categories);
-        session.setAttribute("recentProducts", recentProducts);
-        session.setAttribute("countProduct", countProduct);
+        Account a = (Account) session.getAttribute("user");
+        if(a != null) {
+        	session.setAttribute("amountCart", cartservice.getCountCart(a.getUserName()));
+        }
         
         request.getRequestDispatcher("Client/index.jsp").forward(request, response);
     }

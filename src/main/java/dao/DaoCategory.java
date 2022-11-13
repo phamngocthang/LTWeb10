@@ -20,7 +20,6 @@ public class DaoCategory {
       session.close();
     } catch (Exception e) {
     }
-    System.out.println(list);
     return list;
   }
 
@@ -32,7 +31,6 @@ public class DaoCategory {
       session.close();
     } catch (Exception e) {
     }
-    System.out.println(list);
     return list;
   }
 
@@ -44,7 +42,6 @@ public class DaoCategory {
       session.close();
     } catch (Exception e) {
     }
-    System.out.println(list);
     return list.get(0).intValue();
   }
 }

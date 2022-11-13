@@ -420,7 +420,7 @@
                                 <div class="product-img position-relative overflow-hidden">
                                     <img class="img-fluid w-100" src="${p.image.pathMiddle}" alt="">
                                     <div class="product-action">
-                                        <a class="btn btn-outline-dark btn-square" href=""><i
+                                        <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${p.id_P})"><i
                                                 class="fa fa-shopping-cart"></i></a>
                                         <a class="btn btn-outline-dark btn-square" href=""><i
                                                 class="far fa-heart"></i></a>
@@ -489,5 +489,22 @@
             <!-- Footer  -->
             <%@ include file="footer.jsp" %>>
     </body>
-
+	<script>
+    	function AddCartAjax(pID){﻿
+	        $.ajax({
+	            url: location.origin + "/WebApp/AddCartAjax",
+	            type: "get", //send it through get method
+	            data: {
+	            	productID: pID
+	            },
+	            success: function (data) {
+	                var row = document.getElementById("amountcart");
+	                row.innerHTML = data;
+	            },
+	            error: function (xhr) {
+	                //Do Something to handle error
+	            }
+	        });
+	    }
+    </script>
     </html>
