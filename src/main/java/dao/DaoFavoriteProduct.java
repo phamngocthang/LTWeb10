@@ -82,6 +82,16 @@ public class DaoFavoriteProduct {
 			session.close();
 		}
 	}
+	 public int getCountFavoriteProduct(String HQL) {
+	    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
+	    		Long count1 = ((Long) session.createQuery(HQL).uniqueResult());
+	    		Integer count = count1.intValue();
+	    		return count;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+	        return -1;
+	    }
 	/*public static void main(String []args) {
 		DaoFavoriteProduct a = new DaoFavoriteProduct();
 		String userName = "pntnoah";

@@ -134,11 +134,14 @@
                             <a href="${pageContext.request.contextPath}/Client/contact.jsp" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="managerFavoriteProduct" class="btn px-0">
+                        	<c:if test="${sessionScope.user != null }">
+                            <a href="managerFavoriteProduct" id="amountfproduct"class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
+                                				${amountfProduct}
+                                </span>
                             </a>
-<<<<<<< HEAD
+                            </c:if> 
                             <c:if test="${sessionScope.user != null }">
 	                            <a href="managerCart" id="amountcart" class="btn px-0 ml-3">
 	                                <i class="fas fa-shopping-cart text-primary"></i>
@@ -147,12 +150,6 @@
 		                                </span>
 	                            </a>
                             </c:if>
-=======
-                            <a href="managerCart" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
->>>>>>> af4983e (add favoriteproduct)
                         </div>
                     </div>
                 </nav>

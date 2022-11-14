@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import service.CartService;
 import service.CategoryService;
 import service.ProductService;
+import service.FavoriteProductService;
 import entity.Account;
 import entity.Product;
 import entity.Subcategory;
@@ -64,10 +65,12 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("countProduct", countProduct);
         
         CartService cartservice = new CartService();
+        FavoriteProductService fproductservice = new FavoriteProductService();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
         if(a != null) {
         	session.setAttribute("amountCart", cartservice.getCountCart(a.getUserName()));
+        	session.setAttribute("amountfProduct", fproductservice.getCountFavoriteProduct(a.getUserName()));
         }
         
         request.getRequestDispatcher("Client/index.jsp").forward(request, response);

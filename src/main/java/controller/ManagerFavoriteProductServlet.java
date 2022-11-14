@@ -33,11 +33,11 @@ public class ManagerFavoriteProductServlet extends HttpServlet {
         }
         String userName = a.getUserName();
         FavoriteProductService fproductservice = new FavoriteProductService();
-        
         List<Favoriteproduct> listfproduct = fproductservice.getFavoriteProductByUserName(userName);
         List<Product> listProduct = fproductservice.getProductByPIDAndUserName(userName);
         session.setAttribute("listfproduct", listfproduct);   
         session.setAttribute("listProduct", listProduct);
+        session.setAttribute("amountfProduct", listfproduct.size());
         request.getRequestDispatcher("Client/favoriteproduct.jsp").forward(request, response);
       
     }

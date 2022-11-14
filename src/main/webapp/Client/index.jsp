@@ -422,13 +422,8 @@
                                     <div class="product-action">
                                         <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${p.id_P})"><i
                                                 class="fa fa-shopping-cart"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" onclick="message()" href="addFavoriteProduct?pid=${p.id_P}"><i
+                                        <a class="btn btn-outline-dark btn-square" onclick="AddFavoriteProductAjax(${p.id_P})"><i
                                                 class="far fa-heart"></i></a>
-										<script>
-									        function message(){
-									            window.alert("Đã thêm sản phẩm thành công");
-									        }
-									    </script>
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
@@ -508,6 +503,22 @@
 	            error: function (xhr) {
 	                //Do Something to handle error
 	            }
+	        });
+	    }
+    	
+    	function AddFavoriteProductAjax(pID){﻿
+	        $.ajax({
+	            url: location.origin + "/WebApp/addFavoriteProduct",
+	            type: "get", //send it through get method
+	            data: {
+	            	productID: pID
+	            },
+	            success: function (data) {
+	                var row = document.getElementById("amountfproduct");
+	                row.innerHTML = data;
+	            },
+	            error: function () {
+	            	
 	        });
 	    }
     </script>

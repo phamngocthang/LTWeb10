@@ -31,21 +31,6 @@
 <body>
 	<%@ include file="header.jsp" %>
 
-    <!-- Breadcrumb Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Shop List</span>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
-
-
     <!-- Shop Start--> 
     <div class="container-fluid">
         <div class="row px-xl-5">
@@ -60,13 +45,8 @@
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i
                                             class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" onclick="message()" href="${pageContext.request.contextPath}/deleteFavoriteProduct?productID=${p.id_P}"><i
-                                            class="fas fa-heart-broken" ></i></a>
-									<script>
-								        function message(){
-								            window.alert("Xóa sản phẩm thành công");
-								        }
-								    </script>
+                                    <a class="btn btn-outline-dark btn-square" onclick="location.href='deleteFavoriteProduct?productID=${p.id_P}';"><i
+                                            class="fas fa-heart-broken" ></i></a>		
                                 </div>
                             </div>
                             <div class="text-center py-4">
@@ -97,6 +77,7 @@
              	</c:forEach>
             </c:forEach> 
          </div>
+         <span class="bg-secondary pr-3" style="font-size: x-large;">${mess1}</span>
     </div>
 	<!-- Shop End -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

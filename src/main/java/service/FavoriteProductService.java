@@ -49,4 +49,9 @@ public class FavoriteProductService {
         String HQL = "Delete From Favoriteproduct F Where F.product=" + Integer.toString(productID);
         daoFacvoriteProduct.deleteCart(HQL);
     }
+	public int getCountFavoriteProduct(String userName) {
+		String HQL = "";
+		HQL = "select count(F) from Favoriteproduct F Where F.account='"+ userName + "'";
+		return daoFacvoriteProduct.getCountFavoriteProduct(HQL);
+	}
 }

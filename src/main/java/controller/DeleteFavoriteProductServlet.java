@@ -17,7 +17,7 @@ public class DeleteFavoriteProductServlet extends HttpServlet {
         int productID = Integer.parseInt(request.getParameter("productID"));
         FavoriteProductService fproductservice = new FavoriteProductService();
         fproductservice.deleteCart(productID);
-        request.setAttribute("mess", "Da xoa san pham khoi gio hang!");
+        request.setAttribute("mess1", "Da xoa san pham khoi san pham yeu thich!");
         request.getRequestDispatcher("managerFavoriteProduct").forward(request, response);
     }
 	
