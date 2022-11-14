@@ -28,6 +28,7 @@
             <!-- Customized Bootstrap Stylesheet -->
             <link href="css/style.css" rel="stylesheet">
             <link href="css/waiting.css" rel="stylesheet">
+             
             <!-- JSP Usebeen -->
 
     </head>
@@ -158,9 +159,6 @@
                 <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
                         class="bg-secondary pr-3">Categories</span></h2>
                 <div class="row px-xl-5 pb-3">
-
-
-
                     <!-- Get category in session and then for each -->
                     <c:forEach items="${allCategories}" var="c">
                         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
@@ -418,17 +416,11 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                             <div class="product-item bg-light mb-4">
                                 <div class="product-img position-relative overflow-hidden">
-                                    <img id ="product" class="img-fluid w-100" src="${p.image.pathMiddle}" alt="">
+                                    <img class="img-fluid w-100" src="${p.image.pathMiddle}" alt="">
                                     <div class="product-action">
-                                        <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${p.id_P})"><i
-                                                class="fa fa-shopping-cart"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" onclick="message()" href="addFavoriteProduct?pid=${p.id_P}"><i
-                                                class="far fa-heart"></i></a>
-										<script>
-									        function message(){
-									            window.alert("Đã thêm sản phẩm thành công");
-									        }
-									    </script>
+                                        <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${p.id_P})"><i class="fa fa-shopping-cart"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" onclick="AddFavoriteProductAjax(${p.id_P})"><i class="far fa-heart"></i></a>
+
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
@@ -455,60 +447,7 @@
             </div>
             <!-- Products End -->
 
-
-            <!-- Vendor Start -->
-            <div class="container-fluid py-5">
-                <div class="row px-xl-5">
-                    <div class="col">
-                        <div class="owl-carousel vendor-carousel">
-                            <div class="bg-light p-4">
-                                <img src="img/vendor-1.jpg" alt="">
-                            </div>
-                            <div class="bg-light p-4">
-                                <img src="img/vendor-2.jpg" alt="">
-                            </div>
-                            <div class="bg-light p-4">
-                                <img src="img/vendor-3.jpg" alt="">
-                            </div>
-                            <div class="bg-light p-4">
-                                <img src="img/vendor-4.jpg" alt="">
-                            </div>
-                            <div class="bg-light p-4">
-                                <img src="img/vendor-5.jpg" alt="">
-                            </div>
-                            <div class="bg-light p-4">
-                                <img src="img/vendor-6.jpg" alt="">
-                            </div>
-                            <div class="bg-light p-4">
-                                <img src="img/vendor-7.jpg" alt="">
-                            </div>
-                            <div class="bg-light p-4">
-                                <img src="img/vendor-8.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Vendor End -->
             <!-- Footer  -->
             <%@ include file="footer.jsp" %>>
     </body>
-	<script>
-    	function AddCartAjax(pID){﻿
-	        $.ajax({
-	            url: location.origin + "/WebApp/AddCartAjax",
-	            type: "get", //send it through get method
-	            data: {
-	            	productID: pID
-	            },
-	            success: function (data) {
-	                var row = document.getElementById("amountcart");
-	                row.innerHTML = data;
-	            },
-	            error: function (xhr) {
-	                //Do Something to handle error
-	            }
-	        });
-	    }
-    </script>
     </html>

@@ -26,40 +26,17 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-	<link href="css/style.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+	<script src="js/ajax.js"></script>
 </head>
 <body>
 	<!-- Topbar Start -->
     <div class="container-fluid">
-        <div class="row bg-secondary py-1 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="">About</a>
-                    <a class="text-body mr-3" href="">Contact</a>
-                    <a class="text-body mr-3" href="">Help</a>
-                    <a class="text-body mr-3" href="">FAQs</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                </div>
-                <div class="d-inline-flex align-items-center d-block d-lg-none">
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-heart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-shopping-cart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                </div>
-            </div>
-        </div>
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="home" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">NHÓM 10</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">HOME</span>
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">NHÓM</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">10</span>
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
@@ -71,7 +48,7 @@
                 	</div>
             	</c:if>
                 
-                <c:if test="${sessionScope.user != null }">
+				<c:if test="${sessionScope.user != null }">
 	                <div class="btn-group">
 	                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.user.userName}</button>
 	                    <div class="dropdown-menu dropdown-menu-right">
@@ -134,25 +111,20 @@
                             <a href="${pageContext.request.contextPath}/Client/contact.jsp" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="managerFavoriteProduct" class="btn px-0">
-                                <i class="fas fa-heart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
-<<<<<<< HEAD
                             <c:if test="${sessionScope.user != null }">
-	                            <a href="managerCart" id="amountcart" class="btn px-0 ml-3">
+                            <a href="managerFavoriteProduct" id="amountfproduct"class="btn px-0">
+                                <i class="fas fa-heart text-primary"></i>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
+                                				${amountfProduct}
+                                </span>
+                            </a>
+	                        <a href="managerCart" id="amountcart" class="btn px-0 ml-3">
 	                                <i class="fas fa-shopping-cart text-primary"></i>
 		                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
 		                                		${amountCart}
 		                                </span>
-	                            </a>
+	                         </a>
                             </c:if>
-=======
-                            <a href="managerCart" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
->>>>>>> af4983e (add favoriteproduct)
                         </div>
                     </div>
                 </nav>

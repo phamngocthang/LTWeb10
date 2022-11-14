@@ -27,7 +27,7 @@ public class ManagerCartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
         if(a == null) {
-        	response.sendRedirect("Login");
+        	response.sendRedirect("login");
         	return;
         }
         String userName = a.getUserName();

@@ -169,7 +169,6 @@
 					<div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div>
-
                             </div>
                             <div class="ml-2">
                                 <div class="btn-group ml-2">
@@ -178,11 +177,6 @@
                                         <a class="dropdown-item" href="shop?subcateID=${subcateID}&index=1&showP=3">3</a>
                                         <a class="dropdown-item" href="shop?subcateID=${subcateID}&index=1&showP=6">6</a>
                                         <a class="dropdown-item" href="shop?subcateID=${subcateID}&index=1&showP=9">9</a>
-                                        <!--  
-                                        <a class="dropdown-item" onclick="SearchByPrice(1, 3);">3</a>
-                                        <a class="dropdown-item" onclick="SearchByPrice(1, 6);">6</a>
-                                        <a class="dropdown-item" onclick="SearchByPrice(1, 9);">9</a>
-                                        -->
                                     </div>
                                 </div>
                             </div>
@@ -191,18 +185,12 @@
                     <c:forEach items="${listP}" var="o">
 	                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
 	                        <div class="product-item bg-light mb-4">
-	                            <div id ="product" class="product-img position-relative overflow-hidden">
+	                            <div class="product-img position-relative overflow-hidden">
 	                            	<c:set var="img_o" value="${o.image}" />
 	                                <img class="img-fluid w-100" src="${img_o.pathMiddle}" alt="">
 	                                <div class="product-action">
-	                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-	                                    <a class="btn btn-outline-dark btn-square" onclick="message()" href="addFavoriteProduct?pid=${o.id_P}"><i class="far fa-heart"></i></a>
-	                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-	                                    <script>
-									        function message(){
-									            window.alert("Đã thêm sản phẩm thành công");
-									        }
-									    </script>
+	                                    <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${o.id_P})"><i class="fa fa-shopping-cart"></i></a>
+	                                    <a class="btn btn-outline-dark btn-square" onclick="AddFavoriteProductAjax(${o.id_P})"><i class="far fa-heart"></i></a>
 	                                </div>
 	                            </div>
 	                            <div class="text-center py-4">
@@ -252,81 +240,81 @@
     </div>
 	<!-- Shop End -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script>
-		function SearchByPrice(indexp, showp){
-	   	 $.ajax({
-	            url: location.origin + "/WebApp/SearchProductByPrice",
-	            type: "get", //send it through get method
-	            data: {
-	            	price1: document.getElementById("price-1").checked.toString(),
-	            	price2: document.getElementById("price-2").checked.toString(),
-	            	price3: document.getElementById("price-3").checked.toString(),
-	            	color1: document.getElementById("color-1").checked.toString(),
-	            	color2: document.getElementById("color-2").checked.toString(),
-	            	color3: document.getElementById("color-3").checked.toString(),
-	            	indexP: indexp,
-	            	showP: showp,
-	            	subcateID: '${subcateID}'
-	            },
-	            beforeSend: function() {
-	            	// Set Button Loadding là Hidden
-	            	var row = document.getElementById("content");
-	            	row.setAttribute("hidden", "hidden");
-	            	// Ân button Loading
-	            	var load = document.getElementById("loader");
-	            	load.removeAttribute("hidden");
-	            },
-	            success: function (data) {
-	            	// Đưa data lên page
-	                var row = document.getElementById("content");
-	               	row.innerHTML = data;
-	               	// Ân button Loading
-	               	var load = document.getElementById("loader");
-	            	load.setAttribute("hidden", "hidden");
-	            	// Hiện sản phẩm lên form
-	               	row.removeAttribute("hidden");
-	            }
-	        });
-	   }
-		function searchByName(param){
-	         var txtSearch = param.value;﻿
-	         document.getElementById("cate-all").checked = true
-	         document.getElementById("price-1").checked = false;
-         	document.getElementById("price-2").checked = false;
-         	document.getElementById("price-3").checked = false;
-         	document.getElementById("color-1").checked = false;
-         	document.getElementById("color-2").checked = false;
-         	document.getElementById("color-3").checked = false;
-	         $.ajax({
-	             url: location.origin + "/WebApp/SearchByName",
-	             type: "get", //send it through get method
-	             data: {
-	                 txt: txtSearch
-	             },
-	             beforeSend: function() {
-		            	// Set Button Loadding là Hidden
-		            	var row = document.getElementById("content");
-		            	row.setAttribute("hidden", "hidden");
-		            	// Ân button Loading
-		            	var load = document.getElementById("loader");
-		            	load.removeAttribute("hidden");
-		         },
-	             success: function (data) {
-	                 var row = document.getElementById("content");
-	                 row.innerHTML = data;
-	                 var load = document.getElementById("loader");
-		             load.setAttribute("hidden", "hidden");
-		             // Hiện sản phẩm lên form
-		             row.removeAttribute("hidden");
-	             },
-	             error: function (xhr) {
-	                 //Do Something to handle error
-	             }
-	         });
-	     }
-	</script>
 
     <%@ include file="footer.jsp" %>>
 </body>
-
+<script>
+    	function SearchByPrice(indexp, showp){
+   	   	 $.ajax({
+   	            url: location.origin + "/WebApp/SearchProductByPrice",
+   	            type: "get", //send it through get method
+   	            data: {
+   	            	price1: document.getElementById("price-1").checked.toString(),
+   	            	price2: document.getElementById("price-2").checked.toString(),
+   	            	price3: document.getElementById("price-3").checked.toString(),
+   	            	color1: document.getElementById("color-1").checked.toString(),
+   	            	color2: document.getElementById("color-2").checked.toString(),
+   	            	color3: document.getElementById("color-3").checked.toString(),
+   	            	indexP: indexp,
+   	            	showP: showp,
+   	            	subcateID: '${subcateID}'
+   	            },
+   	            beforeSend: function() {
+   	            	// Set Button Loadding là Hidden
+   	            	var row = document.getElementById("content");
+   	            	row.setAttribute("hidden", "hidden");
+   	            	// Ân button Loading
+   	            	var load = document.getElementById("loader");
+   	            	load.removeAttribute("hidden");
+   	            },
+   	            success: function (data) {
+   	            	// Đưa data lên page
+   	                var row = document.getElementById("content");
+   	               	row.innerHTML = data;
+   	               	// Ân button Loading
+   	               	var load = document.getElementById("loader");
+   	            	load.setAttribute("hidden", "hidden");
+   	            	// Hiện sản phẩm lên form
+   	               	row.removeAttribute("hidden");
+   	            }
+   	        });
+   	   }
+   		function searchByName(param){
+   	         var txtSearch = param.value;﻿
+   	         document.getElementById("cate-all").checked = true
+   	         document.getElementById("price-1").checked = false;
+            	document.getElementById("price-2").checked = false;
+            	document.getElementById("price-3").checked = false;
+            	document.getElementById("color-1").checked = false;
+            	document.getElementById("color-2").checked = false;
+            	document.getElementById("color-3").checked = false;
+   	         $.ajax({
+   	             url: location.origin + "/WebApp/SearchByName",
+   	             type: "get", //send it through get method
+   	             data: {
+   	                 txt: txtSearch
+   	             },
+   	             beforeSend: function() {
+   		            	// Set Button Loadding là Hidden
+   		            	var row = document.getElementById("content");
+   		            	row.setAttribute("hidden", "hidden");
+   		            	// Ân button Loading
+   		            	var load = document.getElementById("loader");
+   		            	load.removeAttribute("hidden");
+   		         },
+   	             success: function (data) {
+   	                 var row = document.getElementById("content");
+   	                 row.innerHTML = data;
+   	                 
+   	                 var load = document.getElementById("loader");
+   		             load.setAttribute("hidden", "hidden");
+   		             // Hiện sản phẩm lên form
+   		             row.removeAttribute("hidden");
+   	             },
+   	             error: function (xhr) {
+   	                 //Do Something to handle error
+   	             }
+   	         });
+   		}
+</script>
 </html>

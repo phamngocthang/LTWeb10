@@ -45,12 +45,10 @@ public class AddCartAjax extends HttpServlet {
         PrintWriter out = response.getWriter();
         if(cartExisted != null) {
 	       	request.setAttribute("mess", "Sản phẩm này đã tồn tại trong giỏ hàng!");
-	       	out.println("<a href=\"managerCart\" id=\"amountcart\" class=\"btn px-0 ml-3\">\n"
-	        		+ "	                                <i class=\"fas fa-shopping-cart text-primary\"></i>\n"
-	        		+ "		                                <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">\n"
-	        		+ "		                                		"+ (amountCart) +"\n"
-	        		+ "		                                </span>\n"
-	        		+ "	                            </a>");
+	       	out.println("<i class=\"fas fa-shopping-cart text-primary\"></i>\n"
+	       			+ "		                                <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">\n"
+	       			+ "		                                		"+amountCart+"\n"
+	       			+ "		                                </span>");
 
         }
         else {
@@ -59,12 +57,10 @@ public class AddCartAjax extends HttpServlet {
 	       	session.setAttribute("amountCart", amountCart+1);
 	       	
 	       	
-	        out.println("<a href=\"managerCart\" id=\"amountcart\" class=\"btn px-0 ml-3\">\n"
-	        		+ "	                                <i class=\"fas fa-shopping-cart text-primary\"></i>\n"
+	        out.println("<i class=\"fas fa-shopping-cart text-primary\"></i>\n"
 	        		+ "		                                <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">\n"
-	        		+ "		                                		"+ (amountCart+1) +"\n"
-	        		+ "		                                </span>\n"
-	        		+ "	                            </a>");
+	        		+ "		                                		"+(amountCart+1)+"\n"
+	        		+ "		                                </span>");
 
         }
 

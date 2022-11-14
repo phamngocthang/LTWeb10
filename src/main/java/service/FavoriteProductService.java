@@ -45,8 +45,13 @@ public class FavoriteProductService {
         String HQL = "INSERT INTO Favoriteproduct(userName, id_P) Values (:userName, :productID)";
         daoFacvoriteProduct.insertFavoriteProduct(HQL, userName, productID);
     }
-	public void deleteCart(int productID) {
-        String HQL = "Delete From Favoriteproduct F Where F.product=" + Integer.toString(productID);
+	public void deleteCart(int productID, String userName) {
+        String HQL = "Delete From Favoriteproduct F Where F.product=" + Integer.toString(productID) + " and F.account='" + userName+ "'";;
         daoFacvoriteProduct.deleteCart(HQL);
     }
+	public int getCountFavoriteProduct(String userName) {
+		String HQL = "";
+		HQL = "select count(F) from Favoriteproduct F Where F.account='"+ userName + "'";
+		return daoFacvoriteProduct.getCountFavoriteProduct(HQL);
+	}
 }

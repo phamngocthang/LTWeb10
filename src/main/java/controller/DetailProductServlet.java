@@ -30,7 +30,8 @@ public class DetailProductServlet extends HttpServlet {
 		  String brand = request.getParameter("brand"); 
 		  Product detail = dp.getProductByID(id); 
 	      // Get 5 Recent Product
-	      List<Product> list = dp.getAllProductByBrand(brand, id);      
+	      List<Product> list = dp.getAllProductByBrand(brand, id);
+	      
 	      // Get FeedBack
 	      ReviewService reviewService = new ReviewService();
 	      List<Feedback> fb = reviewService.showReview(id);
@@ -41,11 +42,6 @@ public class DetailProductServlet extends HttpServlet {
 		  request.setAttribute("detail", detail);
 		  request.setAttribute("feedback", fb);
 		  //session.setAttribute("countfeedback", countFeedBack);
-
-		  HttpSession session = request.getSession();
-		  session.setAttribute("listNP", list);
-		  session.setAttribute("detail", detail);
-
 		  request.getRequestDispatcher("Client/detail.jsp").forward(request, response);
 		}
 		  

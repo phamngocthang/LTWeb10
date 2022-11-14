@@ -218,8 +218,8 @@
                         	<c:set var="img_o" value="${o.image}" />
                             <img class="img-fluid w-100" src="${img_o.pathMiddle}" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${o.id_P})"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" onclick="AddFavoriteProductAjax(${o.id_P})"><i class="far fa-heart"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -238,26 +238,6 @@
 
     <%@ include file="footer.jsp" %>
     
-    <script>
-		function AddReviews(pID){﻿
-	        
-	        $.ajax({
-	            url: location.origin + "/WebApp/AddReviews",
-	            type: "get", //send it through get method
-	            data: {
-	            	message: document.getElementById("message").value,
-	            	productID: pID
-	            },
-	            success: function (data) {
-	                var row = document.getElementById("reviews");
-	                row.innerHTML += data;
-	            },
-	            error: function (xhr) {
-	                //Do Something to handle error
-	            }
-	        });
-	    }
-    </script>
-</body>
 
+</body>
 </html>

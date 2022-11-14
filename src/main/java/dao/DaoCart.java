@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -86,7 +86,6 @@ public class DaoCart {
     	trans.begin();
     	try {
     		
-    		
     		query.executeUpdate();
         	trans.commit();
     	}
@@ -141,16 +140,15 @@ public class DaoCart {
 	}
 	
 	
-	/*public static void main (String[] args) { 
+	public static void main (String[] args) { 
 		DaoCart dao = new DaoCart();
-		String userName = "pntnoah";
+		String name = "'pntnoah'";
 		String id = "1";
-		String HQL = "From Cart C Where C.account='" + userName + "'";
-		List <Cart> list = dao.getCartByUserName(HQL);
 		
-		for( Cart o: list) {
-		  System.out.println(o.getIdCard());
+		/*
+		for( Product o: list) {
+		  System.out.println(o.getId_P());
 		}
-		
-	}*/
+		*/
+	}
 }

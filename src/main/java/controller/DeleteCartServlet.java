@@ -24,8 +24,15 @@ public class DeleteCartServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int productID = Integer.parseInt(request.getParameter("productID"));
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("user");
+        if(a == null) {
+        	response.sendRedirect("Login");
+        	return;
+        }
         CartService cartservice = new CartService();
-        cartservice.deleteCart(productID);
+        cartservice.deleteCart(productID, a.getUserName());
+        
         request.setAttribute("mess", "Da xoa san pham khoi gio hang!");
         request.getRequestDispatcher("managerCart").forward(request, response);
     }

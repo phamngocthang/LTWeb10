@@ -22,8 +22,8 @@ public class CartService {
         daoCart.editAmountCart(HQL, amount);
   
     }
-	public void deleteCart(int productID) {
-        String HQL = "Delete From Cart c Where c.product=" + Integer.toString(productID);
+	public void deleteCart(int productID, String userName) {
+        String HQL = "Delete From Cart c Where c.product=" + Integer.toString(productID) + " and c.account='" + userName+ "'";
         daoCart.deleteCart(HQL);
     }
 	
@@ -34,7 +34,7 @@ public class CartService {
 	
 	public void insertCart(String userName, String productID, int amount) {
         String HQL = "INSERT INTO Cart(userName, id_P, amount) Values (:userName, :productID, :amount)";
-        daoCart.insertCart(HQL, userName, productID, amount);
+       daoCart.insertCart(HQL, userName, productID, amount);
   
     }
 	public Cart checkCartExist(String userName,String productID) {

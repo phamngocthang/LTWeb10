@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,7 @@ public class AddFavoriteProductServlet extends HttpServlet {
 	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		String productID = request.getParameter("pid");
+		String productID = request.getParameter("productID");
 		HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
         if(a == null) {
@@ -29,16 +31,26 @@ public class AddFavoriteProductServlet extends HttpServlet {
         }
         
         String userName = a.getUserName();
+        int amountfproduct = (Integer) session.getAttribute("amountfProduct");
+    	PrintWriter out = response.getWriter();
         FavoriteProductService fproductservice = new FavoriteProductService ();
         Favoriteproduct fproductExisted = fproductservice.checkFavorityProductExist(userName,productID);
         if(fproductExisted == null) {
         	fproductservice.insertFavoriteProduct(userName, productID);
-	       	request.setAttribute("mess", "Da them san pham yeu thich!");
-	        request.getRequestDispatcher("managerFavoriteProduct").forward(request, response);
+	       	request.setAttribute("mess1", "Da them san pham yeu thich!");
+	       	session.setAttribute("amountfProduct", amountfproduct+1);
+	        out.println("<i class=\"fas fa-heart text-primary\"></i>\n"
+	        		+ "                                <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">\n"
+	        		+ "                                				"+(amountfproduct+1)+"\n"
+	        		+ "                                </span>\n");
         }
         else 
         {
-        	response.sendRedirect("#");
+        	request.setAttribute("mess1", "Sản phẩm này đã tồn tại trong giỏ hàng!");
+        	out.println("<i class=\"fas fa-heart text-primary\"></i>\n"
+ 	        		+ "                                <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">\n"
+ 	        		+ "                                				"+(amountfproduct)+"\n"
+ 	        		+ "                                </span>\n");
         }
     }
 
