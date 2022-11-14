@@ -33,9 +33,9 @@ public class Account implements Serializable {
 	@OneToOne(mappedBy="account")
 	private Customer customer;
 
-	//bi-directional many-to-one association to Spyeuthich
+	//bi-directional many-to-one association to Favoriteproduct
 	@OneToMany(mappedBy="account")
-	private List<Spyeuthich> spyeuthiches;
+	private List<Favoriteproduct> favoriteproducts;
 
 	public Account() {
 	}
@@ -116,26 +116,26 @@ public class Account implements Serializable {
 		this.customer = customer;
 	}
 
-	public List<Spyeuthich> getSpyeuthiches() {
-		return this.spyeuthiches;
+	public List<Favoriteproduct> getFavoriteproducts() {
+		return this.favoriteproducts;
 	}
 
-	public void setSpyeuthiches(List<Spyeuthich> spyeuthiches) {
-		this.spyeuthiches = spyeuthiches;
+	public void setFavoriteproducts(List<Favoriteproduct> favoriteproducts) {
+		this.favoriteproducts = favoriteproducts;
 	}
 
-	public Spyeuthich addSpyeuthich(Spyeuthich spyeuthich) {
-		getSpyeuthiches().add(spyeuthich);
-		spyeuthich.setAccount(this);
+	public Favoriteproduct addFavoriteproduct(Favoriteproduct favoriteproduct) {
+		getFavoriteproducts().add(favoriteproduct);
+		favoriteproduct.setAccount(this);
 
-		return spyeuthich;
+		return favoriteproduct;
 	}
 
-	public Spyeuthich removeSpyeuthich(Spyeuthich spyeuthich) {
-		getSpyeuthiches().remove(spyeuthich);
-		spyeuthich.setAccount(null);
+	public Favoriteproduct removeFavoriteproduct(Favoriteproduct favoriteproduct) {
+		getFavoriteproducts().remove(favoriteproduct);
+		favoriteproduct.setAccount(null);
 
-		return spyeuthich;
+		return favoriteproduct;
 	}
 
 }

@@ -5,12 +5,12 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the spyeuthich database table.
+ * The persistent class for the favoriteproduct database table.
  * 
  */
 @Entity
-@NamedQuery(name="Spyeuthich.findAll", query="SELECT s FROM Spyeuthich s")
-public class Spyeuthich implements Serializable {
+@NamedQuery(name="Favoriteproduct.findAll", query="SELECT f FROM Favoriteproduct f")
+public class Favoriteproduct implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,7 +27,7 @@ public class Spyeuthich implements Serializable {
 	@JoinColumn(name="id_P")
 	private Product product;
 
-	public Spyeuthich() {
+	public Favoriteproduct() {
 	}
 
 	public int getIdSpyeuthich() {

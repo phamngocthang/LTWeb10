@@ -191,13 +191,18 @@
                     <c:forEach items="${listP}" var="o">
 	                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
 	                        <div class="product-item bg-light mb-4">
-	                            <div class="product-img position-relative overflow-hidden">
+	                            <div id ="product" class="product-img position-relative overflow-hidden">
 	                            	<c:set var="img_o" value="${o.image}" />
 	                                <img class="img-fluid w-100" src="${img_o.pathMiddle}" alt="">
 	                                <div class="product-action">
 	                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-	                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+	                                    <a class="btn btn-outline-dark btn-square" onclick="message()" href="addFavoriteProduct?pid=${o.id_P}"><i class="far fa-heart"></i></a>
 	                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+	                                    <script>
+									        function message(){
+									            window.alert("Đã thêm sản phẩm thành công");
+									        }
+									    </script>
 	                                </div>
 	                            </div>
 	                            <div class="text-center py-4">

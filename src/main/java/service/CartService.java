@@ -34,7 +34,7 @@ public class CartService {
 	
 	public void insertCart(String userName, String productID, int amount) {
         String HQL = "INSERT INTO Cart(userName, id_P, amount) Values (:userName, :productID, :amount)";
-       daoCart.insertCart(HQL, userName, productID, amount);
+        daoCart.insertCart(HQL, userName, productID, amount);
   
     }
 	public Cart checkCartExist(String userName,String productID) {

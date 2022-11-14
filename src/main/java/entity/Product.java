@@ -39,6 +39,10 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy="product")
 	private List<Cart> carts;
 
+	//bi-directional many-to-one association to Favoriteproduct
+	@OneToMany(mappedBy="product")
+	private List<Favoriteproduct> favoriteproducts;
+
 	//bi-directional many-to-one association to Feedback
 	@OneToMany(mappedBy="product")
 	private List<Feedback> feedbacks;
@@ -48,27 +52,16 @@ public class Product implements Serializable {
 	private Image image;
 
 	//bi-directional many-to-one association to Category
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_Cate")
 	private Category category;
 
 	//bi-directional many-to-one association to Subcategory
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_SubCate")
 	private Subcategory subcategory;
 
-	//bi-directional many-to-one association to Spyeuthich
-	@OneToMany(mappedBy="product")
-	private List<Spyeuthich> spyeuthiches;
-
 	public Product() {
-	}
-
-	public Product(String name_P, double price, Image image) {
-		super();
-		this.name_P = name_P;
-		this.price = price;
-		this.image = image;
 	}
 
 	public int getId_P() {
@@ -179,6 +172,28 @@ public class Product implements Serializable {
 		return cart;
 	}
 
+	public List<Favoriteproduct> getFavoriteproducts() {
+		return this.favoriteproducts;
+	}
+
+	public void setFavoriteproducts(List<Favoriteproduct> favoriteproducts) {
+		this.favoriteproducts = favoriteproducts;
+	}
+
+	public Favoriteproduct addFavoriteproduct(Favoriteproduct favoriteproduct) {
+		getFavoriteproducts().add(favoriteproduct);
+		favoriteproduct.setProduct(this);
+
+		return favoriteproduct;
+	}
+
+	public Favoriteproduct removeFavoriteproduct(Favoriteproduct favoriteproduct) {
+		getFavoriteproducts().remove(favoriteproduct);
+		favoriteproduct.setProduct(null);
+
+		return favoriteproduct;
+	}
+
 	public List<Feedback> getFeedbacks() {
 		return this.feedbacks;
 	}
@@ -223,28 +238,6 @@ public class Product implements Serializable {
 
 	public void setSubcategory(Subcategory subcategory) {
 		this.subcategory = subcategory;
-	}
-
-	public List<Spyeuthich> getSpyeuthiches() {
-		return this.spyeuthiches;
-	}
-
-	public void setSpyeuthiches(List<Spyeuthich> spyeuthiches) {
-		this.spyeuthiches = spyeuthiches;
-	}
-
-	public Spyeuthich addSpyeuthich(Spyeuthich spyeuthich) {
-		getSpyeuthiches().add(spyeuthich);
-		spyeuthich.setProduct(this);
-
-		return spyeuthich;
-	}
-
-	public Spyeuthich removeSpyeuthich(Spyeuthich spyeuthich) {
-		getSpyeuthiches().remove(spyeuthich);
-		spyeuthich.setProduct(null);
-
-		return spyeuthich;
 	}
 
 }
