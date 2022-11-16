@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,13 +27,34 @@ public class DeleteCartServlet extends HttpServlet {
         int productID = Integer.parseInt(request.getParameter("productID"));
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
-        if(a == null) {
-        	response.sendRedirect("Login");
-        	return;
-        }
         CartService cartservice = new CartService();
-        cartservice.deleteCart(productID, a.getUserName());
-        
+        if(a == null) {
+        	String cart ="";
+        	Cookie[] arr = request.getCookies();
+        	for (Cookie o:arr) {
+             	if (o.getName().equals("Cart")) {
+             		cart = o.getValue();
+             		o.setMaxAge(0);
+             		response.addCookie(o);	
+             	}
+            } 
+        	System.out.println(cart);
+        	List <Cart> carts = cartservice.getCartCookies(cart);
+        	String cartCookies = cartservice.deleteCartCookies(productID,carts);
+        	//Cookie newCartCookie = new Cookie("Cart",cartCookies);
+        	//newCartCookie.setMaxAge(24*60*60);
+        	//response.addCookie(newCartCookie);
+        	//Cookie[] arr1 = request.getCookies();
+        	for (Cookie o:arr) {
+             	if (o.getName().equals("Cart")) {
+             		o.setValue(cartCookies);
+             	}
+            } 
+        	//response.sendRedirect("Login");
+        	//return;
+        }else {
+	        cartservice.deleteCart(productID, a.getUserName());
+        }
         request.setAttribute("mess", "Da xoa san pham khoi gio hang!");
         request.getRequestDispatcher("managerCart").forward(request, response);
     }

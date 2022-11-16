@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,19 +26,34 @@ public class AddAmountCartServlet extends HttpServlet {
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("user");
-        if(a == null) {
-        	response.sendRedirect("Login");
-        	return;
-        }
-        String userName = a.getUserName();;
         String productID = request.getParameter("productID");
         int amount = Integer.parseInt(request.getParameter("amount"));
         amount+=1;
+        Account a = (Account) session.getAttribute("user");
         CartService cartservice = new CartService();
-        cartservice.editAmountCart(userName, productID, amount);
-        request.setAttribute("mess", "Da tang so luong!");
-        request.getRequestDispatcher("managerCart").forward(request, response);
+        if(a == null) {
+        	String cart ="";
+        	Cookie[] arr = request.getCookies();
+            for (Cookie o:arr) {
+            	if (o.getName().equals("Cart")) {
+            		cart = o.getValue();
+            	}
+            }
+            List<Cart> list = cartservice.getCartCookies(cart);
+            String addamount = cartservice.editAmountCookies(Integer.parseInt(productID), list, amount);
+            for (Cookie o:arr) {
+            	if (o.getName().equals("Cart")) {
+            		o.setValue(addamount);
+            	}
+            }
+        	//response.sendRedirect("Login");
+        	//return;
+        }else {
+	        String userName = a.getUserName();;
+	        cartservice.editAmountCart(userName, productID, amount);
+        }
+	    request.setAttribute("mess", "Da tang so luong!");
+	    request.getRequestDispatcher("managerCart").forward(request, response);
     }
 	
 

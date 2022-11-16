@@ -1,10 +1,12 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,18 +28,32 @@ public class ManagerCartServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
-        if(a == null) {
-        	response.sendRedirect("login");
-        	return;
-        }
-        String userName = a.getUserName();
         CartService cartservice = new CartService();
-        
-        List<Cart> listCart = cartservice.getCartByUserName(userName);
-        List<Product> listProduct = cartservice.getProductByPIDAndUserName(userName);
+        List<Cart> listCart = new ArrayList<>();
+        List<Product> listProduct = new ArrayList<>();
+        String cart ="";
+        Cookie[] arr = request.getCookies();
+        if(a == null) {
+        	for (Cookie o:arr) {
+             	if (o.getName().equals("Cart")) {
+             		cart = o.getValue();
+             		o.setMaxAge(24*60);
+             		response.addCookie(o);
+             	}
+             }
+        	listCart = cartservice.getCartCookies(cart);
+        	listProduct = cartservice.getProductCookies(listCart);
+        	//response.sendRedirect("login");
+        	//return;
+        }else {
+	        String userName = a.getUserName();
+	        listCart = cartservice.getCartByUserName(userName);
+	        listProduct = cartservice.getProductByPIDAndUserName(userName);
+        }
         session.setAttribute("listCart", listCart);   
         session.setAttribute("listProduct", listProduct);
         session.setAttribute("amountCart", listCart.size());
+        
         double totalPrice=0;
         for(Cart c : listCart) {
         	for(Product p : listProduct) {

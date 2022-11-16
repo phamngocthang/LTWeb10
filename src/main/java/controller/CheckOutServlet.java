@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +31,7 @@ public class CheckOutServlet extends HttpServlet {
         if(a == null) {
         	response.sendRedirect("Login");
         	return;
-        }
+        }	
         DaoAccount dao = new DaoAccount();
         Customer cust = dao.getCustomer(a.getUserName());
         session.setAttribute("Customer", cust);

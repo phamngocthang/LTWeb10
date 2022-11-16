@@ -35,7 +35,12 @@ public class Cart implements Serializable {
 		this.account = account;
 		this.product = product;
 	}
-
+	
+	public Cart(int amount, Product product) {
+		super();
+		this.amount = amount;
+		this.product = product;
+	}
 	public Cart() {
 	}
 

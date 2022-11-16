@@ -1,5 +1,5 @@
 src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-
+		
 	    function AddCartAjax(pID){﻿
 	        $.ajax({
 	            url: location.origin + "/WebApp/AddCartAjax",

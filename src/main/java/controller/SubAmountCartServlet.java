@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,22 +26,35 @@ public class SubAmountCartServlet extends HttpServlet {
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("user");
-        if(a == null) {
-        	response.sendRedirect("Login");
-        	return;
-        }
-        
-        String userName = a.getUserName();;
-        String productID = request.getParameter("productID");
         int amount = Integer.parseInt(request.getParameter("amount"));
-        if(amount <= 1) {
+        String productID = request.getParameter("productID");
+        amount-=1;
+        System.out.print(amount);
+        Account a = (Account) session.getAttribute("user");
+        CartService cartservice = new CartService();
+        if(a == null) {
+        	String cart ="";
+        	Cookie[] arr = request.getCookies();
+            for (Cookie o:arr) {
+            	if (o.getName().equals("Cart")) {
+            		cart = o.getValue();
+            	}
+            }
+            List<Cart> list = cartservice.getCartCookies(cart);
+            String subamount = cartservice.editAmountCookies(Integer.parseInt(productID), list, amount);
+            for (Cookie o:arr) {
+            	if (o.getName().equals("Cart")) {
+            		o.setValue(subamount);
+            	}
+            }
+        }else {
+        	String userName = a.getUserName();
+        	cartservice.editAmountCart(userName, productID, amount);
+        }
+        if(amount < 1) {
         	response.sendRedirect("deleteCart?productID="+productID);
         	return;
         }
-        amount-=1;
-        CartService cartservice = new CartService();
-        cartservice.editAmountCart(userName, productID, amount);
         request.setAttribute("mess", "Da giam so luong!");
         request.getRequestDispatcher("managerCart").forward(request, response);
     }

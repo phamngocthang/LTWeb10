@@ -63,6 +63,10 @@ public class Product implements Serializable {
 
 	public Product() {
 	}
+	
+	public Product(int id) {
+		this.id_P = id;
+	}
 
 	public int getId_P() {
 		return this.id_P;

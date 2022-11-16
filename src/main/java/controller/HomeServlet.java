@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import service.CategoryService;
 import service.FavoriteProductService;
 import service.ProductService;
 import entity.Account;
+import entity.Cart;
 import entity.Product;
 import entity.Subcategory;
 
@@ -67,9 +69,38 @@ public class HomeServlet extends HttpServlet {
         CartService cartservice = new CartService();
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
+        
+
         if(a != null) {
         	session.setAttribute("amountCart", cartservice.getCountCart(a.getUserName()));
         	session.setAttribute("amountfProduct", fproductservice.getCountFavoriteProduct(a.getUserName()));
+        }
+        else {
+        	 String amount = "";
+             Cookie[] arr = request.getCookies();
+             for (Cookie o:arr) {
+             	if (o.getName().equals("Cart")) {
+             		amount = o.getValue();
+             		o.setMaxAge(60*24*60);
+             		response.addCookie(o);
+             	}
+             }
+             if (amount.isEmpty())
+             {
+             	amount ="0";
+     	    	Cookie amountCart = new Cookie("amountCart", amount);
+     	    	amountCart.setMaxAge(24*60*60);
+     	    	response.addCookie(amountCart);
+             }
+             else {
+            	 CartService cart = new CartService();
+            	 List<Cart> list = cart.getCartCookies(amount);
+            	 amount = Integer.toString(list.size());
+            	 Cookie amountCart = new Cookie("amountCart", Integer.toString(list.size()));
+      	    	 amountCart.setMaxAge(24*60*60);
+      	    	 response.addCookie(amountCart);
+             }
+             session.setAttribute("amountCart", amount);
         }
         
         request.getRequestDispatcher("Client/index.jsp").forward(request, response);

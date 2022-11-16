@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import dao.DaoAccount;
 import entity.Account;
+import entity.Cart;
 import entity.Product;
+import service.CartService;
 
 
 /**
@@ -29,7 +31,34 @@ public class LoginServlet extends HttpServlet {
   
         DaoAccount dao = new DaoAccount();
         Account a = dao.Login(username, password);
-        if(a != null) { 
+        CartService cartservice = new CartService();
+        if(a != null) {
+        	String cart = "";
+            Cookie[] arr = request.getCookies();
+            for (Cookie o:arr) {
+            	if (o.getName().equals("Cart")) {
+            		cart = o.getValue();      		
+            		o.setMaxAge(0);
+            		response.addCookie(o);
+            	}
+            }
+            List <Cart> list = cartservice.getCartCookies(cart);
+        	String userName = a.getUserName();
+        	for (Cart c: list) {
+        		Cart cartExisted = cartservice.checkCartExist(userName,String.valueOf(c.getProduct().getId_P()));
+        		int amountExisted;
+        		if(cartExisted != null) {
+	       	       	amountExisted = cartExisted.getAmount();
+	       	       	cartservice.editAmountCart(userName,String.valueOf(c.getProduct().getId_P()), (amountExisted+c.getAmount()));
+	       	       	//request.setAttribute("mess", "Da tang so luong san pham!");
+	       	       	//request.getRequestDispatcher("managerCart").forward(request, response);
+        		}
+        		else {
+	               cartservice.insertCart(userName, String.valueOf(c.getProduct().getId_P()), c.getAmount());
+	       	       //request.setAttribute("mess", "Da them san pham vao gio hang!");
+	       	       //request.getRequestDispatcher("managerCart").forward(request, response);
+        		}
+        	}    
         	// store the data in a Account object
         	Account acc = new Account();
         	acc.setUserName(username);

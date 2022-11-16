@@ -75,10 +75,83 @@ public class CartService {
 		HQL = "select count(C) from Cart C Where C.account='"+ userName + "'";
 		return daoProduct.getCountProduct(HQL);
 	}
+	public List<Product> getProductCookies(List<Cart> cart) {
+		List<Product> product = new ArrayList<>();
+		for (Cart c : cart) {
+			String HQL = "From Product P Where P.id_P=:productID";
+			Product p = daoCart.getProductByID(HQL, c.getProduct().getId_P());
+			product.add(p);
+		}
+		return product;
+	}
+	public List<Cart> getCartCookies(String cart){
+		List<Cart> Cart = new ArrayList<>();
+		if(cart!= null && cart.length()!=0) {
+			String[] s = cart.split("/");
+			for(String i:s) {
+				int check = 0;
+				String[] n = i.split(":");
+				for( Cart c: Cart) {
+					if(c.getProduct().getId_P()== Integer.parseInt(n[0])) {
+						c.setAmount(Integer.parseInt(n[1]));
+						check = 1;
+						break;
+					}
+				}
+				if (check == 0) {
+					Product id = new Product(Integer.parseInt(n[0]));
+					int quantity = Integer.parseInt(n[1]);
+					Cart c = new Cart(quantity,id);
+					Cart.add(c);
+				}
+			}
+		}
+		return Cart;
+	}
+	public int checkCartCookies(String cart, String productID){
+		int amount = 0;
+		if(cart!= null && cart.length()!=0) {
+			String[] s = cart.split("/");
+			for(String i:s) {
+				String[] n = i.split(":");
+				if(productID.equals(n[0])) {
+					amount = Integer.parseInt(n[1]);
+				}
+			}
+		}
+		return amount;
+	}
+	public String deleteCartCookies(int productID, List<Cart> cart) {
+		String cartcookie ="";
+		for (Cart c : cart) {
+			if(c.getProduct().getId_P() != productID) {
+				cartcookie = cartcookie + "/" + Integer.toString(c.getProduct().getId_P()) + ":" +  Integer.toString(c.getAmount());
+			}
+		}
+		if(cartcookie != "")
+			cartcookie = cartcookie.substring(1);
+		return cartcookie;
+    }
+	public String editAmountCookies(int productID, List<Cart> cart, int amount) {
+		String amountcart ="";
+		for (Cart c : cart) {
+			if(c.getProduct().getId_P() == productID) {
+				amountcart = amountcart + "/" + Integer.toString(c.getProduct().getId_P()) + ":" +  Integer.toString(amount);
+			}else {
+				amountcart = amountcart + "/" + Integer.toString(c.getProduct().getId_P()) + ":" +  Integer.toString(c.getAmount());
+			}
+		}
+		if(amountcart != "")
+			amountcart = amountcart.substring(1);
+		return amountcart;
+    }
 	
 	public static void main(String[] args) {
-
-		CartService carservice = new CartService();
+		String cart = "19:1/20:2/21:3";
+		CartService sv = new CartService();
+		List <Cart> list = sv.getCartCookies(cart);
+		String txt = sv.editAmountCookies(20, list,4);
+		System.out.println(txt);
 		//System.out.println(carservice.getCountCart("pntnoah"));
 	}
 }
