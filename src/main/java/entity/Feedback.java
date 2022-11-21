@@ -26,12 +26,12 @@ public class Feedback implements Serializable {
 	private int rate;
 
 	//bi-directional many-to-one association to Product
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_P")
 	private Product product;
 
 	//bi-directional many-to-one association to Customer
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="userName")
 	private Customer customer;
 

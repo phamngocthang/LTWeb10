@@ -1,7 +1,7 @@
-package controller;
+package controller.Client;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,36 +11,44 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entity.Account;
-import entity.Cart;
 import entity.Favoriteproduct;
-import entity.Product;
 import service.FavoriteProductService;
 
 /**
- * Servlet implementation class ManagerFavoriteProductServlet
+ * Servlet implementation class AddFavoriteProductServlet
  */
-@WebServlet("/managerFavoriteProduct")
-public class ManagerFavoriteProductServlet extends HttpServlet {
+@WebServlet("/addFavoriteProduct")
+public class AddFavoriteProductServlet extends HttpServlet {
+	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();
+		String productID = request.getParameter("productID");
+		HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
         if(a == null) {
         	response.sendRedirect("Login");
         	return;
         }
+        
         String userName = a.getUserName();
-        FavoriteProductService fproductservice = new FavoriteProductService();
-        List<Favoriteproduct> listfproduct = fproductservice.getFavoriteProductByUserName(userName);
-        List<Product> listProduct = fproductservice.getProductByPIDAndUserName(userName);
-        session.setAttribute("listfproduct", listfproduct);
-        session.setAttribute("listProduct", listProduct);
-        session.setAttribute("amountfProduct", listfproduct.size());
-        request.getRequestDispatcher("Client/favoriteproduct.jsp").forward(request, response);
-      
+        int amountfproduct = (Integer) session.getAttribute("amountfProduct");
+    	PrintWriter out = response.getWriter();
+        FavoriteProductService fproductservice = new FavoriteProductService ();
+        Favoriteproduct fproductExisted = fproductservice.checkFavorityProductExist(userName,productID);
+        if(fproductExisted == null) {
+        	fproductservice.insertFavoriteProduct(userName, productID);
+	       	request.setAttribute("mess1", "Da them san pham yeu thich!");
+	       	session.setAttribute("amountfProduct", amountfproduct+1);
+	       	out.println((amountfproduct + 1));
+        }
+        else 
+        {
+        	request.setAttribute("mess1", "Sản phẩm này đã tồn tại trong giỏ hàng!");
+
+        	out.println((amountfproduct));
+        }
     }
+
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -1,4 +1,4 @@
-package controller;
+package controller.Client;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,38 +53,32 @@ public class AddCartAjax extends HttpServlet {
             		response.addCookie(o);
             	}
             }
-            if (productID != null){
-            	String num = "1";
-            	int amount = Integer.parseInt(amountCart);
-            	if(cart.isEmpty()){
-            		cart = productID +":"+num;
-            		amount++;
-                }else {
-                	int number = cartservice.checkCartCookies(cart, productID);
-                	if(number!=0) {
-                		number = number + 1;
-                		cart = cart +"/"+productID+":"+ String.valueOf(number);
-                	}else {	
-                		cart = cart +"/"+productID+":"+num;
-                		amount++;
-                	}
+            String num = "1";
+            int amount = Integer.parseInt(amountCart);
+            if(cart.isEmpty()){
+            	cart = productID +":"+num;
+            	amount++;
+            }else {
+                int number = cartservice.checkCartCookies(cart, productID);
+                if(number!=0) {
+                	number = number + 1;
+                	cart = cart +"/"+productID+":"+ String.valueOf(number);
+                }else {	
+                	cart = cart +"/"+productID+":"+num;
+                	amount++;
                 }
-        		Cookie amountC = new Cookie("amountCart",Integer.toString(amount));
-        		amountC.setMaxAge(24*60*60);
-    	    	response.addCookie(amountC);
-        		session.setAttribute("amountCart",amount);
-            	
             }
-            int amountNew = (Integer) session.getAttribute("amountCart");
-            out.println("<i class=\"fas fa-shopping-cart text-primary\"></i>\n"
-	       			+ "		                                <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">\n"
-	       			+ "		                                		"+amountNew+"\n"
-	       			+ "		                                </span>");
+            System.out.println(amount);
+        	Cookie amountC = new Cookie("amountCart",Integer.toString(amount));
+        	amountC.setMaxAge(24*60*60);
+    	    response.addCookie(amountC);
+        	session.setAttribute("amountCart",amount);
+        	System.out.println(session.getAttribute("amountCart"));
+        	// IN KQ
+            out.println(amount);
             Cookie Cart = new Cookie("Cart", cart);
 	    	Cart.setMaxAge(24*60*60);
 	    	response.addCookie(Cart);
-        	//response.sendRedirect("Login");
-        	//return;
         }
         else {
 	        String userName = a.getUserName();
@@ -93,25 +87,20 @@ public class AddCartAjax extends HttpServlet {
 	        
 	        Cart cartExisted = cartservice.checkCartExist(userName,productID);
 	        if(cartExisted != null) {
-		       	request.setAttribute("mess", "Sản phẩm này đã tồn tại trong giỏ hàng!");
-		       	out.println("<i class=\"fas fa-shopping-cart text-primary\"></i>\n"
-		       			+ "		                                <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">\n"
-		       			+ "		                                		"+amountCart+"\n"
-		       			+ "		                                </span>");
+	        	// Tăng số lượng SP đã có
+	        	cartservice.editAmountCart(userName, productID, amountCart+1);
+	        	session.setAttribute("amountCart", amountCart);
+		       	out.println(amountCart);
 	
 	        }
 	        else {
+	        	// Thêm sản phẩm vào và tăng số lượng amountCart
 	        	cartservice.insertCart(userName, productID, amount);
-		       	request.setAttribute("mess", "Đã thêm sản phẩm vào giỏ hàng!");
 		       	session.setAttribute("amountCart", amountCart+1);
-		       	
-		       	
-		        out.println("<i class=\"fas fa-shopping-cart text-primary\"></i>\n"
-		        		+ "		                                <span class=\"badge text-secondary border border-secondary rounded-circle\" style=\"padding-bottom: 2px;\">\n"
-		        		+ "		                                		"+(amountCart+1)+"\n"
-		        		+ "		                                </span>");
-	
+
+		        out.println((amountCart+1));
 	        }
+	        
         }
     }
 

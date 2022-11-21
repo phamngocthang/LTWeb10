@@ -19,13 +19,30 @@ import javax.naming.NamingException;
 import javax.persistence.EntityTransaction;
 
 import context.HibernateUtil;
-import entity.Account;
-import entity.Bill;
-import entity.Cart;
-import entity.Image;
-import entity.Product;
 
 public class DaoBill {
+	
+	public List<Object[]> getTopBill(String HQL) {
+		
+    	List<Object[]> list = new ArrayList<>();
+    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
+    		list = session.createNativeQuery(HQL).getResultList();
+    		session.close();
+		} catch (Exception e) {
+		}
+    	return list;
+	}
+	
+	public int getSumBill(String HQL) {
+    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
+    		double count1 = ((double) session.createQuery(HQL).uniqueResult());
+    		return (int)count1;
+    		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+        return -1;
+    }
 	
 	public int getMaxIDBill(String HQL) {
     	try (Session session = HibernateUtil.getSessionFactory().openSession()){
@@ -86,14 +103,5 @@ public class DaoBill {
 	
 	
 	public static void main (String[] args) { 
-		DaoBill dao = new DaoBill();
-		String name = "'pntnoah'";
-		String id = "1";
-		
-		/*
-		for( Product o: list) {
-		  System.out.println(o.getId_P());
-		}
-		*/
 	}
 }

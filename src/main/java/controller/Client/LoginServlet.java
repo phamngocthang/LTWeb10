@@ -1,4 +1,4 @@
-package controller;
+package controller.Client;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,23 +50,15 @@ public class LoginServlet extends HttpServlet {
         		if(cartExisted != null) {
 	       	       	amountExisted = cartExisted.getAmount();
 	       	       	cartservice.editAmountCart(userName,String.valueOf(c.getProduct().getId_P()), (amountExisted+c.getAmount()));
-	       	       	//request.setAttribute("mess", "Da tang so luong san pham!");
-	       	       	//request.getRequestDispatcher("managerCart").forward(request, response);
         		}
         		else {
 	               cartservice.insertCart(userName, String.valueOf(c.getProduct().getId_P()), c.getAmount());
-	       	       //request.setAttribute("mess", "Da them san pham vao gio hang!");
-	       	       //request.getRequestDispatcher("managerCart").forward(request, response);
         		}
         	}    
-        	// store the data in a Account object
-        	Account acc = new Account();
-        	acc.setUserName(username);
-        	acc.setPassWord(password);
         	
             // store the Account object as a session attribute
             HttpSession session = request.getSession();
-            session.setAttribute("user", acc);   
+            session.setAttribute("user", a);   
             
             // add a cookie that stores the user's email to browser
             Cookie c = new Cookie("userName", username);
@@ -74,7 +66,12 @@ public class LoginServlet extends HttpServlet {
             c.setPath("/");                      // allow entire app to access it
             response.addCookie(c);
             
-            response.sendRedirect("home");
+            if(a.getIsAdmin() == 0) {
+            	response.sendRedirect("home");
+            }
+            else {
+            	response.sendRedirect("DashBoard");
+            }
         }
         else {
         	response.sendRedirect("Client/Login.jsp?err=1");

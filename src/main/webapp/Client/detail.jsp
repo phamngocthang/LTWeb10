@@ -159,12 +159,12 @@
                                     <c:forEach items="${feedback}" var="fb">
                                     
                                     	<c:set var="user" value="${fb.customer}" />
-                                    	<div class="media mb-4">
-	                                        <div class="media-body">
-	                                            <h6>${user.userName }<small> - <i>${fb.date}</i></small></h6>
-	                                            <p>${fb.content}</p>
-	                                        </div>
-                                    	</div>
+	                                    <div class="media mb-4">
+		                                    <div class="media-body">
+			                                    <h6>${user.userName }<small> - <i>${fb.date}</i></small></h6>
+			                                    <p>${fb.content}</p>
+		                                  	</div>
+	                                    </div>
                                     </c:forEach>
                                 </div>
                                 <c:choose>

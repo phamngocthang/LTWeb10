@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-import dao.DaoAccount;
 import dao.DaoBill;
 import dao.DaoCart;
-import dao.DaoShopDetail;
+import dao.DaoProduct;
 import entity.Account;
 import entity.Cart;
 import entity.Image;
@@ -17,35 +15,42 @@ import entity.Product;
 public class BillService {
 	DaoBill daoBill = new DaoBill();
 	DaoCart daoCart = new DaoCart();
+	DaoProduct daoProduct = new DaoProduct();
 	
+	public List<Object[]> getTopBill() {
+		String HQL = "SELECT B.userName, firstName, lastName, email, phonenumber, SUM FROM (SELECT userName, SUM(totalPrice) AS SUM FROM bill GROUP BY userName) \n"
+				+ "AS B INNER JOIN customer ON B.userName = customer.userName ORDER BY SUM DESC LIMIT 5;";
+		return daoBill.getTopBill(HQL);
+	}
+	
+	public List<Object[]> getTopProduct() {
+		String HQL = "Select P.name_P, P.price, P.color, P.brand, SUM(b.amount)*p.price as Total From billdetail as B inner JOIN "
+				+ "product as P ON B.id_P = P.id_P GROUP BY P.id_P ORDER BY Total DESC LIMIT 5;";
+		return daoBill.getTopBill(HQL);
+	}
+	
+	public int getSumBill() {
+		String HQL = "select SUM(totalPrice) From Bill";
+		return daoBill.getSumBill(HQL);
+	}
+	
+	public int getCountBill() {
+		String HQL = "select count(B) From Bill B";
+		return daoProduct.getCountQuery(HQL);
+	}
 	public void insertBill(String userName, int totalPrice) {
-		/*
-        String query = "update Cart set [amount]=?,\r\n"
-        		+ "[size]=?\r\n"
-        		+ "where [accountID]=? and [productID]=?";
-        */
         String HQL = "INSERT INTO Bill(userName, totalPrice, date) Values (:userName, :totalPrice, :date)";
        daoBill.insertBill(HQL, userName, totalPrice);
   
     }
 	
 	public void insertBillDeTail(int idBill, int productID, int amount) {
-		/*
-        String query = "update Cart set [amount]=?,\r\n"
-        		+ "[size]=?\r\n"
-        		+ "where [accountID]=? and [productID]=?";
-        */
         String HQL = "INSERT INTO Billdetail(idBill, id_P, amount) Values (:idBill, :id_P, :amount)";
        daoBill.insertBillDeTail(HQL, idBill, productID, amount);
   
     }
 	
 	public int getMaxIDBill() {
-		/*
-        String query = "update Cart set [amount]=?,\r\n"
-        		+ "[size]=?\r\n"
-        		+ "where [accountID]=? and [productID]=?";
-        */
        String HQL = "Select max(B.idBill) from Bill B";
        return daoBill.getMaxIDBill(HQL);
   
@@ -55,6 +60,10 @@ public class BillService {
 	public static void main(String[] args) {
 
 		BillService carservice = new BillService();
-		System.out.println(carservice.getMaxIDBill());
+		List<Object[]> list = carservice.getTopProduct();
+		for (Object[] objects : list) {
+			System.out.println(objects[0]);
+			System.out.println(objects[1]);
+		}
 	}
 }

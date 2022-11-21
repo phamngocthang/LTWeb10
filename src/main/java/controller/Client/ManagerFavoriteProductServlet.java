@@ -1,6 +1,8 @@
-package controller;
+package controller.Client;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,28 +11,37 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entity.Account;
+import entity.Cart;
+import entity.Favoriteproduct;
+import entity.Product;
 import service.FavoriteProductService;
 
-@WebServlet("/deleteFavoriteProduct")
-public class DeleteFavoriteProductServlet extends HttpServlet {
-	
+/**
+ * Servlet implementation class ManagerFavoriteProductServlet
+ */
+@WebServlet("/managerFavoriteProduct")
+public class ManagerFavoriteProductServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int productID = Integer.parseInt(request.getParameter("productID"));
+		response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
         if(a == null) {
         	response.sendRedirect("Login");
         	return;
         }
+        String userName = a.getUserName();
         FavoriteProductService fproductservice = new FavoriteProductService();
-        fproductservice.deleteCart(productID, a.getUserName());
-        request.setAttribute("mess1", "Da xoa san pham khoi san pham yeu thich!");
-        request.getRequestDispatcher("managerFavoriteProduct").forward(request, response);
+        List<Favoriteproduct> listfproduct = fproductservice.getFavoriteProductByUserName(userName);
+        List<Product> listProduct = fproductservice.getProductByPIDAndUserName(listfproduct);
+        request.setAttribute("listfproduct", listfproduct);
+        request.setAttribute("listProduct", listProduct);
+        session.setAttribute("amountfProduct", listfproduct.size());
+        request.getRequestDispatcher("Client/favoriteproduct.jsp").forward(request, response);
+      
     }
-	
-
-    @Override
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
@@ -42,6 +53,5 @@ public class DeleteFavoriteProductServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
 
 }

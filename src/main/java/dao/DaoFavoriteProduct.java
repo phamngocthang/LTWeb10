@@ -93,13 +93,5 @@ public class DaoFavoriteProduct {
 	        return -1;
 	    }
 	/*public static void main(String []args) {
-		DaoFavoriteProduct a = new DaoFavoriteProduct();
-		String userName = "pntnoah";
-		int productID = 1;
-		String HQL = "From Favoriteproduct F Where F.account='" + userName +"' And F.product=" + productID;
-		List <Favoriteproduct> p = a.getFavoriteProductByUserName(HQL);
-		for (Favoriteproduct f:p) {
-			System.out.print(f.getIdSpyeuthich());
-		}
 	  }*/
 }

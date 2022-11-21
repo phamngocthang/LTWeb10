@@ -18,12 +18,12 @@ public class Favoriteproduct implements Serializable {
 	private int idSpyeuthich;
 
 	//bi-directional many-to-one association to Account
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="userName")
 	private Account account;
 
 	//bi-directional many-to-one association to Product
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_P")
 	private Product product;
 

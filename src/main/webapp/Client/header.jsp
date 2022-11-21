@@ -27,10 +27,22 @@
 
     <!-- Customized Bootstrap Stylesheet -->
 	<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-	<script src="js/ajax.js"></script>
+	<style>
+	#thongBao {
+		 position: fixed; display: none; top: 1rem;
+		 left: 50%;
+		 transform: translateX(-50%);
+		 background-color: #ffd333;
+		 padding: 10px;
+		 border-radius: 8px;
+		 z-index: 100;
+		 color: white;
+	}
+	</style>
 </head>
 <body>
 	<!-- Topbar Start -->
+    <div id="thongBao"></div>
     <div class="container-fluid">
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
@@ -44,16 +56,16 @@
             <div class="col-lg-4 col-6 text-right">
             	<c:if test="${sessionScope.user == null }">
             		<div class="btn-group mx-2">
-                    	<button type="button" class="btn btn-sm btn-light" data-toggle="dropdown" onclick="location.href='Client/Login.jsp';" >Login</button>
+                    	<button type="button" class="btn btn-primary" data-toggle="dropdown" onclick="location.href='Login';" >Login</button>
                 	</div>
             	</c:if>
                 
-				<c:if test="${sessionScope.user != null }">
+                <c:if test="${sessionScope.user != null }">
 	                <div class="btn-group">
 	                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${sessionScope.user.userName}</button>
 	                    <div class="dropdown-menu dropdown-menu-right">
-	                        <button class="dropdown-item" type="button">Tài khoản của tôi</button>
-	                        <button class="dropdown-item" type="button" onclick="location.href='Logout';">Logout</button>
+	                        <button class="dropdown-item" type="button" onclick="location.href='MyAccount';">My Account</button>
+	                        <button class="dropdown-item" type="button" onclick="location.href='Logout';">Log Out</button>
 	                    </div>
 	                </div>
                 </c:if>
@@ -112,16 +124,16 @@
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <c:if test="${sessionScope.user != null }">
-                            <a href="managerFavoriteProduct" id="amountfproduct"class="btn px-0">
+                            <a href="managerFavoriteProduct" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
+                                <span id="amountfproduct" class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
                                 				${amountfProduct}
                                 </span>
                             </a>
                             </c:if> 
-	                        <a href="managerCart" id="amountcart" class="btn px-0 ml-3">
+	                        <a href="managerCart" class="btn px-0 ml-3">
 	                                <i class="fas fa-shopping-cart text-primary"></i>
-		                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
+		                                <span id="amountcart" class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
 		                                		${amountCart}
 		                                </span>
 	                         </a>

@@ -52,14 +52,22 @@ public class Product implements Serializable {
 	private Image image;
 
 	//bi-directional many-to-one association to Category
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_Cate")
 	private Category category;
 
 	//bi-directional many-to-one association to Subcategory
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_SubCate")
 	private Subcategory subcategory;
+
+	public Product(String brand, String color, String name_P, double price) {
+		super();
+		this.brand = brand;
+		this.color = color;
+		this.name_P = name_P;
+		this.price = price;
+	}
 
 	public Product() {
 	}

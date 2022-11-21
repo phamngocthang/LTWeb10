@@ -1,4 +1,4 @@
-package controller;
+package controller.Client;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,10 +42,20 @@ public class AddReviewAjax extends HttpServlet {
         Date date = new java.sql.Date(today.getTime());
         // Println to AddReview Servlet
         PrintWriter out = response.getWriter();
-        out.println("<div class=\"media mb-4\">\n"
+        out.println("<div id=\"testrv\">\n"
+        		+ "	                                    	<div class=\"media mb-4\">\n"
+        		+ "		                                        <div class=\"media-body\">\n"
+        		+ "		                                            <h6>"+ acc.getUserName()+"<small> - <i>"+ date.toString() +"</i></small></h6>\n"
+        		+ "		                                            <p>"+ message +"</p>\n"
+        		+ "		                                        </div>\n"
+        		+ "	                                    	</div>\n"
+        		+ "                                    	</div>");
+        
+        out.println("<div class=\"media mb-4\" id=\"testrv2\">\n"
+        		
         		+ "                                        <div class=\"media-body\">\n"
         		+ "                                            <h6>"+acc.getUserName()+"<small> - <i>"+ date.toString() +"</i></small></h6>\n"
-        		+ "                                            <p>"+ message +"</p>\n"
+        		+ "                                            <p>"+ message + " test2"+ "</p>\n"
         		+ "                                        </div>\n"
         		+ "                                    </div>");
 

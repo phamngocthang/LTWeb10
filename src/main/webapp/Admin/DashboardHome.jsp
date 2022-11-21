@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-  <link rel="stylesheet" href="../dist/output.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/output.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
 <body>
@@ -21,19 +23,19 @@
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-money-bill"></i>
-            <a href="Bill.html">Hóa đơn</a>
+            <a href="Bill.html">Hóa Đơn</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-user"></i>
-            <a href="./Manage.html">Quản lý tài khoản</a>
+            <a href="./Manage.html">Quản Lý Tài Khoản</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-shoe-prints"></i>
-            <a href="DashboardHome.html">Quản lý sản phẩm</a>
+            <a href="DashboardHome.html">Quản Lý Sản Phẩm</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-chart-simple"></i>
-            <a href="./Top.html">Top 10</a>
+            <a href="TopServlet">Top 10</a>
           </li>
         </ul>
       </nav>
@@ -46,8 +48,8 @@
             <i class="fa-solid fa-user"></i>
           </div>
           <div>
-            <p class='text-lg'>Tổng số khách hàng</p>
-            <p class='text-3xl'>1345</p>
+            <p class='text-lg'>Tổng Số Khách Hàng</p>
+            <p class='text-3xl'>${amountCustomer}</p>
           </div>
         </div>
         <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>
@@ -55,8 +57,8 @@
             <i class="fa-solid fa-user"></i>
           </div>
           <div>
-            <p class='text-lg'>Tổng số danh mục sản phẩm</p>
-            <p class='text-3xl'>23</p>
+            <p class='text-lg'>Tổng Số Sản Phẩm</p>
+            <p class='text-3xl'>${amountProduct}</p>
           </div>
         </div>
         <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>
@@ -64,8 +66,8 @@
             <i class="fa-solid fa-user"></i>
           </div>
           <div>
-            <p class='text-lg'>Tổng số sản phẩm</p>
-            <p class='text-3xl'>2344</p>
+            <p class='text-lg'>Tổng Số Doanh Thu</p>
+            <p class='text-3xl'>${sumBill}</p>
           </div>
         </div>
         <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>
@@ -73,8 +75,8 @@
             <i class="fa-solid fa-user"></i>
           </div>
           <div>
-            <p class='text-lg'>Tổng số đơn đặt hàng</p>
-            <p class='text-3xl'>5678</p>
+            <p class='text-lg'>Tổng Số Đơn Đặt Hàng</p>
+            <p class='text-3xl'>${countBill }</p>
           </div>
         </div>
       </div>

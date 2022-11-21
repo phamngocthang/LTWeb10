@@ -25,10 +25,8 @@ public class FavoriteProductService {
 	       
 	}
 	
-	public List<Product> getProductByPIDAndUserName(String userName) {
+	public List<Product> getProductByPIDAndUserName(List<Favoriteproduct> fproduct) {
 		List<Product> product = new ArrayList<>();
-		FavoriteProductService fproductservice = new FavoriteProductService();
-		List<Favoriteproduct> fproduct = fproductservice.getFavoriteProductByUserName(userName);
 		for (Favoriteproduct f : fproduct) {
 			String HQL = "From Product P Where P.id_P=:productID";
 			Product p = daoFacvoriteProduct.getProductByID(HQL, f.getProduct().getId_P());

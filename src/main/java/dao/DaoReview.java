@@ -72,14 +72,5 @@ public class DaoReview {
 	}
 	
 	public static void main (String[] args) { 
-		DaoReview dao = new DaoReview();
-		String name = "'pntnoah'";
-		String id = "1";
-		
-		/*
-		for( Product o: list) {
-		  System.out.println(o.getId_P());
-		}
-		*/
 	}
 }

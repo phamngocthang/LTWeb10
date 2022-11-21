@@ -1,4 +1,4 @@
-package controller;
+package controller.Client;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.DaoCustomer;
 import service.CartService;
 import service.CategoryService;
 import service.FavoriteProductService;
 import service.ProductService;
 import entity.Account;
 import entity.Cart;
+import entity.Customer;
 import entity.Product;
 import entity.Subcategory;
 
@@ -53,6 +55,21 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
         
+		String user="";
+        Cookie[] cookies=request.getCookies();
+        for(int i=0; i < cookies.length; i++)
+        {
+    		Cookie cookie=cookies[i];
+    		if(cookie.getName().equals("userName"))
+    			{
+    				user=cookie.getValue();
+    			}
+    	}        
+        HttpSession session = request.getSession();
+        DaoCustomer dao = new DaoCustomer();
+        Customer cus=dao.getCustomer(user);      
+        session.setAttribute("curCustomer", cus);
+		
         // ProductService pService = new ProductService();
         // // Get 4 Recent Product
         // List<Product> list = pService.getRecentProduct();
@@ -67,7 +84,6 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("countProduct", countProduct);
         FavoriteProductService fproductservice = new FavoriteProductService();
         CartService cartservice = new CartService();
-        HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
         
 

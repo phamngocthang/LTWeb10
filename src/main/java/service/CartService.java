@@ -5,10 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 
-import dao.DaoAccount;
 import dao.DaoCart;
 import dao.DaoProduct;
-import dao.DaoShopDetail;
 import entity.Account;
 import entity.Cart;
 import entity.Image;
@@ -55,11 +53,9 @@ public class CartService {
 	       
 	}
 	
-	public List<Product> getProductByPIDAndUserName(String userName) {
+	public List<Product> getProductByPIDAndUserName(List<Cart> listCart) {
 		List<Product> product = new ArrayList<>();
-		CartService carservice = new CartService();
-		List<Cart> cart = carservice.getCartByUserName(userName);
-		for (Cart c : cart) {
+		for (Cart c : listCart) {
 			String HQL = "From Product P Where P.id_P=:productID";
 			Product p = daoCart.getProductByID(HQL, c.getProduct().getId_P());
 			product.add(p);

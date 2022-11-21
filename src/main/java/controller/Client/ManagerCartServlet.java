@@ -1,4 +1,4 @@
-package controller;
+package controller.Client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class ManagerCartServlet extends HttpServlet {
         }else {
 	        String userName = a.getUserName();
 	        listCart = cartservice.getCartByUserName(userName);
-	        listProduct = cartservice.getProductByPIDAndUserName(userName);
+	        listProduct = cartservice.getProductByPIDAndUserName(listCart);
         }
         session.setAttribute("listCart", listCart);   
         session.setAttribute("listProduct", listProduct);
@@ -66,19 +66,6 @@ public class ManagerCartServlet extends HttpServlet {
         totalPrice = totalPrice+35000;
         session.setAttribute("totalPrice", Math.round(totalPrice));
         request.getRequestDispatcher("Client/cart.jsp").forward(request, response);
-        /*
-        double totalMoney=0;
-        
-        for(Cart o : list) {
-        	for(Product p : list2) {
-        		if(o.getProductID()==p.getId()) {
-        			totalMoney=totalMoney+(p.getPrice()*o.getAmount());
-        		}
-        	}
-        }
-        
-        double totalMoneyVAT=totalMoney+totalMoney*0.1;
-        */
     }
 
     @Override

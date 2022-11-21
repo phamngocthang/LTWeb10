@@ -33,20 +33,18 @@
 
     <!-- Shop Start--> 
     <div class="container-fluid">
-        <div class="row px-xl-5">
-           	<c:forEach items="${sessionScope.listfproduct}" var="c">
+        <div class="row px-xl-5" id="listFavorite">
+           	<c:forEach items="${listfproduct}" var="c">
            		<c:set var="cp" value="${c.product}" />
-           		<c:forEach items="${sessionScope.listProduct}" var="p">
+           		<c:forEach items="${listProduct}" var="p">
            			<c:if test="${cp.id_P == p.id_P}">
            			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
                                 <img class="img-fluid w-100" src="${p.image.pathMiddle}" alt="">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i
-                                            class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" onclick="location.href='deleteFavoriteProduct?productID=${p.id_P}';"><i
-                                            class="fas fa-heart-broken" ></i></a>		
+                                <div class="product-action">   
+                                    <a class="btn btn-outline-dark btn-square" onclick="DelFavoriteProductAjax(${p.id_P})"><i
+                                            class="fas fa-heart-broken"></i></a>		
                                 </div>
                             </div>
                             <div class="text-center py-4">
@@ -67,12 +65,6 @@
                             </div>
                         </div>
                     </div>
-                  <!--<tr>
-                  	<c:set var="img" value="${p.image}" />
-                      <td class="align-middle"><img src="${img.pathMiddle}" alt="" style="width: 50px;"> ${p.name_P}</td>
-                      <td class="align-middle">${Double.toString(p.price).substring(0,Double.toString(p.price).length()-2)} VND</td>	                     
-                      <td class="align-middle"><button class="btn btn-sm btn-danger" onclick="location.href='deleteCart?productID=${p.id_P}';"><i class="fa fa-times"></i></button></td>
-                  </tr>-->
               		</c:if>
              	</c:forEach>
             </c:forEach> 

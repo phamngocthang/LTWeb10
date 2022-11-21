@@ -20,12 +20,5 @@ public class ShopDetailService {
 	}
 	
 	/*public static void main (String[] args) { 
-		ShopDetailService dao = new ShopDetailService(); 
-
-		
-		for( Product o: list) {
-		  System.out.println(o.getId_P());
-		}
-		
 	}*/
 }

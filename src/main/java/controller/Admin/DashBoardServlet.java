@@ -1,5 +1,5 @@
 
-  package controller;
+  package controller.Admin;
   
   import java.io.IOException; import java.util.List;
   
@@ -13,6 +13,8 @@
 import entity.Account;
 import entity.Feedback;
 import entity.Product;
+import service.AccountService;
+import service.BillService;
 import service.ProductService;
 import service.ReviewService;
 import service.ShopDetailService;
@@ -20,29 +22,23 @@ import service.ShopDetailService;
  /**
 	 * Servlet implementation class DetailProductServlet
 	 */
-@WebServlet(name = "DetailProductServlet", urlPatterns = {"/detail"}) 
-public class DetailProductServlet extends HttpServlet {
+@WebServlet(name = "DetailProductServlet", urlPatterns = {"/DashBoard"}) 
+public class DashBoardServlet extends HttpServlet {
 		protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 		{
 		  response.setContentType("text/html;charset=UTF-8"); 
-		  ShopDetailService dp = new ShopDetailService(); 
-		  int id = Integer.parseInt(request.getParameter("id"));
-		  String brand = request.getParameter("brand"); 
-		  Product detail = dp.getProductByID(id); 
-	      // Get 5 Recent Product
-	      List<Product> list = dp.getAllProductByBrand(brand, id);
-	      
-	      // Get FeedBack
-	      ReviewService reviewService = new ReviewService();
-	      List<Feedback> fb = reviewService.showReview(id);
-	      //int countFeedBack = reviewService.countFBByPID(id);
-	      System.out.print(brand);
-		  
-		  request.setAttribute("listNP", list);
-		  request.setAttribute("detail", detail);
-		  request.setAttribute("feedback", fb);
-		  //session.setAttribute("countfeedback", countFeedBack);
-		  request.getRequestDispatcher("Client/detail.jsp").forward(request, response);
+		  AccountService accService = new AccountService();
+		  ProductService productService = new ProductService();
+		  BillService billService = new BillService();
+		  int amountCustomer = accService.getCountQuery();
+		  int amountProduct = productService.getCountAccount("-1");
+		  int sumBill = billService.getSumBill();
+		  int countBill = billService.getCountBill();
+		  request.setAttribute("amountCustomer", amountCustomer);
+		  request.setAttribute("amountProduct", amountProduct);
+		  request.setAttribute("sumBill", sumBill);
+		  request.setAttribute("countBill", countBill);
+		  request.getRequestDispatcher("Admin/DashboardHome.jsp").forward(request, response);
 		}
 		  
 		  @Override protected void doGet(HttpServletRequest request,
