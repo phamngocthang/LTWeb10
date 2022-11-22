@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 /target/
 /build/
 .vscode
-=======
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -52,4 +50,3 @@ release.properties
 dependency-reduced-pom.xml
 /.apt_generated/
 /.apt_generated_tests/
->>>>>>> a43f1ce7bec4f0a9857dca714845d43eb275105e

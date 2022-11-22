@@ -16,7 +16,7 @@ public class BillService {
 	DaoBill daoBill = new DaoBill();
 	DaoCart daoCart = new DaoCart();
 	DaoProduct daoProduct = new DaoProduct();
-	
+
 	public List<Object[]> getTopBill() {
 		String HQL = "SELECT B.userName, firstName, lastName, email, phonenumber, SUM FROM (SELECT userName, SUM(totalPrice) AS SUM FROM bill GROUP BY userName) \n"
 				+ "AS B INNER JOIN customer ON B.userName = customer.userName ORDER BY SUM DESC LIMIT 5;";
@@ -25,7 +25,7 @@ public class BillService {
 	
 	public List<Object[]> getTopProduct() {
 		String HQL = "Select P.name_P, P.price, P.color, P.brand, SUM(b.amount)*p.price as Total From billdetail as B inner JOIN "
-				+ "product as P ON B.id_P = P.id_P GROUP BY P.id_P ORDER BY Total DESC LIMIT 5;";
+				+ "product as P ON B.id_P = P.id_P GROUP BY P.id_P ORDER BY Total DESC LIMIT 8;";
 		return daoBill.getTopBill(HQL);
 	}
 	
