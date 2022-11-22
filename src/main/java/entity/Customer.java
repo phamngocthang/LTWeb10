@@ -67,6 +67,16 @@ public class Customer implements Serializable {
 		return this.firstName;
 	}
 
+	public Customer(String userName, String email, String firstName, String lastName,
+			String phonenumber) {
+		super();
+		this.userName = userName;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phonenumber = phonenumber;
+	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}

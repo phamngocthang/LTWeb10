@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -14,19 +15,23 @@ public class Feedback implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_FB;
 
 	private String content;
 
+	@Temporal(TemporalType.DATE)
+	private Date date;
+
 	private int rate;
 
 	//bi-directional many-to-one association to Product
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_P")
 	private Product product;
 
 	//bi-directional many-to-one association to Customer
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="userName")
 	private Customer customer;
 
@@ -47,6 +52,14 @@ public class Feedback implements Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public int getRate() {

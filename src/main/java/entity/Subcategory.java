@@ -24,7 +24,7 @@ public class Subcategory implements Serializable {
 	private List<Product> products;
 
 	//bi-directional many-to-one association to Category
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_Cate")
 	private Category category;
 
@@ -77,7 +77,4 @@ public class Subcategory implements Serializable {
 		this.category = category;
 	}
 
-	public int getProductCount() {
-		return this.products.size();
-	}
 }

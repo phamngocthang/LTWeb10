@@ -3,7 +3,7 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
-import entity.Spyeuthich;
+
 
 /**
  * The persistent class for the product database table.
@@ -31,6 +31,18 @@ public class Product implements Serializable {
 
 	private String size;
 
+	//bi-directional many-to-one association to Billdetail
+	@OneToMany(mappedBy="product")
+	private List<Billdetail> billdetails;
+
+	//bi-directional many-to-one association to Cart
+	@OneToMany(mappedBy="product")
+	private List<Cart> carts;
+
+	//bi-directional many-to-one association to Favoriteproduct
+	@OneToMany(mappedBy="product")
+	private List<Favoriteproduct> favoriteproducts;
+
 	//bi-directional many-to-one association to Feedback
 	@OneToMany(mappedBy="product")
 	private List<Feedback> feedbacks;
@@ -40,20 +52,28 @@ public class Product implements Serializable {
 	private Image image;
 
 	//bi-directional many-to-one association to Category
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_Cate")
 	private Category category;
 
 	//bi-directional many-to-one association to Subcategory
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_SubCate")
 	private Subcategory subcategory;
 
-	//bi-directional many-to-one association to Spyeuthich
-	@OneToMany(mappedBy="product")
-	private List<Spyeuthich> spyeuthiches;
+	public Product(String brand, String color, String name_P, double price) {
+		super();
+		this.brand = brand;
+		this.color = color;
+		this.name_P = name_P;
+		this.price = price;
+	}
 
 	public Product() {
+	}
+	
+	public Product(int id) {
+		this.id_P = id;
 	}
 
 	public int getId_P() {
@@ -120,6 +140,72 @@ public class Product implements Serializable {
 		this.size = size;
 	}
 
+	public List<Billdetail> getBilldetails() {
+		return this.billdetails;
+	}
+
+	public void setBilldetails(List<Billdetail> billdetails) {
+		this.billdetails = billdetails;
+	}
+
+	public Billdetail addBilldetail(Billdetail billdetail) {
+		getBilldetails().add(billdetail);
+		billdetail.setProduct(this);
+
+		return billdetail;
+	}
+
+	public Billdetail removeBilldetail(Billdetail billdetail) {
+		getBilldetails().remove(billdetail);
+		billdetail.setProduct(null);
+
+		return billdetail;
+	}
+
+	public List<Cart> getCarts() {
+		return this.carts;
+	}
+
+	public void setCarts(List<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public Cart addCart(Cart cart) {
+		getCarts().add(cart);
+		cart.setProduct(this);
+
+		return cart;
+	}
+
+	public Cart removeCart(Cart cart) {
+		getCarts().remove(cart);
+		cart.setProduct(null);
+
+		return cart;
+	}
+
+	public List<Favoriteproduct> getFavoriteproducts() {
+		return this.favoriteproducts;
+	}
+
+	public void setFavoriteproducts(List<Favoriteproduct> favoriteproducts) {
+		this.favoriteproducts = favoriteproducts;
+	}
+
+	public Favoriteproduct addFavoriteproduct(Favoriteproduct favoriteproduct) {
+		getFavoriteproducts().add(favoriteproduct);
+		favoriteproduct.setProduct(this);
+
+		return favoriteproduct;
+	}
+
+	public Favoriteproduct removeFavoriteproduct(Favoriteproduct favoriteproduct) {
+		getFavoriteproducts().remove(favoriteproduct);
+		favoriteproduct.setProduct(null);
+
+		return favoriteproduct;
+	}
+
 	public List<Feedback> getFeedbacks() {
 		return this.feedbacks;
 	}
@@ -164,28 +250,6 @@ public class Product implements Serializable {
 
 	public void setSubcategory(Subcategory subcategory) {
 		this.subcategory = subcategory;
-	}
-
-	public List<Spyeuthich> getSpyeuthiches() {
-		return this.spyeuthiches;
-	}
-
-	public void setSpyeuthiches(List<Spyeuthich> spyeuthiches) {
-		this.spyeuthiches = spyeuthiches;
-	}
-
-	public Spyeuthich addSpyeuthich(Spyeuthich spyeuthich) {
-		getSpyeuthiches().add(spyeuthich);
-		spyeuthich.setProduct(this);
-
-		return spyeuthich;
-	}
-
-	public Spyeuthich removeSpyeuthich(Spyeuthich spyeuthich) {
-		getSpyeuthiches().remove(spyeuthich);
-		spyeuthich.setProduct(null);
-
-		return spyeuthich;
 	}
 
 }

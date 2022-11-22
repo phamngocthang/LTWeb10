@@ -9,19 +9,16 @@ import entity.Product;
 
 public class ShopDetailService {
 	DaoShopDetail daoShopDetail = new DaoShopDetail();
-	public Product getProductByID(String id) {
+	public Product getProductByID(int id) {
 		Product product = daoShopDetail.getProductByID(id);
     	return product;
 	}
-
 	
-	public static void main (String[] args) { 
-		ShopDetailService dao = new ShopDetailService(); 
-
-		/*
-		for( Product o: list) {
-		  System.out.println(o.getId_P());
-		}
-		*/
+	public List<Product> getAllProductByBrand(String brand, int id) {
+		List <Product> pList = daoShopDetail.getAllProductByBrand(brand, id);
+		return pList;
 	}
+	
+	/*public static void main (String[] args) { 
+	}*/
 }

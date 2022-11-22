@@ -12,12 +12,15 @@ import org.hibernate.mapping.Property;
 import org.hibernate.service.ServiceRegistry;
 
 import entity.Account;
+import entity.Bill;
+import entity.Billdetail;
+import entity.Cart;
 import entity.Category;
 import entity.Customer;
+import entity.Favoriteproduct;
 import entity.Feedback;
 import entity.Image;
 import entity.Product;
-import entity.Spyeuthich;
 import entity.Subcategory;
 
 public class HibernateUtil {
@@ -58,11 +61,11 @@ public class HibernateUtil {
 	static {
 		Configuration conf = new Configuration ();
 		Properties pros = new Properties();
-		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
+		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
 		pros.put (Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
 		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
 		pros.put (Environment.USER, "root");
-		pros.put (Environment.PASS, "20110687");
+		pros.put (Environment.PASS, "816570");
 		pros.put (Environment.SHOW_SQL, "true");
 		pros.put(Environment.AUTOCOMMIT, "true");
 		
@@ -75,7 +78,10 @@ public class HibernateUtil {
 		conf.addAnnotatedClass(Customer.class);
 		conf.addAnnotatedClass(Feedback.class);
 		conf.addAnnotatedClass(Subcategory.class);
-		conf.addAnnotatedClass(Spyeuthich.class);
+		conf.addAnnotatedClass(Favoriteproduct.class);
+		conf.addAnnotatedClass(Bill.class);
+		conf.addAnnotatedClass(Billdetail.class);
+		conf.addAnnotatedClass(Cart.class);
 		
 		ServiceRegistry registry = new StandardServiceRegistryBuilder()
 				.applySettings(conf.getProperties()).build();

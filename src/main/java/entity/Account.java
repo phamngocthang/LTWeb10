@@ -21,13 +21,21 @@ public class Account implements Serializable {
 
 	private String passWord;
 
+	//bi-directional many-to-one association to Bill
+	@OneToMany(mappedBy="account")
+	private List<Bill> bills;
+
+	//bi-directional many-to-one association to Cart
+	@OneToMany(mappedBy="account")
+	private List<Cart> carts;
+
 	//bi-directional one-to-one association to Customer
 	@OneToOne(mappedBy="account")
 	private Customer customer;
 
-	//bi-directional many-to-one association to Spyeuthich
+	//bi-directional many-to-one association to Favoriteproduct
 	@OneToMany(mappedBy="account")
-	private List<Spyeuthich> spyeuthiches;
+	private List<Favoriteproduct> favoriteproducts;
 
 	public Account() {
 	}
@@ -56,6 +64,50 @@ public class Account implements Serializable {
 		this.passWord = passWord;
 	}
 
+	public List<Bill> getBills() {
+		return this.bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
+	}
+
+	public Bill addBill(Bill bill) {
+		getBills().add(bill);
+		bill.setAccount(this);
+
+		return bill;
+	}
+
+	public Bill removeBill(Bill bill) {
+		getBills().remove(bill);
+		bill.setAccount(null);
+
+		return bill;
+	}
+
+	public List<Cart> getCarts() {
+		return this.carts;
+	}
+
+	public void setCarts(List<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public Cart addCart(Cart cart) {
+		getCarts().add(cart);
+		cart.setAccount(this);
+
+		return cart;
+	}
+
+	public Cart removeCart(Cart cart) {
+		getCarts().remove(cart);
+		cart.setAccount(null);
+
+		return cart;
+	}
+
 	public Customer getCustomer() {
 		return this.customer;
 	}
@@ -64,26 +116,26 @@ public class Account implements Serializable {
 		this.customer = customer;
 	}
 
-	public List<Spyeuthich> getSpyeuthiches() {
-		return this.spyeuthiches;
+	public List<Favoriteproduct> getFavoriteproducts() {
+		return this.favoriteproducts;
 	}
 
-	public void setSpyeuthiches(List<Spyeuthich> spyeuthiches) {
-		this.spyeuthiches = spyeuthiches;
+	public void setFavoriteproducts(List<Favoriteproduct> favoriteproducts) {
+		this.favoriteproducts = favoriteproducts;
 	}
 
-	public Spyeuthich addSpyeuthich(Spyeuthich spyeuthich) {
-		getSpyeuthiches().add(spyeuthich);
-		spyeuthich.setAccount(this);
+	public Favoriteproduct addFavoriteproduct(Favoriteproduct favoriteproduct) {
+		getFavoriteproducts().add(favoriteproduct);
+		favoriteproduct.setAccount(this);
 
-		return spyeuthich;
+		return favoriteproduct;
 	}
 
-	public Spyeuthich removeSpyeuthich(Spyeuthich spyeuthich) {
-		getSpyeuthiches().remove(spyeuthich);
-		spyeuthich.setAccount(null);
+	public Favoriteproduct removeFavoriteproduct(Favoriteproduct favoriteproduct) {
+		getFavoriteproducts().remove(favoriteproduct);
+		favoriteproduct.setAccount(null);
 
-		return spyeuthich;
+		return favoriteproduct;
 	}
 
 }
