@@ -52,7 +52,7 @@ public class DeleteCartServlet extends HttpServlet {
         	for (Cookie o:arr) {
              	if (o.getName().equals("Cart")) {
              		o.setValue(cartCookies);
-             	}
+             	}         	   
             } 
         	
         	for (Cookie o:arr) {
@@ -74,6 +74,9 @@ public class DeleteCartServlet extends HttpServlet {
         session.setAttribute("listCart", listCart);   
         session.setAttribute("listProduct", listProduct);
         session.setAttribute("amountCart", listCart.size());
+        Cookie amountCart = new Cookie("amountCart", Integer.toString(listCart.size()));
+	    amountCart.setMaxAge(24*60*60);
+	    response.addCookie(amountCart);
         //System.out.println(session.getAttribute("amountCart"));
         double subTotal=0;
         for(Cart c : listCart) {
