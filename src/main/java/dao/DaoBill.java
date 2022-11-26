@@ -19,8 +19,32 @@ import javax.naming.NamingException;
 import javax.persistence.EntityTransaction;
 
 import context.HibernateUtil;
+import entity.Bill;
+import entity.Billdetail;
 
 public class DaoBill {
+	public List<Bill> getAllBill(String HQL) {
+		List<Bill> list = new ArrayList<>();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			list = session.createQuery(HQL, Bill.class).list();
+			session.close();
+
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	public List<Billdetail> getAllBillDetail(String HQL, Integer idBill) {
+		List<Billdetail> list = new ArrayList<>();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			list = session.createQuery(HQL, Billdetail.class).setParameter("id", idBill).getResultList();
+
+			session.close();
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
 	public List<Object[]> getTopBill(String HQL) {
 
 		List<Object[]> list = new ArrayList<>();
@@ -95,6 +119,21 @@ public class DaoBill {
 		}
 	}
 
+	public Bill getBillByID(String HQL, int id) {
+		Bill bill = new Bill();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			bill = session.createQuery(HQL, Bill.class).setParameter("id", id).getSingleResult();
+			session.close();
+		} catch (Exception e) {
+		}
+		return bill;
+	}
+
+
+
 	public static void main(String[] args) {
+		DaoBill dao = new DaoBill();
+		// print length
+		System.out.println(dao.getAllBillDetail("From Billdetail where idBill = :id", 3).size());
 	}
 }
