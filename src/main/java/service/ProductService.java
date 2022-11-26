@@ -10,11 +10,18 @@ import entity.Product;
 
 public class ProductService {
 	DaoProduct daoProduct = new DaoProduct();
+
 	public List<Product> getRecentProduct() {
-    	List<Product> list = new ArrayList<>();
-    	String HQL = "From Product P ORDER BY P.id_P DESC";
-    	list = daoProduct.getRecentProduct(HQL, 4);
-    	return list;
+		List<Product> list = new ArrayList<>();
+		String HQL = "From Product P ORDER BY P.id_P DESC";
+		list = daoProduct.getRecentProduct(HQL, 8);
+		return list;
+	}
+	
+	public List<Product> getTopProduct() {
+		// group by how many product in bill
+		String HQL = "SELECT P FROM Product P, Billdetail B WHERE P.id_P = B.product.id_P GROUP BY P.id_P ORDER BY COUNT(P.id_P) DESC";
+		return daoProduct.getTopProduct(HQL, 8);
 	}
 	
 	public List<Product> getAllProduct()
@@ -63,6 +70,7 @@ public class ProductService {
 		String HQL = "select count(P)" + query;
 		return daoProduct.getCountQuery(HQL);
 	}
+
 	
 	public List<Product> getProductAjax(String price1, String price2, String price3, String color1, String color2, String color3, 
 			String subcateID, String index, int showP, String[] queryCount) {

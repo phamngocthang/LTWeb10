@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DaoCustomer;
+import service.BillService;
 import service.CartService;
 import service.CategoryService;
 import service.FavoriteProductService;
@@ -36,6 +37,12 @@ public class HomeServlet extends HttpServlet {
     protected List<Product> getRecentProduct() {
         ProductService productService = new ProductService();
         List<Product> list = productService.getRecentProduct();
+        return list;
+    }
+
+    protected List<Product> getBestSellerProduct() {
+        ProductService productService = new ProductService();
+        List<Product> list = productService.getTopProduct();
         return list;
     }
     
@@ -77,11 +84,17 @@ public class HomeServlet extends HttpServlet {
         List<Subcategory> categories = getCategory();
         List<Product> recentProducts = getRecentProduct();
         HashMap<Integer, Integer> countProduct = countProduct(categories);
-
+        List<Product> bestSellerProducts = getBestSellerProduct();
+        // print best seller product
+        for (Product product : bestSellerProducts) {
+            System.out.println(product.getName_P());
+        }
         
         request.setAttribute("allCategories", categories);
         request.setAttribute("recentProducts", recentProducts);
         request.setAttribute("countProduct", countProduct);
+        request.setAttribute("bestSellerProducts", bestSellerProducts);
+
         FavoriteProductService fproductservice = new FavoriteProductService();
         CartService cartservice = new CartService();
         Account a = (Account) session.getAttribute("user");
