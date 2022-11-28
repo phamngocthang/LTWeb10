@@ -29,6 +29,9 @@ public class Category implements Serializable {
 
 	public Category() {
 	}
+	public Category(int id) {
+		this.id_Cate = id;
+	}
 
 	public int getId_Cate() {
 		return this.id_Cate;

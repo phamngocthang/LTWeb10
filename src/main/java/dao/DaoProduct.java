@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 
 import javax.annotation.Resource;
@@ -114,5 +114,44 @@ public class DaoProduct {
 		} catch (Exception e) {
 		}
     	return list;
+	}
+	public void insertProduct(Product product, Image img) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try{
+			session.getTransaction().begin();
+    		session.save(product);
+    		session.save(img);
+    		session.getTransaction().commit();
+    		session.close();
+    		
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+		}
+	}
+	public void updateProduct(Product product, Image img) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try{
+			session.getTransaction().begin();
+    		session.update(product);
+    		session.update(img);
+    		session.getTransaction().commit();
+    		session.close();
+    		
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+		}
+	}
+	public void deleteProduct(String HQL) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query query = session.createQuery(HQL);
+		try{
+			session.getTransaction().begin();
+    		query.executeUpdate();
+    		session.getTransaction().commit();
+    		session.close();
+    		
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+		}
 	}
 }

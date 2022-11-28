@@ -2,6 +2,8 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+
 import java.util.List;
 
 
@@ -30,8 +32,11 @@ public class Product implements Serializable {
 	private double price;
 
 	private String size;
+	
+	private int status;
 
 	//bi-directional many-to-one association to Billdetail
+	//@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy="product")
 	private List<Billdetail> billdetails;
 
@@ -54,7 +59,7 @@ public class Product implements Serializable {
 	//bi-directional many-to-one association to Category
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_Cate")
-	private Category category;
+	private  Category category;
 
 	//bi-directional many-to-one association to Subcategory
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -71,6 +76,31 @@ public class Product implements Serializable {
 
 	public Product() {
 	}
+	public Product(String name, String brand, Category category, String color, String description, Double price, String size, Subcategory subcate, Image image, int status){
+		this.name_P = name;
+		this.brand = brand;
+		this.category = category;
+		this.color = color;
+		this.description = description;
+		this.price = price;
+		this.size = size;
+		this.subcategory = subcate;
+		this.image = image;
+		this.status = status;
+	}
+	public Product(int id_P, String name, String brand, Category category, String color, String description, Double price, String size, Subcategory subcate, Image image, int status){
+		this.id_P = id_P;
+		this.name_P = name;
+		this.brand = brand;
+		this.category = category;
+		this.color = color;
+		this.description = description;
+		this.price = price;
+		this.size = size;
+		this.subcategory = subcate;
+		this.image = image;
+		this.status = status;
+	}
 	
 	public Product(int id) {
 		this.id_P = id;
@@ -82,6 +112,13 @@ public class Product implements Serializable {
 
 	public void setId_P(int id_P) {
 		this.id_P = id_P;
+	}
+	public int getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public int getAmount() {

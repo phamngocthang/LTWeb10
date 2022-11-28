@@ -31,7 +31,7 @@
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-shoe-prints"></i>
-            <a href="DashboardHome.html">Quản Lý Sản Phẩm</a>
+            <a href="ManagerProduct">Quản Lý Sản Phẩm</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-chart-simple"></i>

@@ -30,6 +30,10 @@ public class Subcategory implements Serializable {
 
 	public Subcategory() {
 	}
+	public Subcategory(int id) {
+		this.id_SubCate = id;
+	}
+
 
 	public int getId_SubCate() {
 		return this.id_SubCate;
