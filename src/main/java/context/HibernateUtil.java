@@ -25,7 +25,6 @@ import entity.Subcategory;
 
 public class HibernateUtil {
 	/*private static SessionFactory sessionFactory = null;
-
     static {
         Configuration cfg = new Configuration().configure();
         Properties pros = new Properties();
@@ -47,11 +46,9 @@ public class HibernateUtil {
                 .applySettings(cfg.getProperties());
         sessionFactory = cfg.buildSessionFactory(builder.build());
     }
-
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-
     public static void main(String[] args) {
     	Session session = HibernateUtil.getSessionFactory().openSession();
         }*/

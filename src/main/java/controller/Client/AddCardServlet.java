@@ -28,76 +28,67 @@ public class AddCardServlet extends HttpServlet {
         Account a = (Account) session.getAttribute("user");
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         CartService cartservice = new CartService();
-        try {
-        	if(a == null) {
-            	String amountCart ="";
-            	String cart = "";
-                Cookie[] arr = request.getCookies();
-                for (Cookie o:arr) {
-                	if (o.getName().equals("Cart")) {
-                		cart = o.getValue();      		
-                		o.setMaxAge(0);
-                		response.addCookie(o);
-                	}
-                	if (o.getName().equals("amountCart")) {
-                		//if(productID ==)
-                		amountCart = o.getValue();
-                		o.setMaxAge(0);
-                		response.addCookie(o);
-                	}
+    	if(a == null) {
+        	String amountCart ="";
+        	String cart = "";
+            Cookie[] arr = request.getCookies();
+            for (Cookie o:arr) {
+            	if (o.getName().equals("Cart")) {
+            		cart = o.getValue();
+            	}
+            	if (o.getName().equals("amountCart")) {
+            		amountCart = o.getValue();
+            	}
+            }
+            String num = Integer.toString(quantity);
+            int amount = Integer.parseInt(amountCart);
+            if(cart.isEmpty()){
+            	System.out.println("rong");
+            	cart = productID +":"+num;
+            	amount++;
+            	System.out.println(amount);
+            }else {
+            	
+                int number = cartservice.checkCartCookies(cart, productID);
+                // Đã có
+                if(number!=0) {
+                	number = number + quantity;
+                	cart = cart +"/"+productID+":"+ String.valueOf(number);
                 }
-                String num = Integer.toString(quantity);
-                int amount = Integer.parseInt(amountCart);
-                if(cart.isEmpty()){
-                	cart = productID +":"+num;
+                // Chưa có
+                else {	
+                	cart = cart +"/"+productID+":"+num;
                 	amount++;
-                }else {
-                	
-                    int number = cartservice.checkCartCookies(cart, productID);
-                    // Đã có
-                    if(number!=0) {
-                    	number = number + quantity;
-                    	cart = cart +"/"+productID+":"+ String.valueOf(number);
-                    }
-                    // Chưa có
-                    else {	
-                    	cart = cart +"/"+productID+":"+num;
-                    	amount++;
-                    }
                 }
-                System.out.println(amount);
-            	Cookie amountC = new Cookie("amountCart",Integer.toString(amount));
-            	amountC.setMaxAge(24*60*60);
-        	    response.addCookie(amountC);
-            	session.setAttribute("amountCart",amount);
-            	// IN KQ
-                Cookie Cart = new Cookie("Cart", cart);
-    	    	Cart.setMaxAge(24*60*60);
-    	    	response.addCookie(Cart);
-    	    	
-    	    	request.getRequestDispatcher("managerCart").forward(request, response);
+            }
+            System.out.println(amount);
+            for (Cookie o:arr) {
+            	if (o.getName().equals("Cart")) {
+            		o.setValue(cart);
+            	}
+            }
+            Cookie amountC = new Cookie("amountCart",Integer.toString(amount));
+        	amountC.setMaxAge(24*60*60);
+    	    response.addCookie(amountC);
+        	session.setAttribute("amountCart",amount);
+	    	request.getRequestDispatcher("managerCart").forward(request, response);
+        }
+        else {
+        	String userName = a.getUserName();
+            
+            Cart cartExisted = cartservice.checkCartExist(userName,productID);
+            int amountExisted;
+            if(cartExisted != null) {
+    	       	 amountExisted = cartExisted.getAmount();
+    	       	 cartservice.editAmountCart(userName,productID, (amountExisted+quantity));
+
+    	       	 request.getRequestDispatcher("managerCart").forward(request, response);
             }
             else {
-            	String userName = a.getUserName();
-                
-                Cart cartExisted = cartservice.checkCartExist(userName,productID);
-                int amountExisted;
-                if(cartExisted != null) {
-        	       	 amountExisted = cartExisted.getAmount();
-        	       	 cartservice.editAmountCart(userName,productID, (amountExisted+quantity));
-
-        	       	 request.getRequestDispatcher("managerCart").forward(request, response);
-                }
-                else {
-                	cartservice.insertCart(userName, productID, quantity);
-        	       	request.getRequestDispatcher("managerCart").forward(request, response);
-                }
+            	cartservice.insertCart(userName, productID, quantity);
+    	       	request.getRequestDispatcher("managerCart").forward(request, response);
             }
-        }
-        catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-        
+        }  
     }
 
     @Override
