@@ -30,7 +30,6 @@ nb-configuration.xml
 .classpath
 .project
 .settings/
-src/main/java/context/HibernateUtil.java
 # Intellij
 .idea/
 *.iml
