@@ -14,7 +14,6 @@ import org.hibernate.Hibernate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import context.HibernateProxyTypeAdapter;
 import entity.Product;
 import service.ProductService;
 import service.ShopDetailService;
