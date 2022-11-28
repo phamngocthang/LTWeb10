@@ -43,10 +43,8 @@ public class AddCardServlet extends HttpServlet {
             String num = Integer.toString(quantity);
             int amount = Integer.parseInt(amountCart);
             if(cart.isEmpty()){
-            	System.out.println("rong");
             	cart = productID +":"+num;
             	amount++;
-            	System.out.println(amount);
             }else {
             	
                 int number = cartservice.checkCartCookies(cart, productID);
@@ -61,7 +59,6 @@ public class AddCardServlet extends HttpServlet {
                 	amount++;
                 }
             }
-            System.out.println(amount);
             for (Cookie o:arr) {
             	if (o.getName().equals("Cart")) {
             		o.setValue(cart);

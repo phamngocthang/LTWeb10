@@ -12,36 +12,36 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   </head>
 
-  <body>
-    <main class='grid grid-cols-[200px_1fr] p-4 min-h-screen gap-4 max-w-[1200px] mx-auto pt-10'>
-      <aside>
-        <nav>
-          <ul>
-            <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
-              <i class="w-[32px] fa-solid fa-gauge"></i>
-              <a href="DashboardHome.html">Dashboard</a>
-            </li>
-            <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
-              <i class="w-[32px] fa-solid fa-money-bill"></i>
-              <a href="Bill.jsp">Hóa Đơn</a>
-            </li>
-            <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
-              <i class="w-[32px] fa-solid fa-user"></i>
-              <a href="./Manage.html">Quản Lý Tài Khoản</a>
-            </li>
-            <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
-              <i class="w-[32px] fa-solid fa-shoe-prints"></i>
-              <a href="DashboardHome.html">Quản Lý Sản Phẩm</a>
-            </li>
-            <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
-              <i class="w-[32px] fa-solid fa-chart-simple"></i>
-              <a href="TopServlet">Top 10</a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-      <article>
-        <div class='grid grid-cols-2 gap-4'>
+<body>
+  <main class='grid grid-cols-[200px_1fr] p-4 min-h-screen gap-4 max-w-[1200px] mx-auto pt-10'>
+    <aside>
+      <nav>
+        <ul>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-gauge"></i>
+            <a href="DashboardHome.html">Dashboard</a>
+          </li>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-money-bill"></i>
+            <a href="Bill.jpp">Hóa Đơn</a>
+          </li>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-user"></i>
+            <a href="./Manage.html">Quản Lý Tài Khoản</a>
+          </li>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-shoe-prints"></i>
+            <a href="ManagerProduct">Quản Lý Sản Phẩm</a>
+          </li>
+          <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
+            <i class="w-[32px] fa-solid fa-chart-simple"></i>
+            <a href="TopServlet">Top 10</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <article>
+      <div class='grid grid-cols-2 gap-4'>
 
           <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>
             <div class='text-3xl'>

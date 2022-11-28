@@ -34,6 +34,13 @@ public class Image implements Serializable {
 		super();
 		this.pathMiddle = pathMiddle;
 	}
+	public Image(int id, String pathLeft, String pathMiddle, String pathRight) {
+		super();
+		this.id_P = id;
+		this.pathLeft = pathLeft;
+		this.pathMiddle = pathMiddle;
+		this.pathRight = pathRight;
+	}
 
 	public Image() {
 	}
