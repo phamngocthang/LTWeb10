@@ -25,15 +25,14 @@ import entity.Subcategory;
 
 public class HibernateUtil {
 	/*private static SessionFactory sessionFactory = null;
-
     static {
         Configuration cfg = new Configuration().configure();
         Properties pros = new Properties();
 		pros.put (Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
 		pros.put (Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
+		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/dbshopshoes");
 		pros.put (Environment.USER, "root");
-		pros.put (Environment.PASS, "816570");
+		pros.put (Environment.PASS, "");
 		pros.put (Environment.SHOW_SQL, "true");
 		cfg.setProperties (pros);
 		cfg.addAnnotatedClass(Product.class);
@@ -47,11 +46,9 @@ public class HibernateUtil {
                 .applySettings(cfg.getProperties());
         sessionFactory = cfg.buildSessionFactory(builder.build());
     }
-
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-
     public static void main(String[] args) {
     	Session session = HibernateUtil.getSessionFactory().openSession();
         }*/
@@ -61,11 +58,11 @@ public class HibernateUtil {
 	static {
 		Configuration conf = new Configuration ();
 		Properties pros = new Properties();
-		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 		pros.put (Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/dbshopshoes");
+		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
 		pros.put (Environment.USER, "root");
-		pros.put (Environment.PASS, "");
+		pros.put (Environment.PASS, "20110687");
 		pros.put (Environment.SHOW_SQL, "true");
 		pros.put(Environment.AUTOCOMMIT, "true");
 		
