@@ -71,7 +71,7 @@
                 </c:if>
             </div>
         </div>
-    </div>x
+    </div>
     <!-- Topbar End -->
 
 
