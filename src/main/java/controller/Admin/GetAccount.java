@@ -1,32 +1,34 @@
 package controller.Admin;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import entity.Category;
-import entity.Image;
-import entity.Product;
-import entity.Subcategory;
-import service.ProductService;
+import org.hibernate.Hibernate;
+
+import entity.Account;
+import service.AccountService;
 
 /**
- * Servlet implementation class DeleteProduct
+ * Servlet implementation class GetProduct
  */
-@WebServlet("/deleteProduct")
-public class DeleteProduct extends HttpServlet {
+@WebServlet("/getAccount")
+public class GetAccount extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+	  
 	  response.setContentType("text/html;charset=UTF-8"); 
-	  String productID = (String)request.getParameter("id_P");
+	  String username = request.getParameter("username");
 	  // get value product
-	  ProductService productservice = new ProductService();
-	  productservice.DeleteProduct(productID);
-	  request.getRequestDispatcher("ManagerProduct").forward(request, response);
+	  AccountService dp = new AccountService(); 
+	  Account accountdetail = dp.getAccountByUsername(username);
+	  request.setAttribute("accountdetail", accountdetail);
+	  request.getRequestDispatcher("Admin/UpdateAccount.jsp").forward(request, response);
 	}
 	  
 	@Override protected void doGet(HttpServletRequest request,

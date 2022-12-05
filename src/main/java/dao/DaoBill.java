@@ -55,6 +55,17 @@ public class DaoBill {
 		}
 		return list;
 	}
+	
+	public List<Object[]> getBillInMonth(String HQL) {
+
+		List<Object[]> list = new ArrayList<>();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			list = session.createNativeQuery(HQL).getResultList();
+			session.close();
+		} catch (Exception e) {
+		}
+		return list;
+	}
 
 	public int getSumBill(String HQL) {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {

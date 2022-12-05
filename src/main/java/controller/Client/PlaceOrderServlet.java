@@ -30,8 +30,10 @@ public class PlaceOrderServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         Account a = (Account) session.getAttribute("user");
+        
         List<Cart> cart = (List<Cart>) session.getAttribute("listCart");
         List<Product> product = (List<Product>) session.getAttribute("listProduct");
+        
         String t = String.valueOf(session.getAttribute("totalPrice"));
         int total = Integer.parseInt(t);
         if(a == null) {
@@ -64,8 +66,8 @@ public class PlaceOrderServlet extends HttpServlet {
 		        
 		        //old code
 				Email email =new Email();
-				email.setFrom("20110728@student.hcmute.edu.vn"); //chinh lai email quan tri tai day [chu y dung email con hoat dong]
-				email.setFromPassword("xxxxxxxxxxxxxx"); //mat khau email tren
+				email.setFrom("20110728@student.hcmute.edu.vn"); 
+				email.setFromPassword("0937566870");
 				email.setTo(emailAddress);
 				email.setSubject("Dat hang thanh cong tu Shoes Family");
 				StringBuilder sb = new StringBuilder();

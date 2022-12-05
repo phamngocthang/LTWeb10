@@ -85,10 +85,6 @@ public class HomeServlet extends HttpServlet {
         List<Product> recentProducts = getRecentProduct();
         HashMap<Integer, Integer> countProduct = countProduct(categories);
         List<Product> bestSellerProducts = getBestSellerProduct();
-        // print best seller product
-        for (Product product : bestSellerProducts) {
-            System.out.println(product.getName_P());
-        }
         
         request.setAttribute("allCategories", categories);
         request.setAttribute("recentProducts", recentProducts);

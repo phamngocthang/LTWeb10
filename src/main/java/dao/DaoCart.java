@@ -29,10 +29,7 @@ public class DaoCart {
 		Cart cart = new Cart();
     	try (Session session = HibernateUtil.getSessionFactory().openSession()){
     		cart = session.createQuery(HQL, Cart.class).uniqueResult();
-    		
     		session.close();
-    		
-    		
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -55,10 +52,7 @@ public class DaoCart {
 		List<Cart> cart = new ArrayList<>();
     	try (Session session = HibernateUtil.getSessionFactory().openSession()){
     		cart = session.createQuery(HQL, Cart.class).list();
-    		
     		session.close();
-    		
-    		
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

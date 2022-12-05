@@ -49,6 +49,23 @@ html {
   /* 5 */
 }
 
+
+#left-content .panel-default > .panel-heading 
+{
+    background-color: rgb(255, 255, 255);
+}
+#none-border {
+	border: none;
+	margin-top: 40px;
+}
+
+.panel-body{
+    padding:5px!important;
+}
+ .panel-heading {
+     background: url("/Content/public/images/asfalt-dark.png");
+}
+
 /*
 1. Remove the margin in all browsers.
 2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.

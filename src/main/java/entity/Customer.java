@@ -76,6 +76,8 @@ public class Customer implements Serializable {
 		this.lastName = lastName;
 		this.phonenumber = phonenumber;
 	}
+	
+	
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;

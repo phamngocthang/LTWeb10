@@ -78,8 +78,7 @@ public class EditAmountCartServlet extends HttpServlet {
         }
         session.setAttribute("listCart", listCart);   
         session.setAttribute("listProduct", listProduct);
-        //session.setAttribute("amountCart", listCart.size());
-        //System.out.println(session.getAttribute("amountCart"));
+
         double subTotal=0;
         for(Cart c : listCart) {
         	for(Product p : listProduct) {
