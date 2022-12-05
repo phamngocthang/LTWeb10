@@ -14,7 +14,7 @@ public class ProductService {
 
 	public List<Product> getRecentProduct() {
     	List<Product> list = new ArrayList<>();
-    	String HQL = "From Product P Where P.status = 1 ORDER BY P.id_P DESC";
+    	String HQL = "From Product P ORDER BY P.id_P DESC";
     	list = daoProduct.getRecentProduct(HQL, 4);
     	return list;
 	}
@@ -22,13 +22,19 @@ public class ProductService {
 	public List<Product> getTopProduct() {
 		// group by how many product in bill
 		String HQL = "SELECT P FROM Product P, Billdetail B WHERE P.id_P = B.product.id_P GROUP BY P.id_P ORDER BY COUNT(P.id_P) DESC";
-		return daoProduct.getTopProduct(HQL, 8);
+		return daoProduct.getTopProduct(HQL, 4);
+	}
+	
+	public List<Object[]> getProductByCate() {
+		// group by how many product in bill
+		String HQL = "SELECT product.id_SubCate, count(*) FROM Product , Billdetail WHERE Product.id_P = Billdetail.id_P GROUP BY product.id_SubCate ORDER BY id_SubCate ASC";
+		return daoProduct.getProductByCate(HQL);
 	}
 	
 	public List<Product> getAllProduct()
 	{
 		List<Product> list = new ArrayList<>();
-		String HQL = "From Product P Where P.status = 1";
+		String HQL = "From Product P";
 		list = daoProduct.getAllProduct(HQL);
 		return list;
 	}
@@ -38,10 +44,10 @@ public class ProductService {
 		List<Product> list = new ArrayList<>();
 		String HQL = "";
 		if(subcateID.equals("-1")) {
-    		HQL = "From Product P Where P.status = 1 Order By P.id_P ASC";
+    		HQL = "From Product P Order By P.id_P ASC";
     	}
     	else {
-    		HQL = "From Product P Where P.subcategory=" + subcateID +" and P.status = 1 Order By P.id_P ASC";
+    		HQL = "From Product P Where P.subcategory=" + subcateID +" Order By P.id_P ASC";
     	}
 		//System.out.println(HQL);
 		list = daoProduct.pagingAccount(HQL, (index-1)*show, show);
@@ -59,10 +65,10 @@ public class ProductService {
 	public int getCountAccount(String subCateID) {
 		String HQL = "";
 		if(subCateID.equals("-1")) {
-			HQL = "select count(p) from Product p where p.status = 1";
+			HQL = "select count(p) from Product p";
 		}
 		else {
-			HQL = "select count(p) from Product p Where p.subcategory=" + subCateID + "and where p.status=1";
+			HQL = "select count(p) from Product p Where p.subcategory=" + subCateID;
 		}
 		return daoProduct.getCountProduct(HQL);
 	}
@@ -138,19 +144,19 @@ public class ProductService {
 		if(subcateID.equals("-1")) {
 			//fillCategory = "";
 			if(fillTotal == "") {
-				HQL = "From Product P Where P.status = 1 Order By P.id_P ASC";
+				HQL = "From Product P Order By P.id_P ASC";
 			}
 			else {
-				HQL = "From Product P Where P.status = 1 and" + fillTotal + " Order By P.id_P ASC";
+				HQL = "From Product P Where " + fillTotal + " Order By P.id_P ASC";
 			}
 		}
 		else {
 			if(fillTotal == "")
 			{
-				HQL = "From Product P Where (P.subcategory=" + subcateID + ") and P.status = 1 Order By P.id_P ASC";
+				HQL = "From Product P Where (P.subcategory=" + subcateID + ") Order By P.id_P ASC";
 			}
 			else {
-				HQL = "From Product P Where (P.subcategory=" + subcateID + ") And " + fillTotal +"and P.status = 1 Order By P.id_P ASC";
+				HQL = "From Product P Where (P.subcategory=" + subcateID + ") And " + fillTotal +" Order By P.id_P ASC";
 			}
 			//fillCategory = "id_subCate=? AND";
 			
@@ -170,10 +176,14 @@ public class ProductService {
 	public void UpdateProduct(Product product, Image img) {
 		daoProduct.updateProduct(product, img);
 	}
+	
+	public void UpdateStatus(int productID) {
+	   String HQL = "Update Product p set p.status=1 Where p.id_P="+ productID;
+	   daoProduct.updateStatus(HQL);
+	  
+	}
 	public void DeleteProduct(String id_P) {
 		String HQL = "Update Product P Set P.status = 0 Where P.id_P =" + id_P;
 		daoProduct.deleteProduct(HQL);
-	}
-	public static void main (String[] args) {
 	}
 }

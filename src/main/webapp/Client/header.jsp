@@ -68,6 +68,8 @@
 	                        <button class="dropdown-item" type="button" onclick="location.href='Logout';">Log Out</button>
 	                    </div>
 	                </div>
+	                
+	                
                 </c:if>
             </div>
         </div>

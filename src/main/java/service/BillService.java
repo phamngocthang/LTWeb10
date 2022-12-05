@@ -25,6 +25,15 @@ public class BillService {
 		list = daoBill.getAllBill(HQL);
 		return list;
 	}
+	
+	public List<Object[]> getBillInMonth() {
+		List<Object[]> list = new ArrayList<>();
+		String HQL = "select MONTH(date), SUM(totalPrice) from bill Group by MONTH(date)";
+		
+		list = daoBill.getBillInMonth(HQL);
+		
+		return list;
+	}
 
 	public List<Billdetail> getAllBillDetails(Integer idBill) {
 		List<Billdetail> list = new ArrayList<>();
@@ -42,7 +51,7 @@ public class BillService {
 
 	public List<Object[]> getTopProduct() {
 		String HQL = "Select P.name_P, P.price, P.color, P.brand, SUM(b.amount)*p.price as Total From billdetail as B inner JOIN "
-				+ "product as P ON B.id_P = P.id_P GROUP BY P.id_P ORDER BY Total DESC LIMIT 8;";
+				+ "product as P ON B.id_P = P.id_P GROUP BY P.id_P ORDER BY Total DESC LIMIT 5;";
 		return daoBill.getTopBill(HQL);
 	}
 
@@ -81,10 +90,9 @@ public class BillService {
 	public static void main(String[] args) {
 
 		BillService carservice = new BillService();
-		List<Object[]> list = carservice.getTopProduct();
+		List<Object[]> list = carservice.getBillInMonth();
 		for (Object[] objects : list) {
-			System.out.println(objects[0]);
-			System.out.println(objects[1]);
+			System.out.println(Double.valueOf(objects[0].toString()) + "   " + Double.valueOf(objects[1].toString()));
 		}
 	}
 }

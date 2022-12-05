@@ -89,9 +89,14 @@ public class SearchProductByPrice extends HttpServlet {
 					+ "	                            <div class=\"product-img position-relative overflow-hidden\">\r\n"
 					+ "	                                <img class=\"img-fluid w-100\" src=\""+img.getPathMiddle()+"\" alt=\"\">\r\n"
 					+ "	                                <div class=\"product-action\">\r\n"
-					+ "	                                    <a class=\"btn btn-outline-dark btn-square\" onclick=\"AddCartAjax("+o.getId_P()+")\"><i class=\"fa fa-shopping-cart\"></i></a>\r\n"
-					+ "	                                    <a class=\"btn btn-outline-dark btn-square\" onclick=\"AddFavoriteProductAjax("+o.getId_P()+")\"><i class=\"far fa-heart\"></i></a>\r\n"
-					+ "	                                </div>\r\n"
+					+ "	                                    <a class=\"btn btn-outline-dark btn-square\" onclick=\"AddCartAjax("+o.getId_P()+", "+ o.getStatus()+")\"><i class=\"fa fa-shopping-cart\"></i></a>\r\n"
+					+ "	                                    <a class=\"btn btn-outline-dark btn-square\" onclick=\"AddFavoriteProductAjax("+o.getId_P()+")\"><i class=\"far fa-heart\"></i></a>\r\n");
+			if(o.getStatus() == 0) {
+				out.println("<button type=\"button\" class=\"btn btn-warning\" id=\"expired\">\r\n"
+						+ "											      Hết hàng\r\n"
+						+ "											    </button>\r\n");
+			}
+			out.println("</div>\r\n"
 					+ "	                            </div>\r\n"
 					+ "	                            <div class=\"text-center py-4\">\r\n"
 					+ "	                                <a class=\"h6 text-decoration-none text-truncate\" href=\"detail?id="+o.getId_P()+"&brand="+o.getBrand()+"\">"+o.getName_P()+"</a>\r\n"

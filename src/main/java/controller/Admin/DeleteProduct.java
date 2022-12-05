@@ -23,7 +23,6 @@ public class DeleteProduct extends HttpServlet {
 	{
 	  response.setContentType("text/html;charset=UTF-8"); 
 	  String productID = (String)request.getParameter("id_P");
-	  System.out.println(productID);
 	  // get value product
 	  ProductService productservice = new ProductService();
 	  productservice.DeleteProduct(productID);

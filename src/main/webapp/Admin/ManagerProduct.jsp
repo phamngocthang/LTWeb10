@@ -136,7 +136,7 @@
           </thead>
           <tbody>
             <c:forEach begin="0" end="${fn:length(listProduct) - 1}" step="1" varStatus="position">
-		        <tr class='bg-gray-100 odd:bg-gray-200'>
+		        <tr class='bg-gray-100 odd:bg-gray-200' style='background-color: ${listProduct[position.current].status == 0 ? "orange" : ""};'>
 	              <td class='p-2 pl-4'>${listProduct[position.current].name_P}</td>
 	              <td class='p-2 pl-4'>${Double.toString(listProduct[position.current].price).substring(0,Double.toString(listProduct[position.current].price).length()-2)} VNĐ</td>
 	              <td class='p-2 pl-4'>${listProduct[position.current].color}</td>
@@ -150,6 +150,11 @@
 	              <a href ="deleteProduct?id_P=${listProduct[position.current].id_P}">
 	              <button>
 						<i class="fa-solid fa-delete-left hover:text-red-600 cursor-pointer"></i>
+	              </button>
+	              </a>
+	              <a href ="updateStatus?id_P=${listProduct[position.current].id_P}">
+	              <button>
+						<i class="fas fa-sync-alt hover:text-red-600 cursor-pointer"></i>
 	              </button>
 	              </a>
 	              </td>

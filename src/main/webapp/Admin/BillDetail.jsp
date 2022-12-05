@@ -9,14 +9,14 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
       <title>Document</title>
-      <link rel="stylesheet" href="../dist/output.css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/output.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   </head>
 
   <body>
     <main class='p-4 max-w-[1200px] mx-auto pt-10'>
       <div class='pb-4'>
-        <h1 class='uppercase text-2xl font-semibold text-center p-4'>Chi tiết đơn hàng (mã đơn hàng)</h1>
+        <h1 class='uppercase text-2xl font-semibold text-center p-4'>Chi tiết đơn hàng (Mã hóa đơn: ${billId})</h1>
         <table class='bg-gray-200 table-auto w-full shadow-md border-b-2 border-yellow-500'>
           <thead class='bg-yellow-500'>
             <tr>
@@ -41,7 +41,7 @@
         </table>
         <div class='flex justify-between mt-4'>
           <div>
-            <a class='underline text-gray-500 hover:text-gray-400' href="">Trở về trang quản lý hóa đơn</a>
+            <a class='underline text-gray-500 hover:text-gray-400' href="BillManagement">Trở về trang quản lý hóa đơn</a>
           </div>
           <div class='flex justify-end gap-2'>
             <p class='text-xl'>Tổng giá trị</p>

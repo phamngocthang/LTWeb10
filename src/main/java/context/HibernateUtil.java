@@ -34,7 +34,7 @@ public class HibernateUtil {
 		pros.put (Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
 		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
 		pros.put (Environment.USER, "root");
-		pros.put (Environment.PASS, "123456");
+		pros.put (Environment.PASS, "816570");
 		pros.put (Environment.SHOW_SQL, "true");
 		pros.put(Environment.AUTOCOMMIT, "true");
 		pros.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");

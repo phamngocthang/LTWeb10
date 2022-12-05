@@ -1721,9 +1721,20 @@ pre code {
   background-color: #f1b0b7;
 }
 
+#expired {
+	position: absolute;
+	top: 5px;
+	right: 5px
+}
+
 .table-hover .table-danger:hover > td,
 .table-hover .table-danger:hover > th {
   background-color: #f1b0b7;
+}
+#label-expired {
+	color: red;
+	font-weight: 600;
+	margin-left: 10px;
 }
 
 .table-light,

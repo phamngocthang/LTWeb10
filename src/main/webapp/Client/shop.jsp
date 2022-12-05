@@ -74,47 +74,38 @@
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-all" ${subcateID == -1 ?"checked":""} onclick='window.location.href="shop?subcateID=-1&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-all">All Product</label>
-                            <span class="badge border font-weight-normal">1000</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-1" ${subcateID == 1 ?"checked":""} onclick='window.location.href="shop?subcateID=1&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-1">Giày Sandals Nam</label>
-                            <span class="badge border font-weight-normal">150</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-2" ${subcateID == 2 ?"checked":""} onclick='window.location.href="shop?subcateID=2&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-2">Giày Lười Nam</label>
-                            <span class="badge border font-weight-normal">295</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-3" ${subcateID == 3 ?"checked":""} onclick='window.location.href="shop?subcateID=3&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-3">Giày Sneaker Nam</label>
-                            <span class="badge border font-weight-normal">246</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-4" ${subcateID == 4 ?"checked":""} onclick='window.location.href="shop?subcateID=4&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-4">Giày Thể Thao Nam</label>
-                            <span class="badge border font-weight-normal">246</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-5" ${subcateID == 5 ?"checked":""} onclick='window.location.href="shop?subcateID=5&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-5">Giày Cao Gót Nữ</label>
-                            <span class="badge border font-weight-normal">246</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-6" ${subcateID == 6 ?"checked":""} onclick='window.location.href="shop?subcateID=6&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-6">Giày Sneaker Nữ</label>
-                            <span class="badge border font-weight-normal">246</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-7" ${subcateID == 7 ?"checked":""} onclick='window.location.href="shop?subcateID=7&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-7">Giày Thể Thao Nữ</label>
-                            <span class="badge border font-weight-normal">246</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="radio" name="radiocate" class="custom-control-input" id="cate-8" ${subcateID == 8 ?"checked":""} onclick='window.location.href="shop?subcateID=8&index=1&showP=3"'>
                             <label class="custom-control-label" for="cate-8">Giày Đế Bệ Nữ</label>
-                            <span class="badge border font-weight-normal">246</span>
                         </div>
                     </form>
                 </div>
@@ -189,8 +180,13 @@
 	                            	<c:set var="img_o" value="${o.image}" />
 	                                <img class="img-fluid w-100" src="${img_o.pathMiddle}" alt="">
 	                                <div class="product-action">
-	                                    <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${o.id_P})"><i class="fa fa-shopping-cart"></i></a>
+	                                    <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${o.id_P}, ${o.status})"><i class="fa fa-shopping-cart"></i></a>
 	                                    <a class="btn btn-outline-dark btn-square" onclick="AddFavoriteProductAjax(${o.id_P})"><i class="far fa-heart"></i></a>
+	                                    <c:if test="${o.status == 0}">
+		                                        <button type="button" class="btn btn-warning" id="expired">
+											      Hết hàng
+											    </button>
+										    </c:if>
 	                                </div>
 	                            </div>
 	                            <div class="text-center py-4">
