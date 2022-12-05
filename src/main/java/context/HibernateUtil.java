@@ -24,34 +24,6 @@ import entity.Product;
 import entity.Subcategory;
 
 public class HibernateUtil {
-	/*private static SessionFactory sessionFactory = null;
-    static {
-        Configuration cfg = new Configuration().configure();
-        Properties pros = new Properties();
-		pros.put (Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
-		pros.put (Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/dbshopshoes");
-		pros.put (Environment.USER, "root");
-		pros.put (Environment.PASS, "");
-		pros.put (Environment.SHOW_SQL, "true");
-		cfg.setProperties (pros);
-		cfg.addAnnotatedClass(Product.class);
-		cfg.addAnnotatedClass(Image.class);
-		cfg.addAnnotatedClass(Account.class);
-		cfg.addAnnotatedClass(Category.class);
-		cfg.addAnnotatedClass(Customer.class);
-		cfg.addAnnotatedClass(Feedback.class);
-		cfg.addAnnotatedClass(Subcategory.class);
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
-                .applySettings(cfg.getProperties());
-        sessionFactory = cfg.buildSessionFactory(builder.build());
-    }
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-    public static void main(String[] args) {
-    	Session session = HibernateUtil.getSessionFactory().openSession();
-        }*/
     
 	private final static SessionFactory FACTORY;
 	

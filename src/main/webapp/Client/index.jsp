@@ -34,7 +34,7 @@
     </head>
 
     <body>
-        <%@ include file="header.jsp" %>>
+        <%@ include file="header.jsp" %>
 
 
             <!-- Carousel Start -->
@@ -271,7 +271,7 @@
             <!-- Products End -->
 
             <!-- Footer  -->
-            <%@ include file="footer.jsp" %>>
+            <%@ include file="footer.jsp" %>
     </body>
 
     </html>
