@@ -48,23 +48,23 @@
         <ul>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-gauge"></i>
-            <a href="DashboardHome.html">Dashboard</a>
+            <a href="DashBoard">Dashboard</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-money-bill"></i>
-            <a href="DashboardHome.html">Hóa đơn</a>
+            <a href="BillManagement">Hóa Đơn</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-user"></i>
-            <a href="./Manage.html">Quản lý tài khoản</a>
+            <a href="AccountManage">Quản Lý Tài Khoản</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-shoe-prints"></i>
-            <a href="DashboardHome.html">Quản lý sản phẩm</a>
+            <a href="ManagerProduct">Quản Lý Sản Phẩm</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-chart-simple"></i>
-            <a href="./Top.html">Top 10</a>
+            <a href="TopServlet">Top 10</a>
           </li>
         </ul>
       </nav>

@@ -9,6 +9,7 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/output.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
@@ -20,11 +21,11 @@
         <ul>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-gauge"></i>
-            <a href="DashboardHome.html">Dashboard</a>
+            <a href="DashBoard">Dashboard</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-money-bill"></i>
-            <a href="Bill.jpp">Hóa Đơn</a>
+            <a href="BillManagement">Hóa Đơn</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-user"></i>
@@ -38,10 +39,6 @@
             <i class="w-[32px] fa-solid fa-chart-simple"></i>
             <a href="TopServlet">Top 10</a>
           </li>
-          
-          
-          
-          
         </ul>
       </nav>
     </aside>

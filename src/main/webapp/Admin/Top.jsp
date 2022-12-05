@@ -24,19 +24,19 @@
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-money-bill"></i>
-            <a href="DashBoard">Hóa Đơn</a>
+            <a href="BillManagement">Hóa Đơn</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-user"></i>
-            <a href="DashBoard">Quản Lý Tài Khoản</a>
+            <a href="AccountManage">Quản Lý Tài Khoản</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-shoe-prints"></i>
-            <a href="DashBoard">Quản Lý Sản Phảm</a>
+            <a href="ManagerProduct">Quản Lý Sản Phẩm</a>
           </li>
           <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
             <i class="w-[32px] fa-solid fa-chart-simple"></i>
-            <a href="DashBoard">Top 10</a>
+            <a href="TopServlet">Top 10</a>
           </li>
         </ul>
       </nav>
