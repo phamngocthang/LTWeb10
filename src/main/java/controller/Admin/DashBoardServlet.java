@@ -1,7 +1,10 @@
 
   package controller.Admin;
   
-  import java.io.IOException; import java.util.List;
+  import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
   
   import javax.servlet.ServletException; 
   import javax.servlet.annotation.WebServlet; 
@@ -34,10 +37,45 @@ public class DashBoardServlet extends HttpServlet {
 		  int amountProduct = productService.getCountAccount("-1");
 		  int sumBill = billService.getSumBill();
 		  int countBill = billService.getCountBill();
+		  List<Object[]> list = billService.getBillInMonth();
+		  List<Double> listBillInMon = new ArrayList<>();
+		  for (int i = 1; i <= 12; i++) {
+			  int check = 0;
+			  for (Object[] objects : list) {
+				  if(Double.valueOf(objects[0].toString()) == i) {
+					  listBillInMon.add(Double.valueOf(objects[1].toString()));
+					  check = 1;
+					  break;
+				  }
+			  }
+			  if(check == 0)
+				  listBillInMon.add(0.0);
+		  }
+		  
+		  List<Object[]> listCate = productService.getProductByCate();
+		  int total = 0;
+		  List<Integer> listSL = new ArrayList<>();
+		  for (int i = 1; i <= 8; i++) {
+			  int check = 0;
+			  for (Object[] objects : listCate) {
+				  if(Integer.parseInt(objects[0].toString()) == i) {
+					  listSL.add(Integer.parseInt(objects[1].toString()));
+					  total += Integer.parseInt(objects[1].toString());
+					  check = 1;
+					  break;
+				  }
+			  }
+			  if(check == 0)
+				  listSL.add(0);
+		  }
+		  
 		  request.setAttribute("amountCustomer", amountCustomer);
 		  request.setAttribute("amountProduct", amountProduct);
 		  request.setAttribute("sumBill", sumBill);
 		  request.setAttribute("countBill", countBill);
+		  request.setAttribute("listBillInMon", listBillInMon);
+		  request.setAttribute("listSL", listSL);
+		  request.setAttribute("total", total);
 		  request.getRequestDispatcher("Admin/DashboardHome.jsp").forward(request, response);
 		}
 		  

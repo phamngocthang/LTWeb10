@@ -2,7 +2,7 @@
 /build/
 .vscode
 *.class
-
+/src/main/java/context/HibernateUtil.java
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

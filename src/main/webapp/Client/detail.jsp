@@ -92,8 +92,11 @@
 	                                </button>
 	                            </div>
 	                        </div>
-	                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-	                            Cart</button>
+	                        <button type="${detail.status == 0 ? 'button': '' }" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+	                            Cart</button> 
+	                        <c:if test="${detail.status == 0}">
+	                        	<button type="button" class="btn btn-light px-3 disabled" id="label-expired">(Hết hàng)</button>
+	                        </c:if>
 	                     </form>
                     </div>
                 </div>
@@ -218,8 +221,13 @@
                         	<c:set var="img_o" value="${o.image}" />
                             <img class="img-fluid w-100" src="${img_o.pathMiddle}" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${o.id_P})"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${o.id_P}, ${o.status})"><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" onclick="AddFavoriteProductAjax(${o.id_P})"><i class="far fa-heart"></i></a>
+                                <c:if test="${o.status == 0}">
+		                                        <button type="button" class="btn btn-warning" id="expired">
+											      Hết hàng
+											    </button>
+										    </c:if>
                             </div>
                         </div>
                         <div class="text-center py-4">

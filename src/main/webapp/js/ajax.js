@@ -30,7 +30,11 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 						thongBao.style.display = "none";
 					}, time)
 		}
-	    function AddCartAjax(pID){﻿
+	    function AddCartAjax(pID, status){
+			if(status == 0) {
+				showMessage("Sản phẩm đã hết hàng! ", 3000);
+				return;
+			}﻿
 	        $.ajax({
 	            url: location.origin + "/WebApp/AddCartAjax",
 	            type: "get", //send it through get method

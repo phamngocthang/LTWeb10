@@ -87,4 +87,25 @@ public class DaoAccount {
 		}
 		return customer;
 	}
+	
+	public List<Account> getAllAccount(String HQL) {
+	    List<Account> list = new ArrayList<>();
+
+	    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	      list = session.createQuery(HQL, Account.class).getResultList();
+	      session.close();
+	    } catch (Exception e) {
+	    }
+	    return list;
+	  }
+	public Account getAccountByUsername(String HQL, String username) {
+	    Account acc = new Account();
+
+	    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	      acc = session.createQuery(HQL, Account.class).setParameter("username", username).uniqueResult();
+	      session.close();
+	    } catch (Exception e) {
+	    }
+	    return acc;
+	  }
 }

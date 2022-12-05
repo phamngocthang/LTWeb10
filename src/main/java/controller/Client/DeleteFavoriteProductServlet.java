@@ -31,6 +31,7 @@ public class DeleteFavoriteProductServlet extends HttpServlet {
         String userName = a.getUserName();
         FavoriteProductService fproductservice = new FavoriteProductService();
         fproductservice.deleteCart(productID, a.getUserName());
+        
         List<Favoriteproduct> listfproduct = fproductservice.getFavoriteProductByUserName(userName);
         List<Product> listProduct = fproductservice.getProductByPIDAndUserName(listfproduct);
         session.setAttribute("amountfProduct", listfproduct.size());

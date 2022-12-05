@@ -31,6 +31,16 @@ public class DaoProduct {
 		}
 		return list;
 	}
+	
+	public List<Object[]> getProductByCate(String HQL) {
+		List<Object[]> list = new ArrayList<>();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			list = session.createNativeQuery(HQL).getResultList();
+			session.close();
+		} catch (Exception e) {
+		}
+		return list;
+	}
 
 	public List<Product> getRecentProduct(String HQL, int amount) {
 
@@ -82,7 +92,6 @@ public class DaoProduct {
 			trans.rollback();
 		}
 		return list;
-
 	}
 
 	public List<Product> pagingAccount(String HQL, int offset, int limit) {
@@ -132,6 +141,22 @@ public class DaoProduct {
     		
 		} catch (Exception e) {
 			session.getTransaction().rollback();
+		}
+	}
+	public void updateStatus(String HQL) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+    	EntityTransaction trans = session.getTransaction();
+    	Query query = session.createQuery(HQL);
+    	trans.begin();
+    	try {
+    		query.executeUpdate();
+        	trans.commit();
+    	}
+    	catch (Exception e) {
+			trans.rollback();
+		}
+    	finally {
+			session.close();
 		}
 	}
 	public void updateProduct(Product product, Image img) {

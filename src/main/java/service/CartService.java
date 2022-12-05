@@ -37,8 +37,6 @@ public class CartService {
     }
 	public Cart checkCartExist(String userName,String productID) {
 		String HQL = "From Cart C Where C.account='" + userName +"' And C.product=" + productID;
-		//String HQL1 = "From Cart C Where C.account=:userName And C.product=" + productID;
-		//String HQL2 = "From Cart C";
 		Cart cart = daoCart.getCart(HQL, userName, productID);
 		return cart;
 	       
@@ -60,8 +58,6 @@ public class CartService {
 			Product p = daoCart.getProductByID(HQL, c.getProduct().getId_P());
 			product.add(p);
 		}
-		//String HQL = "Select P.name_P, P.price, P.image From Product P";
-		//product = daoCart.getProductByID(HQL);
 		return product;
 	}
 	

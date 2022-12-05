@@ -9,7 +9,7 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
       <title>Dashboard</title>
-      <link rel="stylesheet" href="../dist/output.css">
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/output.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   </head>
 
@@ -20,19 +20,19 @@
           <ul>
             <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
               <i class="w-[32px] fa-solid fa-gauge"></i>
-              <a href="DashboardHome.html">Dashboard</a>
+              <a href="DashboardHome">Dashboard</a>
             </li>
             <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
               <i class="w-[32px] fa-solid fa-money-bill"></i>
-              <a href="DashboardHome.html">Hóa đơn</a>
+              <a href="BillManagement">Hóa đơn</a>
             </li>
             <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
               <i class="w-[32px] fa-solid fa-user"></i>
-              <a href="DashboardHome.html">Quản lý tài khoản</a>
+              <a href="">Quản lý tài khoản</a>
             </li>
             <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
               <i class="w-[32px] fa-solid fa-shoe-prints"></i>
-              <a href="DashboardHome.html">Quản lý sản phẩm</a>
+              <a href="ManagerProduct">Quản lý sản phẩm</a>
             </li>
             <li class='p-2 hover:bg-slate-200 rounded-md flex items-center gap-2'>
               <i class="w-[32px] fa-solid fa-chart-simple"></i>

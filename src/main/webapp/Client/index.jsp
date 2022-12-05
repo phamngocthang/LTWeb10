@@ -34,7 +34,7 @@
     </head>
 
     <body>
-        <%@ include file="header.jsp" %>>
+        <%@ include file="header.jsp" %>
 
 
             <!-- Carousel Start -->
@@ -194,11 +194,15 @@
                                 <div class="product-img position-relative overflow-hidden">
                                     <img class="img-fluid w-100" src="${p.image.pathMiddle}" alt="">
                                     <div class="product-action">
-                                        <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${p.id_P})"><i
+                                        <a class="btn btn-outline-dark btn-square" onclick="AddCartAjax(${p.id_P}, ${p.status})"><i
                                                 class="fa fa-shopping-cart"></i></a>
                                         <a class="btn btn-outline-dark btn-square"
                                             onclick="AddFavoriteProductAjax(${p.id_P})"><i class="far fa-heart"></i></a>
-
+                                            <c:if test="${p.status == 0}">
+		                                        <button type="button" class="btn btn-warning" id="expired">
+											      Hết hàng
+											    </button>
+										    </c:if>				    
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
@@ -267,7 +271,7 @@
             <!-- Products End -->
 
             <!-- Footer  -->
-            <%@ include file="footer.jsp" %>>
+            <%@ include file="footer.jsp" %>
     </body>
 
     </html>

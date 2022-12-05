@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		request.getRequestDispatcher("Client/Login.jsp").include(request, response);
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
   
@@ -73,8 +74,8 @@ public class LoginServlet extends HttpServlet {
             	response.sendRedirect("DashBoard");
             }
         }
-        else {
-        	response.sendRedirect("Client/Login.jsp?err=1");
+        else if(username!=null){
+        	request.getRequestDispatcher("Client/Login.jsp?err=1").forward(request, response);
         }
     }
     @Override
