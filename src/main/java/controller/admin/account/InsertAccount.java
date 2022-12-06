@@ -18,7 +18,7 @@ public class InsertAccount extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 	  response.setContentType("text/html;charset=UTF-8"); 
-	  
+	  HttpSession session = request.getSession();
 	  int isAdmin=0;
 	  String username = request.getParameter("username");
       String password = request.getParameter("password");
@@ -30,11 +30,13 @@ public class InsertAccount extends HttpServlet {
     	  isAdmin=1;
 	 
       DaoAccount dao = new DaoAccount();
+      session.setAttribute("checkinsert", true);
       int a= dao.Signup(username, password, password, isAdmin);
       if(a>0)
-    	  request.getRequestDispatcher("/AccountManage?err=1").forward(request, response);
+    	  session.setAttribute("messinsert", true);
       else
-    	  request.getRequestDispatcher("/AccountManage?err=2").forward(request, response);
+    	  session.setAttribute("messinsert", false);
+      request.getRequestDispatcher("AccountManage").forward(request, response);
 	}
 	  
   @Override protected void doGet(HttpServletRequest request,

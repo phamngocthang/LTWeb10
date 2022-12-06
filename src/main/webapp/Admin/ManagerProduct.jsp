@@ -9,6 +9,7 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/output.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
@@ -122,8 +123,7 @@
         <h1 class='uppercase text-2xl font-semibold text-center p-4'>Quản lý sản phẩm</h1>
 
         <button onclick="openAddForm()"
-          class='bg-blue-500 hover:bg-blue-400 text-center text-white p-2 mb-2 rounded-md shadow-md'>Thêm
-          sản phẩm</button>
+          class='bg-blue-500 hover:bg-blue-400 text-center text-white p-2 mb-2 rounded-md shadow-md'>Thêm sản phẩm</button>
         <table class='bg-gray-200 table-auto w-full shadow-md border-b-2 border-yellow-500'>
           <thead class='bg-yellow-500'>
             <tr>
@@ -162,66 +162,97 @@
             </c:forEach>
           </tbody>
         </table>
+        <input id="check_insert" value="${checkinsert}" hidden /> 
+        <input id="statusmanage" value="${statusmanage}" hidden /> 
+         <input id="check_delete" value="${checkdelete}" hidden />
+         <input id="check_update" value="${checkupdate}" hidden />
+         <input id="check_update_p" value="${checkupdateproduct}" hidden />
+         <input id="mess_update" value="${messupdate}" hidden />
+         <input id="mess_delete" value="${messdelete}" hidden />
+         <input id="mess_update_p" value="${messupdateproduct}" hidden />
       </div>
     </article>
   </main>
   <script>
-    const openAdd = document.getElementById('openAdd');
-    const addForm = document.getElementById('addForm');
-    
-    const openUpdate = document.getElementById('openUpdate');
-    const UpdateForm = document.getElementById('UpdateForm');
-
-    console.log(openAdd.checked)
-    
-    function openUpdateForm(id) {
-      openUpdate.checked = true;
-      fetch("/")
-      openUpdate.dispatchEvent(new Event('change')); 
-    }
-
-    function closeUpdateForm() {
-      openUpdate.checked = false;
-      openUpdate.dispatchEvent(new Event('change'));
-    }
-
-    function openAddForm() {
-      openAdd.checked = true;
-      openAdd.dispatchEvent(new Event('change'));
-    }
-
-    function closeAddForm() {
-      openAdd.checked = false;
-      openAdd.dispatchEvent(new Event('change'));
-    }
-
-    openAdd.addEventListener('change', () => {
-      console.log("Changed");
-      if (openAdd.checked) {
-        addForm.classList.remove('hidden');
-      } else {
-        addForm.classList.add('hidden');
-      }
-    })
-    openUpdate.addEventListener('change', () => {
-      if (openUpdate.checked) {
-        UpdateForm.classList.remove('hidden');
-        
-      } else {
-        UpdateForm.classList.add('hidden');
-      }
-     
-     function showMessage(message, time) {
+	  const openAdd = document.getElementById('openAdd');
+	  const addForm = document.getElementById('addForm');
+	  function openAddForm() {
+	    openAdd.checked = true;
+	    openAdd.dispatchEvent(new Event('change'));
+	  }
+	
+	  function closeAddForm() {
+	    openAdd.checked = false;
+	    openAdd.dispatchEvent(new Event('change'));
+	  }
+	
+	  openAdd.addEventListener('change', () => {
+	    if (openAdd.checked) {
+	      addForm.classList.remove('hidden');
+	    } else {
+	      addForm.classList.add('hidden');
+	    }
+	  })
+	 function showMessage(message, time) {
 		var thongBao = document.querySelector('#thongBao');
 				clearTimeout(timeoutId);
-                thongBao.style.display = "block";
-                thongBao.innerText=message;
-                timeoutId = setTimeout(() => {
+	            thongBao.style.display = "block";
+	            thongBao.innerText=message;
+	            timeoutId = setTimeout(() => {
 					thongBao.style.display = "none";
 				}, time)
 	}
-    })
-
+	let insertproduct = document.getElementById("check_insert");
+	let deleteproduct = document.getElementById("check_delete");
+	let updateproductstatus = document.getElementById("check_update");
+	let updateproduct = document.getElementById("check_update_p");
+	let checkstatus = document.getElementById("statusmanage");
+	
+	let messupdate = document.getElementById("mess_update");
+	let messdelete = document.getElementById("mess_delete");
+	let messupdateproduct = document.getElementById("mess_update_p");
+	
+	let checkinsert = insertproduct.value;
+	let checkdelete = deleteproduct.value;
+	let checkupdate = updateproduct.value;
+	let checkupdatestatus = updateproductstatus.value;
+	let status = checkstatus.value;
+	
+	let mess_up = messupdate.value;
+	let mess_de = messdelete.value;
+	let mess_upproduct = messupdateproduct.value;
+	if (status === 'true'){
+		if (checkinsert === 'true')
+			swal("Thông Báo!", "Thêm Sản Phẩm Thành Công",
+			"success");
+		if (checkdelete === 'true')
+		{
+			if (mess_de === 'true')
+				swal("Thông Báo!","Xóa Sản Phẩm Thành Công" ,"success");
+			else
+				swal("Thông Báo!","Sản Phẩm Đã Xóa" ,"error");
+		}
+		if (checkupdatestatus === 'true')
+		{
+			if (mess_up === 'true'){
+				swal("Thông Báo!", "Hoàn Tác Sản Phẩm Thành Công",
+				"success");
+			}else{
+				swal("Thông Báo!", "Sản Phẩm Không Được Hoàn Tác",
+				"error");
+			}
+		}
+		if (checkupdate === 'true')
+		{
+			if (mess_upproduct === 'true'){
+				swal("Thông Báo!", "Cập Nhật Sản Phẩm Thành Công",
+				"success");
+			}else{
+				swal("Thông Báo!", "Cập Nhật Sản Phẩm Không Thành Công",
+				"error");
+			}
+		}
+	}
   </script>
 </body>
 

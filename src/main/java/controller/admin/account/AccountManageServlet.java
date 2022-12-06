@@ -28,10 +28,37 @@ public class AccountManageServlet extends HttpServlet {
             throws ServletException, IOException {
 		
 		response.setContentType("text/html;charset=UTF-8");
-		
 		HttpSession session = request.getSession();
 		List<Account> accounts = getAccount();
 		session.setAttribute("allAccounts", accounts);
+		request.setAttribute("statusmanage", false);
+		//check thêm tài khoản
+		if (session.getAttribute("checkinsert") != null && session.getAttribute("messinsert") != null)
+		{
+			boolean checkinsert = (boolean)session.getAttribute("checkinsert");
+			boolean messinsert = (boolean)session.getAttribute("messinsert");
+			session.setAttribute("checkinsert", false);
+			request.setAttribute("checkinsert", checkinsert);
+			request.setAttribute("messinsert", messinsert);
+			request.setAttribute("statusmanage", true);	 
+		}
+		else
+			request.setAttribute("checkinsert", false);
+		//check cập nhật tài khoản
+		if (session.getAttribute("checkupdate") != null && session.getAttribute("messupdate") != null)
+		{
+			boolean checkupdate = (boolean)session.getAttribute("checkupdate");
+			boolean messupdate = (boolean)session.getAttribute("messupdate");
+			session.setAttribute("checkupdate", false);
+			request.setAttribute("checkupdate", checkupdate);
+			request.setAttribute("messupdate", messupdate);
+			request.setAttribute("statusmanage", true);	 
+		}
+		else
+			request.setAttribute("checkupdate", false);
+		if(session.getAttribute("checkinsert") != null ||session.getAttribute("checkupdate") != null ) {
+			request.setAttribute("statusmanage", true);
+		}
         request.getRequestDispatcher("Admin/ManageAccount.jsp").forward(request, response);
     }
 

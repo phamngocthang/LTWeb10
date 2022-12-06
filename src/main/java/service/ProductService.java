@@ -3,7 +3,9 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.DaoCart;
 import dao.DaoProduct;
+import entity.Cart;
 import entity.Category;
 import entity.Image;
 import entity.Product;
@@ -11,7 +13,7 @@ import entity.Subcategory;
 
 public class ProductService {
 	DaoProduct daoProduct = new DaoProduct();
-
+	DaoCart daoCart = new DaoCart();
 	public List<Product> getRecentProduct() {
     	List<Product> list = new ArrayList<>();
     	String HQL = "From Product P ORDER BY P.id_P DESC";
@@ -170,20 +172,49 @@ public class ProductService {
 		
 		return list;
 	}
-	public void InsertProduct(Product product, Image img) {
-		daoProduct.insertProduct(product, img);
+	public boolean InsertProduct(Product product, Image img) {
+		boolean check = daoProduct.insertProduct(product, img);
+		if (check)
+			return true;
+		return false;
 	}
-	public void UpdateProduct(Product product, Image img) {
-		daoProduct.updateProduct(product, img);
+	public boolean UpdateProduct(Product product, Image img) {
+		boolean check = daoProduct.updateProduct(product, img);
+		if (check)
+			return true;
+		return false;
 	}
 	
-	public void UpdateStatus(int productID) {
+	public boolean UpdateStatus(int productID) {
+	   ProductService pc = new ProductService();
 	   String HQL = "Update Product p set p.status=1 Where p.id_P="+ productID;
-	   daoProduct.updateStatus(HQL);
+	   if (pc.GetStatusByID(productID))
+	   {
+		   boolean check = daoProduct.updateStatus(HQL);
+		   if (check)
+			   return true;
+	   }
+	   return false;
 	  
 	}
-	public void DeleteProduct(String id_P) {
+	public boolean DeleteProduct(String id_P) {
+		ProductService pc = new ProductService();
 		String HQL = "Update Product P Set P.status = 0 Where P.id_P =" + id_P;
-		daoProduct.deleteProduct(HQL);
+		if (pc.GetStatusByID(Integer.parseInt(id_P)) == false)
+	    {
+		   boolean check = daoProduct.deleteProduct(HQL);
+		   if (check)
+			   return true;
+	    }
+	    return false;
+	}
+	private boolean GetStatusByID(int productID) {
+		String HQL = "From Product P Where P.id_P=:productID";
+		Product product = daoCart.getProductByID(HQL, productID);
+		if (product.getStatus()==0)
+			return true;
+		return false;
+	}
+	public static void main(String[] args) {
 	}
 }

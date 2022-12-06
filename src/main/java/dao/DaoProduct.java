@@ -130,7 +130,7 @@ public class DaoProduct {
 		}
 		return list;
 	}
-	public void insertProduct(Product product, Image img) {
+	public boolean insertProduct(Product product, Image img) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 			session.getTransaction().begin();
@@ -138,12 +138,14 @@ public class DaoProduct {
     		session.save(img);
     		session.getTransaction().commit();
     		session.close();
+    		return true;
     		
 		} catch (Exception e) {
 			session.getTransaction().rollback();
+			return false;
 		}
 	}
-	public void updateStatus(String HQL) {
+	public boolean updateStatus(String HQL) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
     	EntityTransaction trans = session.getTransaction();
     	Query query = session.createQuery(HQL);
@@ -151,15 +153,17 @@ public class DaoProduct {
     	try {
     		query.executeUpdate();
         	trans.commit();
+        	return true;
     	}
     	catch (Exception e) {
 			trans.rollback();
+			return false;
 		}
     	finally {
 			session.close();
 		}
 	}
-	public void updateProduct(Product product, Image img) {
+	public boolean updateProduct(Product product, Image img) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 			session.getTransaction().begin();
@@ -167,12 +171,14 @@ public class DaoProduct {
     		session.update(img);
     		session.getTransaction().commit();
     		session.close();
+    		return true;
     		
 		} catch (Exception e) {
 			session.getTransaction().rollback();
+			return false;
 		}
 	}
-	public void deleteProduct(String HQL) {
+	public boolean deleteProduct(String HQL) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery(HQL);
 		try{
@@ -180,9 +186,11 @@ public class DaoProduct {
     		query.executeUpdate();
     		session.getTransaction().commit();
     		session.close();
+    		return true;
     		
 		} catch (Exception e) {
 			session.getTransaction().rollback();
+			return false;
 		}
 	}
 }

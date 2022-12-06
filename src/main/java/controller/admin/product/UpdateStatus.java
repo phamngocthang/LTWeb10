@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entity.Category;
 import entity.Image;
@@ -22,10 +23,18 @@ public class UpdateStatus extends HttpServlet {
 	{
 	  response.setContentType("text/html;charset=UTF-8");
 	  request.setCharacterEncoding("UTF-8");
+	  HttpSession session = request.getSession();
 	  int ProductID = Integer.parseInt(request.getParameter("id_P"));
 	  
 	  ProductService productservice = new ProductService();
-	  productservice.UpdateStatus(ProductID);
+	  boolean checkupdate = productservice.UpdateStatus(ProductID);
+	  session.setAttribute("checkupdate", true);
+	  if (checkupdate){
+		  session.setAttribute("messupdate", true);
+	  }
+	  else{
+		  session.setAttribute("messupdate", false);
+	  }
 	  request.getRequestDispatcher("ManagerProduct").forward(request, response);
 	}
 	  

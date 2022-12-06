@@ -22,10 +22,16 @@ public class DeleteProduct extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 	  response.setContentType("text/html;charset=UTF-8"); 
+	  HttpSession session = request.getSession();
 	  String productID = (String)request.getParameter("id_P");
 	  // get value product
 	  ProductService productservice = new ProductService();
-	  productservice.DeleteProduct(productID);
+	  boolean checkdelete = productservice.DeleteProduct(productID);
+	  session.setAttribute("checkdelete", true);
+	  if (checkdelete)
+		  session.setAttribute("messdelete", true);
+	  else
+		  session.setAttribute("messdelete", false);
 	  request.getRequestDispatcher("ManagerProduct").forward(request, response);
 	}
 	  

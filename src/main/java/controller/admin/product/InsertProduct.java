@@ -24,6 +24,7 @@ public class InsertProduct extends HttpServlet {
 	{
 	  response.setContentType("text/html;charset=UTF-8"); 
 	  request.setCharacterEncoding("UTF-8");
+	  HttpSession session = request.getSession();
 	  // get value product
 	  String name = (String)request.getParameter("product-name");
 	  int category = Integer.parseInt(request.getParameter("product-category"));
@@ -43,7 +44,11 @@ public class InsertProduct extends HttpServlet {
 	  Image newimage = new Image(newid_P+1,imgleft, imgcenter, imgright);
 	  Category newcategory = new Category(category);
 	  Product newproduct = new Product(name, brand, newcategory, color, desc,price, size, newsubcategory, newimage, status);
-	  productservice.InsertProduct(newproduct,newimage);
+	  boolean checkinsert= productservice.InsertProduct(newproduct,newimage);
+	  if (checkinsert)
+		  session.setAttribute("checkinsert", checkinsert);
+	  else
+		  session.setAttribute("checkinsert", false);
 	  request.getRequestDispatcher("ManagerProduct").forward(request, response);
 	}
 	  

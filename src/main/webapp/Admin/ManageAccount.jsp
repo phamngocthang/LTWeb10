@@ -9,6 +9,7 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/dist/output.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   
    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
@@ -120,6 +121,11 @@
             </c:forEach>
           </tbody>
         </table>
+        <input id="statusmanage" value="${statusmanage}" hidden />
+        <input id="check_insert" value="${checkinsert}" hidden /> 
+        <input id="mess_insert" value="${messinsert}" hidden /> 
+        <input id="check_update" value="${checkupdate}" hidden /> 
+        <input id="mess_update" value="${messupdate}" hidden /> 
       </div>
     </article>
   </main>
@@ -146,7 +152,33 @@
         addForm.classList.add('hidden');
       }
     })
-
+    
+    let checkstatus = document.getElementById("statusmanage");
+    let insertaccount = document.getElementById("check_insert");
+    let updateaccount = document.getElementById("check_update");
+    let messinsert = document.getElementById("mess_insert");
+    let messupdate = document.getElementById("mess_update");
+    
+    let checkinsert = insertaccount.value;
+    let mess_in= messinsert.value;
+    let checkupdate = updateaccount.value;
+    let mess_up= messupdate.value;
+    let status = checkstatus.value;
+    console.log(status)
+    console.log(checkinsert)
+    console.log(mess_in)
+    if (status === 'true'){
+		if (checkinsert === 'true')
+			if(mess_in === 'true')
+				swal("Thông Báo!", "Thêm Tài Khoản Thành Công","success");
+			else
+				swal("Thông Báo!", "Thêm Tài Khoản Không Thành Công UserName Đã Tồn Tại","error");
+		if (checkupdate === 'true')
+			if(mess_up === 'true')
+				swal("Thông Báo!", "Cập Nhật Password Thành Công","success");
+			else
+				swal("Thông Báo!", "Cập Nhật Password Không Thành Công","error");
+    }
   </script>
 </body>
 

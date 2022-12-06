@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entity.Category;
 import entity.Image;
@@ -22,6 +23,7 @@ public class UpdateProduct extends HttpServlet {
 	{
 	  response.setContentType("text/html;charset=UTF-8");
 	  request.setCharacterEncoding("UTF-8");
+	  HttpSession session = request.getSession();
 	  int ProductID = Integer.parseInt(request.getParameter("id_P"));
 	  
 	  // get value product
@@ -42,7 +44,12 @@ public class UpdateProduct extends HttpServlet {
 	  Category newcategory = new Category(category);
 	  Product newproduct = new Product(ProductID, name, brand, newcategory, color, desc,price, size, newsubcategory, newimage, status);
 	  ProductService productservice = new ProductService();
-	  productservice.UpdateProduct(newproduct, newimage);
+	  session.setAttribute("checkupdateproduct", true);
+	  boolean checkupdate = productservice.UpdateProduct(newproduct, newimage);
+	  if (checkupdate)
+		  session.setAttribute("messupdateproduct", true);
+	  else
+		  session.setAttribute("messupdateproduct", false);
 	  request.getRequestDispatcher("ManagerProduct").forward(request, response);
 	}
 	  
