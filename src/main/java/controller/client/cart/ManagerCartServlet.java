@@ -62,6 +62,16 @@ public class ManagerCartServlet extends HttpServlet {
         		}
         	}
         }
+      //check thêm sản phẩm
+	  	if (session.getAttribute("checkinsert") != null)
+	  	{
+  		    boolean checkinsert = (boolean)session.getAttribute("checkinsert");
+  		    session.setAttribute("checkinsert", false);
+  		    request.setAttribute("checkinsert", checkinsert);
+  		    request.setAttribute("statusmanage", true);		 
+	  	}
+	  	else 
+	  		request.setAttribute("checkinsert", false);
         session.setAttribute("subTotal", Math.round(totalPrice));
         totalPrice = totalPrice+35000;
         session.setAttribute("totalPrice", Math.round(totalPrice));

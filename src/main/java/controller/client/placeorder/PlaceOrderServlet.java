@@ -53,8 +53,9 @@ public class PlaceOrderServlet extends HttpServlet {
         			}
 				}
 			}
+        	session.setAttribute("checkinsert",true);
         }
-       
+        
         // ------------------------------------------ SEND MAIL --------------------------------------------------
         try {
 			String emailAddress = request.getParameter("email");
@@ -66,8 +67,8 @@ public class PlaceOrderServlet extends HttpServlet {
 		        
 		        //old code
 				Email email =new Email();
-				email.setFrom("20110728@student.hcmute.edu.vn"); 
-				email.setFromPassword("0937566870");
+				email.setFrom("20110672@student.hcmute.edu.vn"); 
+				email.setFromPassword("Baolocace111@");
 				email.setTo(emailAddress);
 				email.setSubject("Dat hang thanh cong tu Shoes Family");
 				StringBuilder sb = new StringBuilder();

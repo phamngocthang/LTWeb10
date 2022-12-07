@@ -1,7 +1,9 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta charset="utf-8">
     <title>MultiShop - Online Shop Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -117,9 +119,26 @@
         </div>
     </div>
     <!-- Cart End -->
-
+	<input id="check_insert" value="${checkinsert}" hidden /> 
+    <input id="statusmanage" value="${statusmanage}" hidden />
 
     <%@ include file="footer.jsp"%>
+    
+    <script>
+	  
+	let insert = document.getElementById("check_insert");
+	let checkstatus = document.getElementById("statusmanage");
+	
+	
+	let checkinsert = insert.value;
+	let status = checkstatus.value;
+	
+	if (status === 'true'){
+		if (checkinsert === 'true')
+			swal("Thông Báo!", "Đặt Hàng Thành Công",
+			"success");
+	}
+  	</script>
 </body>
 
 </html>

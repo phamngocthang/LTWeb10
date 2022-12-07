@@ -45,7 +45,7 @@
           </div>
           <div class='flex justify-end gap-2'>
             <p class='text-xl'>Tổng giá trị</p>
-            <p class='text-3xl font-semibold'>1200000 VND</p>
+            <p class='text-3xl font-semibold'>${total} VND</p>
           </div>
         </div>
       </div>
