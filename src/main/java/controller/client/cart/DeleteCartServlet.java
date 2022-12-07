@@ -42,7 +42,6 @@ public class DeleteCartServlet extends HttpServlet {
              		response.addCookie(o);	
              	}
             } 
-        	System.out.println(cart);
         	List <Cart> carts = cartservice.getCartCookies(cart);
         	String cartCookies = cartservice.deleteCartCookies(productID,carts);
         	//Cookie newCartCookie = new Cookie("Cart",cartCookies);

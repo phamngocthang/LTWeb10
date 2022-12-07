@@ -1,8 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +17,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import context.HibernateUtil;
-import entity.Image;
 import entity.Product;
-import service.ShopDetailService;
 public class DaoShopDetail {
 	public Product getProductByID(int id) {
 		Product product = new Product();

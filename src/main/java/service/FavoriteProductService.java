@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Session;
 
 import context.HibernateUtil;
-import entity.Cart;
 import entity.Favoriteproduct;
 import entity.Product;
 import dao.DaoFavoriteProduct;

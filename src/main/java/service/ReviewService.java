@@ -35,9 +35,4 @@ public class ReviewService {
   
     }
 	
-	public static void main(String[] args) {
-
-		ReviewService carservice = new ReviewService();
-		System.out.println(carservice.countFBByPID(1));
-	}
 }

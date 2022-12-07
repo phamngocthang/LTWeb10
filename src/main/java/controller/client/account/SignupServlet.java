@@ -29,6 +29,7 @@ public class SignupServlet extends HttpServlet {
   
         DaoAccount dao = new DaoAccount();
         int a= dao.Signup(username, password, repassword, 0);
+        dao.InsertCustomer(username);
         if(a!= 0) { 
         	// store the data in a Account object
         	Account acc = new Account();

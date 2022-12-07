@@ -1,8 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +16,7 @@ import javax.naming.NamingException;
 import javax.persistence.EntityTransaction;
 
 import context.HibernateUtil;
-import entity.Account;
 import entity.Cart;
-import entity.Image;
 import entity.Product;
 
 public class DaoCart {
@@ -31,7 +26,6 @@ public class DaoCart {
     		cart = session.createQuery(HQL, Cart.class).uniqueResult();
     		session.close();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
     	return cart;
 	}
@@ -44,7 +38,6 @@ public class DaoCart {
     		
     		
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
     	return product;
 	}
@@ -54,7 +47,6 @@ public class DaoCart {
     		cart = session.createQuery(HQL, Cart.class).list();
     		session.close();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
     	return cart;
 	}
@@ -68,7 +60,6 @@ public class DaoCart {
     		
     		
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
     	return product;
 	}
@@ -84,7 +75,6 @@ public class DaoCart {
         	trans.commit();
     	}
     	catch (Exception e) {
-    		System.out.println(e.getMessage());
 			trans.rollback();
 		}
     	finally {
@@ -105,7 +95,6 @@ public class DaoCart {
         	trans.commit();
     	}
     	catch (Exception e) {
-    		System.out.println(e.getMessage());
 			trans.rollback();
 		}
     	finally {
@@ -131,18 +120,5 @@ public class DaoCart {
     	finally {
 			session.close();
 		}
-	}
-	
-	
-	public static void main (String[] args) { 
-		DaoCart dao = new DaoCart();
-		String name = "'pntnoah'";
-		String id = "1";
-		
-		/*
-		for( Product o: list) {
-		  System.out.println(o.getId_P());
-		}
-		*/
 	}
 }

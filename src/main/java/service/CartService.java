@@ -138,12 +138,4 @@ public class CartService {
 		return amountcart;
     }
 	
-	public static void main(String[] args) {
-		String cart = "19:1/20:2/21:3";
-		CartService sv = new CartService();
-		List <Cart> list = sv.getCartCookies(cart);
-		String txt = sv.editAmountCookies(20, list,4);
-		System.out.println(txt);
-		//System.out.println(carservice.getCountCart("pntnoah"));
-	}
 }

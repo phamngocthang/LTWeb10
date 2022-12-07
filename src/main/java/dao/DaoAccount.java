@@ -1,8 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +10,6 @@ import org.hibernate.query.Query;
 import context.HibernateUtil;
 import entity.Account;
 import entity.Customer;
-import entity.Product;
 
 public class DaoAccount {
 	public Account Login(String user, String pass)
@@ -47,12 +43,32 @@ public class DaoAccount {
 				query.setParameter("isadmin",isadmin);
 				row=query.executeUpdate();
 				tx.commit();
+				session.close();
 			}
 			catch (Exception e){	    	
 		    }
 		}
 		return row;
 	}
+	public void InsertCustomer(String username)
+	{
+
+			try {
+				Session session = HibernateUtil.getSessionFactory().openSession();			
+				String hql = "INSERT INTO Customer Values (:username, '', '', '', '', '')" ;
+				Transaction tx=session.beginTransaction();  
+				Query query = session.createNativeQuery(hql);
+				query.setParameter("username",username);
+				query.executeUpdate();
+				tx.commit();
+				session.close();
+			}
+			catch (Exception e){	    	
+		    }
+
+
+	}
+	
 	
 	public int UpdatePassword (String user, String oldPass, String newPass1, String newPass2) {
 		int row=0;
@@ -68,6 +84,7 @@ public class DaoAccount {
 				query.setParameter("user", user);
 				row=query.executeUpdate();
 				tx.commit(); 
+				session.close();
 			}
 			catch (Exception e){			
 			}

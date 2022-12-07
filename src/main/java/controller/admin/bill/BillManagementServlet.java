@@ -40,7 +40,6 @@ public class BillManagementServlet extends HttpServlet {
     BillService billService = new BillService();
     List<Bill> listBill = billService.getAllBill();
     // print listBill length
-    System.out.println("Tong so luong bill " + listBill.size());
     request.setAttribute("listBill", listBill);
     request.getRequestDispatcher("Admin/Bill.jsp").forward(request, response);
   }

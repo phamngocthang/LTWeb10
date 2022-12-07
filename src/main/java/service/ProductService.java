@@ -5,11 +5,8 @@ import java.util.List;
 
 import dao.DaoCart;
 import dao.DaoProduct;
-import entity.Cart;
-import entity.Category;
 import entity.Image;
 import entity.Product;
-import entity.Subcategory;
 
 public class ProductService {
 	DaoProduct daoProduct = new DaoProduct();
@@ -29,7 +26,7 @@ public class ProductService {
 	
 	public List<Object[]> getProductByCate() {
 		// group by how many product in bill
-		String HQL = "SELECT product.id_SubCate, count(*) FROM Product , Billdetail WHERE Product.id_P = Billdetail.id_P GROUP BY product.id_SubCate ORDER BY id_SubCate ASC";
+		String HQL = "SELECT Product.id_SubCate, count(*) FROM Product , Billdetail WHERE Product.id_P = Billdetail.id_P GROUP BY Product.id_SubCate ORDER BY id_SubCate ASC";
 		return daoProduct.getProductByCate(HQL);
 	}
 	
@@ -51,7 +48,6 @@ public class ProductService {
     	else {
     		HQL = "From Product P Where P.subcategory=" + subcateID +" Order By P.id_P ASC";
     	}
-		//System.out.println(HQL);
 		list = daoProduct.pagingAccount(HQL, (index-1)*show, show);
 		return list;
 	}
@@ -59,7 +55,6 @@ public class ProductService {
 	public List<Product> searchByName(String txtSearch) {
         List<Product> list = new ArrayList<>();
         String HQL = "From Product P Where P.name_P like '%" + txtSearch + "%'";
-        //System.out.println("\n"+ HQL +"\n");
         list = daoProduct.searchByName(HQL, '%' + txtSearch + '%');
         return list;
     }
@@ -214,7 +209,5 @@ public class ProductService {
 		if (product.getStatus()==0)
 			return true;
 		return false;
-	}
-	public static void main(String[] args) {
 	}
 }

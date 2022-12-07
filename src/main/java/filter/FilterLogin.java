@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import entity.Account;
 
-@WebFilter(urlPatterns = {"/BillDetail", "/DashBoard", "/TopServlet"})
+@WebFilter(urlPatterns = {"/DashBoard", "/TopServlet", "/BillManagement", "/AccountManage", "/ManagerProduct"})
 public class FilterLogin implements Filter {
 	public void destroy() {
 		//close any resources here
@@ -31,7 +31,7 @@ public class FilterLogin implements Filter {
 		Account a = (Account) session.getAttribute("user");
         
 		
-        if(a != null) {
+        if(a != null && (a.getIsAdmin() == 1)) {
         	chain.doFilter(request, response);
         }
         else {

@@ -1,8 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +16,7 @@ import javax.naming.NamingException;
 import javax.persistence.EntityTransaction;
 
 import context.HibernateUtil;
-import entity.Account;
-import entity.Bill;
-import entity.Cart;
 import entity.Feedback;
-import entity.Image;
 import entity.Product;
 
 public class DaoReview {

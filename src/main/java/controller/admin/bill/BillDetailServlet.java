@@ -45,7 +45,6 @@ public class BillDetailServlet extends HttpServlet {
     List<Billdetail> listBillDetail = billService.getAllBillDetails(billId);
     
     // print billDetail
-    System.out.println(listBillDetail.size());
     request.setAttribute("billDetail", listBillDetail);
     request.setAttribute("billId", billId);
     request.getRequestDispatcher("Admin/BillDetail.jsp").forward(request, response);

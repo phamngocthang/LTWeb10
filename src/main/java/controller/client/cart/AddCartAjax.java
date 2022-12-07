@@ -68,12 +68,10 @@ public class AddCartAjax extends HttpServlet {
                 	amount++;
                 }
             }
-            System.out.println(amount);
         	Cookie amountC = new Cookie("amountCart",Integer.toString(amount));
         	amountC.setMaxAge(24*60*60);
     	    response.addCookie(amountC);
         	session.setAttribute("amountCart",amount);
-        	System.out.println(session.getAttribute("amountCart"));
         	// IN KQ
             out.println(amount);
             Cookie Cart = new Cookie("Cart", cart);

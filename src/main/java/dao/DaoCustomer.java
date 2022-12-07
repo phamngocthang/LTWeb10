@@ -60,6 +60,7 @@ public class DaoCustomer {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			String hql = "From Customer C Where C.userName = :user";		
 			customer =  session.createQuery(hql, Customer.class).setParameter("user",user).uniqueResult();
+			session.close();
 		}
 		catch (Exception e){			
 		}

@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.DaoAccount;
-
 import entity.Account;
-import entity.Subcategory;
+
 import service.AccountService;
 
 @WebServlet("/AccountManage")

@@ -9,10 +9,6 @@ import java.util.List;
 import dao.DaoProduct;
 import dao.DaoAccount;
 import entity.Account;
-import entity.Cart;
-import entity.Feedback;
-import entity.Image;
-import entity.Product;
 
 public class AccountService {
 	DaoProduct daoProduct = new DaoProduct();

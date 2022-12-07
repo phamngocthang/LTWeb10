@@ -32,6 +32,7 @@ public class InsertAccount extends HttpServlet {
       DaoAccount dao = new DaoAccount();
       session.setAttribute("checkinsert", true);
       int a= dao.Signup(username, password, password, isAdmin);
+      dao.InsertCustomer(username);
       if(a>0)
     	  session.setAttribute("messinsert", true);
       else

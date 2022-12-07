@@ -7,12 +7,8 @@ import java.util.List;
 import dao.DaoBill;
 import dao.DaoCart;
 import dao.DaoProduct;
-import entity.Account;
 import entity.Bill;
 import entity.Billdetail;
-import entity.Cart;
-import entity.Image;
-import entity.Product;
 
 public class BillService {
 	DaoBill daoBill = new DaoBill();
@@ -28,10 +24,8 @@ public class BillService {
 	
 	public List<Object[]> getBillInMonth() {
 		List<Object[]> list = new ArrayList<>();
-		String HQL = "select MONTH(date), SUM(totalPrice) from bill Group by MONTH(date)";
-		
+		String HQL = "select MONTH(date), SUM(totalPrice) from Bill Group by MONTH(date)";
 		list = daoBill.getBillInMonth(HQL);
-		
 		return list;
 	}
 
@@ -44,14 +38,14 @@ public class BillService {
 	}
 
 	public List<Object[]> getTopBill() {
-		String HQL = "SELECT B.userName, firstName, lastName, email, phonenumber, SUM FROM (SELECT userName, SUM(totalPrice) AS SUM FROM bill GROUP BY userName) \n"
-				+ "AS B INNER JOIN customer ON B.userName = customer.userName ORDER BY SUM DESC LIMIT 5;";
+		String HQL = "SELECT B.userName, firstName, lastName, email, phonenumber, SUM FROM (SELECT userName, SUM(totalPrice) AS SUM FROM Bill GROUP BY userName)\r\n"
+				+ "AS B INNER JOIN Customer ON B.userName = Customer.userName ORDER BY SUM DESC LIMIT 5;";
 		return daoBill.getTopBill(HQL);
 	}
 
 	public List<Object[]> getTopProduct() {
-		String HQL = "Select P.name_P, P.price, P.color, P.brand, SUM(b.amount)*p.price as Total From billdetail as B inner JOIN "
-				+ "product as P ON B.id_P = P.id_P GROUP BY P.id_P ORDER BY Total DESC LIMIT 5;";
+		String HQL = "Select Product.name_P, Product.price, Product.color, Product.brand, SUM(Billdetail.amount)*Product.price as Total From Billdetail inner JOIN \r\n"
+				+ "Product ON Billdetail.id_P = Product.id_P GROUP BY Product.id_P ORDER BY Total DESC LIMIT 5;";
 		return daoBill.getTopBill(HQL);
 	}
 
@@ -85,14 +79,5 @@ public class BillService {
 	public Bill getBillByID(int idBill) {
 		String HQL = "From Bill B where B.idBill = :idBill";
 		return daoBill.getBillByID(HQL, idBill);
-	}
-
-	public static void main(String[] args) {
-
-		BillService carservice = new BillService();
-		List<Object[]> list = carservice.getBillInMonth();
-		for (Object[] objects : list) {
-			System.out.println(Double.valueOf(objects[0].toString()) + "   " + Double.valueOf(objects[1].toString()));
-		}
 	}
 }

@@ -122,7 +122,6 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="home" class="nav-item nav-link">Home</a>
                             <a href="shop?subcateID=-1&index=1&showP=3" class="nav-item nav-link">Shop</a>
-                            <a href="${pageContext.request.contextPath}/Client/contact.jsp" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <c:if test="${sessionScope.user != null }">

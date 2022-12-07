@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.DaoShopDetail;
-import entity.Image;
 import entity.Product;
 
 public class ShopDetailService {
@@ -18,7 +17,4 @@ public class ShopDetailService {
 		List <Product> pList = daoShopDetail.getAllProductByBrand(brand, id);
 		return pList;
 	}
-	
-	/*public static void main (String[] args) { 
-	}*/
 }

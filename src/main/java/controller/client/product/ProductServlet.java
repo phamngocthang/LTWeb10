@@ -56,9 +56,7 @@ public class ProductServlet extends HttpServlet {
 			request.setAttribute("subcateID", subcateID);
 	        request.getRequestDispatcher("Client/shop.jsp").forward(request, response);
 		}
-		catch(Exception e) {
-			System.out.println(e.getMessage());
-			
+		catch(Exception e) {	
 		}
         
         
