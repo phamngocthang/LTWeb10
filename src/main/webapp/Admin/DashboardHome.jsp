@@ -69,7 +69,7 @@
             </div>
             <div>
               <p class='text-lg'>Tổng Số Doanh Thu</p>
-              <p class='text-3xl'>${sumBill}</p>
+              <p class='text-3xl'>${sumBill} VNĐ</p>
             </div>
           </div>
           <div class='p-4 rounded-md bg-slate-200 flex gap-4 items-center'>

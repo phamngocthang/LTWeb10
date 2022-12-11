@@ -22,7 +22,7 @@
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
             <div class="social-login">
                 <button class="btn facebook-btn social-btn" type="button" onclick="location.href='https://www.facebook.com/dialog/oauth?client_id=3382507702029634&redirect_uri=https://localhost:8999/WebApp/login-facebook'"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-                <button class="btn google-btn social-btn" type="button" onclick="location.href='https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8999/WebApp/login-google&response_type=code&client_id=998202632275-0a5fp9m07oq440p1c6bec8g3t47itono.apps.googleusercontent.com&approval_prompt=force';"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+                <button class="btn google-btn social-btn" type="button" onclick="location.href='https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=https://nhom10-project.herokuapp.com/login-google&response_type=code&client_id=998202632275-0a5fp9m07oq440p1c6bec8g3t47itono.apps.googleusercontent.com&approval_prompt=force';"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
             </div>
             	<%
             	String err = request.getParameter("err");

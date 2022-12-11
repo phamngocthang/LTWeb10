@@ -67,7 +67,7 @@
 	              <td class='p-2 pl-4'>${listTopCustomer[position.current].lastName}</td>
 	              <td class='p-2 pl-4'>${listTopCustomer[position.current].email}</td>
 	              <td class='p-2 pl-4'>${listTopCustomer[position.current].phonenumber}</td>
-	              <td class='p-2 pl-4'>${listTotal[position.current]}</td>
+	              <td class='p-2 pl-4'>${listTotal[position.current]} VNĐ</td>
             	</tr>
             	
             </c:forEach>
@@ -96,7 +96,7 @@
 	              <td class='p-2 pl-4'>${Double.toString(listTopProduct[position.current].price).substring(0,Double.toString(listTopProduct[position.current].price).length()-2)}</td>
 	              <td class='p-2 pl-4'>${listTopProduct[position.current].color}</td>
 	              <td class='p-2 pl-4'>${listTopProduct[position.current].brand}</td>
-	              <td class='p-2 pl-4'>${listTotalProduct[position.current]}</td>
+	              <td class='p-2 pl-4'>${listTotalProduct[position.current]} VNĐ</td>
             	</tr>
             </c:forEach>
           </tbody>

@@ -192,7 +192,7 @@
 	                            <div class="text-center py-4">
 	                                <a class="h6 text-decoration-none text-truncate" href="${pageContext.request.contextPath}/detail?id=${o.id_P}&brand=${o.brand}">${o.name_P}</a>
 	                                <div class="d-flex align-items-center justify-content-center mt-2">
-	                                    <h5>${o.price} VNĐ</h5>
+	                                    <h5>${Double.toString(o.price).substring(0,Double.toString(o.price).length()-2)} VNĐ</h5>
 	                                </div>
 	                                <div class="d-flex align-items-center justify-content-center mt-2">
 	                                    <h6>Size: ${o.size}</h6>
