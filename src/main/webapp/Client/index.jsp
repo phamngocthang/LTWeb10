@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -36,8 +36,7 @@
     <body>
         <%@ include file="header.jsp" %>
 
-
-            <!-- Carousel Start -->
+	<!-- Carousel Start -->
             <div class="container-fluid mb-3">
                 <div class="row px-xl-5">
                     <div class="col-lg-8">

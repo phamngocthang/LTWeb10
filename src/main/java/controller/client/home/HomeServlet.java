@@ -64,19 +64,21 @@ public class HomeServlet extends HttpServlet {
         
 		String user="";
         Cookie[] cookies=request.getCookies();
-        for(int i=0; i < cookies.length; i++)
+        if(cookies!=null)
         {
-    		Cookie cookie=cookies[i];
-    		if(cookie.getName().equals("userName"))
-    			{
-    				user=cookie.getValue();
-    			}
-    	}        
+        	for(int i=0; i < cookies.length; i++)
+            {
+        		Cookie cookie=cookies[i];
+        		if(cookie.getName().equals("userName"))
+        			{
+        				user=cookie.getValue();
+        			}
+        	}                    
+        }
         HttpSession session = request.getSession();
         DaoCustomer dao = new DaoCustomer();
         Customer cus=dao.getCustomer(user);      
         session.setAttribute("curCustomer", cus);
-		
         // ProductService pService = new ProductService();
         // // Get 4 Recent Product
         // List<Product> list = pService.getRecentProduct();
@@ -103,12 +105,15 @@ public class HomeServlet extends HttpServlet {
         else {
         	 String amount = "";
              Cookie[] arr = request.getCookies();
-             for (Cookie o:arr) {
-             	if (o.getName().equals("Cart")) {
-             		amount = o.getValue();
-             		o.setMaxAge(60*24*60);
-             		response.addCookie(o);
-             	}
+             if(arr!=null)
+             {
+            	 for (Cookie o:arr) {
+                  	if (o.getName().equals("Cart")) {
+                  		amount = o.getValue();
+                  		o.setMaxAge(60*24*60);
+                  		response.addCookie(o);
+                  	}
+                  }
              }
              if (amount.isEmpty())
              {
@@ -134,7 +139,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response);       
     }
 
 
@@ -148,5 +153,4 @@ public class HomeServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

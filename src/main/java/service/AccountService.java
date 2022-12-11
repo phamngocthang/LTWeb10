@@ -9,6 +9,7 @@ import java.util.List;
 import dao.DaoProduct;
 import dao.DaoAccount;
 import entity.Account;
+import entity.Customer;
 
 public class AccountService {
 	DaoProduct daoProduct = new DaoProduct();

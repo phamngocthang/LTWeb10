@@ -9,12 +9,20 @@ import dao.DaoCart;
 import dao.DaoProduct;
 import entity.Bill;
 import entity.Billdetail;
+import entity.Account;
 
 public class BillService {
 	DaoBill daoBill = new DaoBill();
 	DaoCart daoCart = new DaoCart();
 	DaoProduct daoProduct = new DaoProduct();
-
+	
+	public List<Bill> getBillByAccount(Account account) {
+		List<Bill> list = new ArrayList<>();
+		String HQL = "From Bill B where B.account = :account";
+		list = daoBill.getBillByAccount(HQL, account);
+		return list;
+	}
+	
 	public List<Bill> getAllBill() {
 		List<Bill> list = new ArrayList<>();
 		String HQL = "From Bill";

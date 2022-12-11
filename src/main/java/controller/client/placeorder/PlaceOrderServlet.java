@@ -70,13 +70,13 @@ public class PlaceOrderServlet extends HttpServlet {
 				email.setFrom("20110672@student.hcmute.edu.vn"); 
 				email.setFromPassword("Baolocace111@");
 				email.setTo(emailAddress);
-				email.setSubject("Dat hang thanh cong tu Shoes Family");
+				email.setSubject("Đặt hàng thành công từ Shoes Family");
 				StringBuilder sb = new StringBuilder();
-				sb.append("Dear ").append(firstname).append(" ").append(lastname).append("<br>");
-				sb.append("Ban vua dat dang tu Shoes Family. <br> ");
-				sb.append("Dia chi nhan hang cua ban la: <b>").append(Address).append(" </b> <br>");
-				sb.append("So dien thoai khi nhan hang cua ban la: <b>").append(phonenumber).append(" </b> <br>");
-				sb.append("Cac san pham ban dat la: <br>");
+				sb.append("<font color=red>").append("Dear ").append(firstname).append(" ").append(lastname).append("<br> </font>");
+				sb.append("Bạn vừa đặt hàng từ Shoes Family. <br> ");
+				sb.append("Địa chỉ nhận hàng của bạn là: <b>").append(Address).append(" </b> <br>");
+				sb.append("Số điên thoại khi nhận hàng của bạn là: <b>").append(phonenumber).append(" </b> <br>");
+				sb.append("Các sản phẩm bạn đặt là: <br>");
 				for (Cart c : cart) {
 	        		for (Product p : product) {
 	        			if(p.getId_P() == c.getProduct().getId_P())
@@ -86,9 +86,8 @@ public class PlaceOrderServlet extends HttpServlet {
 					}
 				}
 				
-				sb.append("Tong Tien: ").append(total).append("$").append("<br>");
-				sb.append("Cam on ban da dat hang tai Shoes Family<br>");
-				sb.append("Chu cua hang");
+				sb.append("Tổng tiền: ").append("<font color=red>").append(total).append("$").append("</font> <br>");
+				sb.append("Cảm ơn bạn đã ủng hộ Shoes Family<br>");
 				
 				email.setContent(sb.toString());
 				EmailUtils.send(email);

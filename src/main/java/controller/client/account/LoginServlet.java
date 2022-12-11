@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import dao.DaoAccount;
 import entity.Account;
 import entity.Cart;
-import entity.Product;
 import service.CartService;
 
 

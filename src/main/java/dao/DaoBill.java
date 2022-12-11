@@ -18,8 +18,20 @@ import javax.persistence.EntityTransaction;
 import context.HibernateUtil;
 import entity.Bill;
 import entity.Billdetail;
+import entity.Account;
 
 public class DaoBill {
+	
+	public List<Bill> getBillByAccount(String HQL, Account account) {
+		List<Bill> list = new ArrayList<>();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			list = session.createQuery(HQL, Bill.class).setParameter("account", account).getResultList();
+			session.close();
+		} catch (Exception e) {
+		}
+		return list;
+	}
+	
 	public List<Bill> getAllBill(String HQL) {
 		List<Bill> list = new ArrayList<>();
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
