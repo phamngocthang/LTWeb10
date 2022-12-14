@@ -44,15 +44,17 @@ public class LoginGoogleServlet extends HttpServlet {
       
       DaoAccount dao = new DaoAccount();
       AccountService accountservice = new AccountService();
-      Account accountExisted = accountservice.getAccountByUsername(a.getUserName());
+      Account accountExisted = accountservice.getSingle(a.getUserName());
       if (accountExisted==null)
-    	  dao.Signup(a.getUserName(), a.getPassWord(), a.getPassWord(), 0);
+    	  accountservice.Signup(a.getUserName(), a.getPassWord(), a.getPassWord(), 0);
       
       CustomerService customerservice = new CustomerService();
       Customer customerExisted = customerservice.checkCustomerExist(a.getUserName());
       if (customerExisted==null)
-    	  dao.InsertCustomer(a.getUserName());
-      
+      {
+    	  customerservice.InsertCustomer(a.getUserName());
+      }
+      	
       CartService cartservice = new CartService();
       String cart = "";
       Cookie[] arr = request.getCookies();

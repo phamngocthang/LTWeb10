@@ -79,6 +79,17 @@ public class Customer implements Serializable {
 	
 	
 
+	public Customer(String userName, String address, String email, String firstName, String lastName,
+			String phonenumber) {
+		super();
+		this.userName = userName;
+		this.address = address;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phonenumber = phonenumber;
+	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}

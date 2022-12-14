@@ -9,17 +9,13 @@ import context.HibernateUtil;
 import entity.Category;
 import entity.Subcategory;
 
-public class DaoCategory extends IDAO<Category>{
+public class DaoSubcategory extends IDAO<Subcategory>{
 
+  // get all category with jpa
   @Override
-	public List<Category> findAll(String queryString) {
+	public List<Subcategory> findAll(String queryString) {
 		// TODO Auto-generated method stub
-	    queryString = "From Category";
+	  queryString = "From Subcategory";
 		return super.findAll(queryString);
-	}
-  @Override
-	public int count(String queryName) {
-		// TODO Auto-generated method stub
-		return super.count(queryName);
-	}
+	}  
 }

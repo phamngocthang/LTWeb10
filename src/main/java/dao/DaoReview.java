@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -19,7 +20,7 @@ import context.HibernateUtil;
 import entity.Feedback;
 import entity.Product;
 
-public class DaoReview {
+public class DaoReview extends IDAO<Feedback> {
 	
 	
 	private static java.sql.Date getCurrentDate() {
@@ -27,43 +28,21 @@ public class DaoReview {
         return new java.sql.Date(today.getTime());
     }
 	
-	public void insertReview(String HQL, String productID, String userName, String content) {
-    	Session session = HibernateUtil.getSessionFactory().openSession();
-    	EntityTransaction trans = session.getTransaction();
-    	Query query = session.createNativeQuery(HQL);
-    	trans.begin();
-    	try {
-    		query.setParameter("id_P", productID);
-    		query.setParameter("userName", userName);
-    		query.setParameter("rate", 5);
-    		query.setParameter("content", content);
-    		query.setParameter("date", getCurrentDate());
-    		query.executeUpdate();
-        	trans.commit();
-    	}
-    	catch (Exception e) {
-			trans.rollback();
-		}
-    	finally {
-			session.close();
-		}
+	@Override
+	public Feedback create(Feedback entity) {
+		// TODO Auto-generated method stub
+		return super.create(entity);
+	}
+	@Override
+	public void nativeQuery(String HQL, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		
+		super.nativeQuery(HQL, params);
+	}
+	@Override
+	public List<Feedback> findAll(String queryString) {
+		// TODO Auto-generated method stub
+		return super.findAll(queryString);
 	}
 	
-	
-	public List<Feedback> showReview(String HQL) {
-    	
-    	List<Feedback> fb = new ArrayList<>();
-    	try {
-    		Session session = HibernateUtil.getSessionFactory().openSession();
-    		fb = session.createQuery(HQL, Feedback.class).getResultList();
-    		session.close();
-    	}
-    	catch (Exception e) {
-    		System.out.println(e.getMessage());
-		}
-    	return fb;
-	}
-	
-	public static void main (String[] args) { 
-	}
 }

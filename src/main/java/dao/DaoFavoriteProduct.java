@@ -2,96 +2,47 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityTransaction;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.COUNT;
 
 import context.HibernateUtil;
 import entity.Favoriteproduct;
 import entity.Product;
 
-public class DaoFavoriteProduct {
-	public List<Favoriteproduct> getFavoriteProductByUserName(String HQL) {
-		List<Favoriteproduct> fproduct = new ArrayList<>();
-    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
-    		fproduct = session.createQuery(HQL, Favoriteproduct.class).list();	
-    		session.close();
-    		
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-    	return fproduct;
-	}
-
-	public Product getProductByID(String HQL,int productID) {
-		Product product = new Product();
-    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
-    		product = session.createQuery(HQL, Product.class).setParameter("productID", productID).uniqueResult();
-    		session.close();
-    		
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-    	return product;
+public class DaoFavoriteProduct extends IDAO<Favoriteproduct> {
+	@Override
+	public int count(String queryName) {
+		// TODO Auto-generated method stub
+		return super.count(queryName);
 	}
 	
-	public Favoriteproduct getFavoriteProduct(String HQL, String userName, String productID) {
-		Favoriteproduct fproduct = new Favoriteproduct();
-    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
-    		fproduct = session.createQuery(HQL, Favoriteproduct.class).uniqueResult();
-    		session.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-    	return fproduct;
+	@Override
+	public List<Favoriteproduct> findWithParams(String queryString, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return super.findWithParams(queryString, params);
 	}
-	public void insertFavoriteProduct(String HQL, String userName, String productID) {
-    	Session session = HibernateUtil.getSessionFactory().openSession();
-    	EntityTransaction trans = session.getTransaction();
-    	Query query = session.createNativeQuery(HQL);
-    	trans.begin();
-    	try {
-    		query.setParameter("userName", userName);
-    		query.setParameter("productID", productID);
-    		query.executeUpdate();
-        	trans.commit();
-    	}
-    	catch (Exception e) {
-			trans.rollback();
-		}
-    	finally {
-			session.close();
-		}
+
+	
+	
+	@Override
+	public Favoriteproduct findSingleWithParams(String queryName, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return super.findSingleWithParams(queryName, params);
 	}
-	public void deleteCart(String HQL) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-    	EntityTransaction trans = session.getTransaction();
-    	Query query = session.createQuery(HQL);
-    	trans.begin();
-    	try {
-    		query.executeUpdate();
-        	trans.commit();
-    	}
-    	catch (Exception e) {
-    		System.out.println(e.getMessage());
-			trans.rollback();
-		}
-    	finally {
-			session.close();
-		}
+	@Override
+	public void nativeQuery(String HQL, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		super.nativeQuery(HQL, params);
 	}
-	 public int getCountFavoriteProduct(String HQL) {
-	    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
-	    		Long count1 = ((Long) session.createQuery(HQL).uniqueResult());
-	    		Integer count = count1.intValue();
-	    		return count;
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-	        return -1;
-	    }
-	/*public static void main(String []args) {
-	  }*/
+	@Override
+	public void CreateQueryWithParams(String queryName, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		super.CreateQueryWithParams(queryName, params);
+	}
+	
 }

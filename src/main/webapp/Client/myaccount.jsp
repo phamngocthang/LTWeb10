@@ -27,6 +27,8 @@
     <!-- Customized Bootstrap Stylesheet -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/dist/output.css">
 	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
 </head>
 <body>
 	<%@ include file="header.jsp" %>
@@ -128,6 +130,11 @@
 						<div>
 							<button class="btn btn-primary" type="submit">Update</button>
 						</div>
+							<input id="statusmanage" value="${statusmanage}" hidden />
+        					<input id="check_insert" value="${checkinsert}" hidden /> 
+        					<input id="mess_insert" value="${messinsert}" hidden /> 
+        					<input id="check_update" value="${checkupdate}" hidden /> 
+        					<input id="mess_update" value="${messupdate}" hidden />
 					</form>	
 					<div class="tab-pane fade" id="notification" role="tabpanel" aria-labelledby="notification-tab">
 						<h3 class="mb-4">Notification Settings</h3>
@@ -179,6 +186,35 @@
 			</div>
 		</div>
 	</section>
+	
+	<script>
+    let checkstatus = document.getElementById("statusmanage");
+    let insertaccount = document.getElementById("check_insert");
+    let updateaccount = document.getElementById("check_update");
+    let messinsert = document.getElementById("mess_insert");
+    let messupdate = document.getElementById("mess_update");
+    
+    let checkinsert = insertaccount.value;
+    let mess_in= messinsert.value;
+    let checkupdate = updateaccount.value;
+    let mess_up= messupdate.value;
+    let status = checkstatus.value;
+    console.log(status)
+    console.log(checkinsert)
+    console.log(mess_in)
+    if (status === 'true'){
+		if (checkinsert === 'true')
+			if(mess_in === 'true')
+				swal("Thông Báo!", "Thêm Tài Khoản Thành Công","success");
+			else
+				swal("Thông Báo!", "Thêm Tài Khoản Không Thành Công UserName Đã Tồn Tại","error");
+		if (checkupdate === 'true')
+			if(mess_up === 'true')
+				swal("Thông Báo!", "Cập Nhật Tài Khoản Thành Công","success");
+			else
+				swal("Thông Báo!", "Cập Nhật Tài Khoản Không Thành Công","error");
+    }
+  	</script>
 
 	<%@ include file="footer.jsp" %>
 		

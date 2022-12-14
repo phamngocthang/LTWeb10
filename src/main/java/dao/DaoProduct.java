@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -18,75 +19,59 @@ import context.HibernateUtil;
 import entity.Image;
 import entity.Product;
 
-public class DaoProduct {
-	public List<Product> getTopProduct(String HQL, int amount) {
-		List<Product> list = new ArrayList<>();
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			list = session.createQuery(HQL, Product.class).setMaxResults(amount).getResultList();
-			session.close();
-		} catch (Exception e) {
-		}
-		return list;
+public class DaoProduct extends IDAO<Product>{
+	
+	@Override
+	public void nativeQuery(String HQL, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		super.nativeQuery(HQL, params);
 	}
 	
+	@Override
+	public Product findSingle(Class<Product> type, Object key) {
+		// TODO Auto-generated method stub
+		return super.findSingle(type, key);
+	}
+	
+	@Override
+	public List<Product> findAll(String queryString) {
+		// TODO Auto-generated method stub
+		return super.findAll(queryString);
+	}
+	
+	@Override
+	public List<Product> findAllLimit(String queryString, int amount) {
+		// TODO Auto-generated method stub
+		return super.findAllLimit(queryString, amount);
+	}
+	public List<Product> getRecentProduct() {
+		String HQL = "From Product P ORDER BY P.id_P DESC";
+		return findAllLimit(HQL, 4);
+	}
+	public List<Product> getTopProduct() {
+		String HQL = "SELECT P FROM Product P, Billdetail B WHERE P.id_P = B.product.id_P GROUP BY P.id_P ORDER BY COUNT(P.id_P) DESC";
+		return findAllLimit(HQL, 4);
+	}
+	@Override
+	public int count(String queryName) {
+		// TODO Auto-generated method stub
+		return super.count(queryName);
+	}
+
+	public int getCountProduct(String HQL) {
+		
+		return count(HQL);
+	}
+
+	public int getCountQuery(String HQL) {
+		return count(HQL);
+	}
 	public List<Object[]> getProductByCate(String HQL) {
 		List<Object[]> list = new ArrayList<>();
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			list = session.createNativeQuery(HQL).getResultList();
 			session.close();
 		} catch (Exception e) {
-		}
-		return list;
-	}
-
-	public List<Product> getRecentProduct(String HQL, int amount) {
-
-		List<Product> list = new ArrayList<>();
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			list = session.createQuery(HQL, Product.class).setMaxResults(amount).getResultList();
-			session.close();
-		} catch (Exception e) {
-		}
-		return list;
-	}
-
-	public int getCountProduct(String HQL) {
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			Long count1 = ((Long) session.createQuery(HQL).uniqueResult());
-			Integer count = count1.intValue();
-
-			return count;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return -1;
-	}
-
-	public int getCountQuery(String HQL) {
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			Long count1 = ((Long) session.createQuery(HQL).uniqueResult());
-			Integer count = count1.intValue();
-
-			return count;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return -1;
-	}
-
-	public List<Product> searchByName(String HQL, String txtSearch) {
-		List<Product> list = new ArrayList<>();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		EntityTransaction trans = session.getTransaction();
-		try {
-
-			trans.begin();
-			list = session.createQuery(HQL, Product.class).list();
-			trans.commit();
-			session.close();
-
-		} catch (Exception e) {
-			trans.rollback();
 		}
 		return list;
 	}
@@ -98,7 +83,6 @@ public class DaoProduct {
 			session.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
 		return list;
 
@@ -111,54 +95,22 @@ public class DaoProduct {
 			session.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
 		return list;
 
 	}
 
-	public List<Product> getAllProduct(String HQL) {
-		List<Product> list = new ArrayList<>();
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			list = session.createQuery(HQL, Product.class).list();
-			session.close();
-
-		} catch (Exception e) {
-		}
-		return list;
+	
+	@Override
+	public Product create(Product entity) {
+		// TODO Auto-generated method stub
+		return super.create(entity);
 	}
-	public boolean insertProduct(Product product, Image img) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		try{
-			session.getTransaction().begin();
-    		session.save(product);
-    		session.save(img);
-    		session.getTransaction().commit();
-    		session.close();
-    		return true;
-    		
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			return false;
-		}
-	}
-	public boolean updateStatus(String HQL) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-    	EntityTransaction trans = session.getTransaction();
-    	Query query = session.createQuery(HQL);
-    	trans.begin();
-    	try {
-    		query.executeUpdate();
-        	trans.commit();
-        	return true;
-    	}
-    	catch (Exception e) {
-			trans.rollback();
-			return false;
-		}
-    	finally {
-			session.close();
-		}
+	
+	@Override
+	public void CreateQueryWithParams(String queryName, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		super.CreateQueryWithParams(queryName, params);
 	}
 	public boolean updateProduct(Product product, Image img) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -166,21 +118,6 @@ public class DaoProduct {
 			session.getTransaction().begin();
     		session.update(product);
     		session.update(img);
-    		session.getTransaction().commit();
-    		session.close();
-    		return true;
-    		
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			return false;
-		}
-	}
-	public boolean deleteProduct(String HQL) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query query = session.createQuery(HQL);
-		try{
-			session.getTransaction().begin();
-    		query.executeUpdate();
     		session.getTransaction().commit();
     		session.close();
     		return true;

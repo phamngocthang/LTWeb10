@@ -50,6 +50,17 @@ public class Feedback implements Serializable {
 		return this.content;
 	}
 
+	
+
+	public Feedback(int id_FB, String content, Date date, int rate, Product product) {
+		super();
+		this.id_FB = id_FB;
+		this.content = content;
+		this.date = date;
+		this.rate = rate;
+		this.product = product;
+	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}

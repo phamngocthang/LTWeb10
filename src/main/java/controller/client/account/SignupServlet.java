@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.DaoAccount;
 import entity.Account;
+import service.AccountService;
+import service.CustomerService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -27,9 +29,11 @@ public class SignupServlet extends HttpServlet {
         String password = request.getParameter("pass_signup");
         String repassword = request.getParameter("repass_signup");
   
-        DaoAccount dao = new DaoAccount();
-        int a= dao.Signup(username, password, repassword, 0);
-        dao.InsertCustomer(username);
+        AccountService accsv = new AccountService();
+        int a = accsv.Signup(username, password, repassword, 0);
+        CustomerService cussv = new CustomerService();
+        cussv.InsertCustomer(username);
+        
         if(a!= 0) { 
         	// store the data in a Account object
         	Account acc = new Account();

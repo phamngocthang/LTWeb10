@@ -26,7 +26,7 @@ public class GetAccount extends HttpServlet {
 	  String username = request.getParameter("username");
 	  // get value product
 	  AccountService dp = new AccountService(); 
-	  Account accountdetail = dp.getAccountByUsername(username);
+	  Account accountdetail = dp.getSingle(username);
 	  request.setAttribute("accountdetail", accountdetail);
 	  request.getRequestDispatcher("Admin/UpdateAccount.jsp").forward(request, response);
 	}

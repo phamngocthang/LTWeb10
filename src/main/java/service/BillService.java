@@ -1,10 +1,13 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import dao.DaoBill;
+import dao.DaoBillDetail;
 import dao.DaoCart;
 import dao.DaoProduct;
 import entity.Bill;
@@ -15,19 +18,22 @@ public class BillService {
 	DaoBill daoBill = new DaoBill();
 	DaoCart daoCart = new DaoCart();
 	DaoProduct daoProduct = new DaoProduct();
+	DaoBillDetail daoBillDetail = new DaoBillDetail();
+	
+	private static java.sql.Date getCurrentDate() {
+        java.util.Date today = new java.util.Date();
+        return new java.sql.Date(today.getTime());
+    }
 	
 	public List<Bill> getBillByAccount(Account account) {
-		List<Bill> list = new ArrayList<>();
 		String HQL = "From Bill B where B.account = :account";
-		list = daoBill.getBillByAccount(HQL, account);
-		return list;
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("account", account);
+		return daoBill.findWithParams(HQL, params);
 	}
 	
 	public List<Bill> getAllBill() {
-		List<Bill> list = new ArrayList<>();
-		String HQL = "From Bill";
-		list = daoBill.getAllBill(HQL);
-		return list;
+		return daoBill.findAll("");
 	}
 	
 	public List<Object[]> getBillInMonth() {
@@ -38,11 +44,10 @@ public class BillService {
 	}
 
 	public List<Billdetail> getAllBillDetails(Integer idBill) {
-		List<Billdetail> list = new ArrayList<>();
-		String HQL = "From Billdetail where idBill = :id";
+		
+		String HQL = "From Billdetail where idBill = " + idBill;
 		// create query
-		list = daoBill.getAllBillDetail(HQL, idBill);
-		return list;
+		return daoBillDetail.findAll(HQL);
 	}
 
 	public List<Object[]> getTopBill() {
@@ -64,19 +69,25 @@ public class BillService {
 
 	public int getCountBill() {
 		String HQL = "select count(B) From Bill B";
-		return daoProduct.getCountQuery(HQL);
+		return daoProduct.count(HQL);
 	}
 
 	public void insertBill(String userName, int totalPrice) {
 		String HQL = "INSERT INTO Bill(userName, totalPrice, date) Values (:userName, :totalPrice, :date)";
-		daoBill.insertBill(HQL, userName, totalPrice);
-
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userName", userName);
+		params.put("totalPrice", totalPrice);
+		params.put("date", getCurrentDate());
+		daoBill.nativeQuery(HQL, params);
 	}
 
 	public void insertBillDeTail(int idBill, int productID, int amount) {
 		String HQL = "INSERT INTO Billdetail(idBill, id_P, amount) Values (:idBill, :id_P, :amount)";
-		daoBill.insertBillDeTail(HQL, idBill, productID, amount);
-
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idBill", idBill);
+		params.put("id_P", productID);
+		params.put("amount", amount);
+		daoBillDetail.nativeQuery(HQL, params);
 	}
 
 	public int getMaxIDBill() {
@@ -86,6 +97,8 @@ public class BillService {
 
 	public Bill getBillByID(int idBill) {
 		String HQL = "From Bill B where B.idBill = :idBill";
-		return daoBill.getBillByID(HQL, idBill);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("idBill", idBill);
+		return daoBill.findSingleWithParams(HQL, params);
 	}
 }

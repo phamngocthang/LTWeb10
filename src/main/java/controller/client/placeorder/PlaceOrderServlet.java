@@ -44,7 +44,6 @@ public class PlaceOrderServlet extends HttpServlet {
         if(cart.size() > 0) {
         	billService.insertBill(a.getUserName(), total);
         	int idBill = billService.getMaxIDBill();
-        	System.out.println(idBill);
         	for (Cart c : cart) {
         		for (Product p : product) {
         			if(p.getId_P() == c.getProduct().getId_P())

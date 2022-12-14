@@ -17,6 +17,7 @@ import dao.DaoCustomer;
 import service.BillService;
 import service.CartService;
 import service.CategoryService;
+import service.CustomerService;
 import service.FavoriteProductService;
 import service.ProductService;
 import entity.Account;
@@ -76,8 +77,8 @@ public class HomeServlet extends HttpServlet {
         	}                    
         }
         HttpSession session = request.getSession();
-        DaoCustomer dao = new DaoCustomer();
-        Customer cus=dao.getCustomer(user);      
+        CustomerService custsv = new CustomerService();
+        Customer cus= custsv.getCustomerByID(user); 
         session.setAttribute("curCustomer", cus);
         // ProductService pService = new ProductService();
         // // Get 4 Recent Product

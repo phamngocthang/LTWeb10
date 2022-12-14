@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DaoAccount;
+import service.AccountService;
 
 /**
  * Servlet implementation class UpdateProduct
@@ -23,11 +24,10 @@ public class UpdateAccount extends HttpServlet {
 	  String old_password= request.getParameter("initial_password");
 	  String new_password= request.getParameter("new_password");
 	  String re_password= request.getParameter("re_newpassword");
-	  
-	  
-	  DaoAccount dao = new DaoAccount();
+
 	  session.setAttribute("checkupdate", true);
-	  int a = dao.UpdatePassword(user_name, old_password, new_password, re_password);	  
+	  AccountService accsv = new AccountService();
+	  int a = accsv.UpdatePassword(user_name, old_password, new_password, re_password);
 	  if(a>0)
 		  session.setAttribute("messupdate", true);
 	  else

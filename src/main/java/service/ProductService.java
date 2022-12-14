@@ -1,8 +1,11 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import dao.DaoBill;
 import dao.DaoCart;
 import dao.DaoProduct;
 import entity.Image;
@@ -12,16 +15,11 @@ public class ProductService {
 	DaoProduct daoProduct = new DaoProduct();
 	DaoCart daoCart = new DaoCart();
 	public List<Product> getRecentProduct() {
-    	List<Product> list = new ArrayList<>();
-    	String HQL = "From Product P ORDER BY P.id_P DESC";
-    	list = daoProduct.getRecentProduct(HQL, 4);
-    	return list;
+    	return daoProduct.getRecentProduct();
 	}
 	
 	public List<Product> getTopProduct() {
-		// group by how many product in bill
-		String HQL = "SELECT P FROM Product P, Billdetail B WHERE P.id_P = B.product.id_P GROUP BY P.id_P ORDER BY COUNT(P.id_P) DESC";
-		return daoProduct.getTopProduct(HQL, 4);
+		return daoProduct.getTopProduct();
 	}
 	
 	public List<Object[]> getProductByCate() {
@@ -33,8 +31,8 @@ public class ProductService {
 	public List<Product> getAllProduct()
 	{
 		List<Product> list = new ArrayList<>();
-		String HQL = "From Product P";
-		list = daoProduct.getAllProduct(HQL);
+		String HQL = "From Product";
+		list = daoProduct.findAll(HQL);
 		return list;
 	}
 	
@@ -55,7 +53,7 @@ public class ProductService {
 	public List<Product> searchByName(String txtSearch) {
         List<Product> list = new ArrayList<>();
         String HQL = "From Product P Where P.name_P like '%" + txtSearch + "%'";
-        list = daoProduct.searchByName(HQL, '%' + txtSearch + '%');
+        list = daoProduct.findAll(HQL);
         return list;
     }
 	
@@ -67,7 +65,7 @@ public class ProductService {
 		else {
 			HQL = "select count(p) from Product p Where p.subcategory=" + subCateID;
 		}
-		return daoProduct.getCountProduct(HQL);
+		return daoProduct.count(HQL);
 	}
 	public int getCountProduct() {
 		String HQL = "select count(id_P) from Product";	
@@ -167,12 +165,28 @@ public class ProductService {
 		
 		return list;
 	}
-	public boolean InsertProduct(Product product, Image img) {
-		boolean check = daoProduct.insertProduct(product, img);
-		if (check)
-			return true;
-		return false;
+	public void insertImage(int idP, String image_mid, String image_left, String image_right) {
+		String HQL = "INSERT INTO Image(id_P, path_middle, path_left, path_right) Values (:id_P, :image_mid, :image_left, :image_right)";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id_P", idP);
+		params.put("image_mid", image_mid);
+		params.put("image_left", image_left);
+		params.put("image_right", image_right);
+		daoProduct.nativeQuery(HQL, params);
 	}
+	
+	public boolean InsertProduct(Product product) {
+		daoProduct.create(product);
+		return true;
+	}
+	
+	public int getMaxIDProduct() {
+		String HQL = "Select max(P.id_P) from Product P";
+		DaoBill daobill = new DaoBill();
+		return daobill.getMaxIDBill(HQL);
+	}
+	
+	
 	public boolean UpdateProduct(Product product, Image img) {
 		boolean check = daoProduct.updateProduct(product, img);
 		if (check)
@@ -183,29 +197,20 @@ public class ProductService {
 	public boolean UpdateStatus(int productID) {
 	   ProductService pc = new ProductService();
 	   String HQL = "Update Product p set p.status=1 Where p.id_P="+ productID;
-	   if (pc.GetStatusByID(productID))
-	   {
-		   boolean check = daoProduct.updateStatus(HQL);
-		   if (check)
-			   return true;
-	   }
-	   return false;
+	   Map<String, Object> params = new HashMap<String, Object>();
+	   daoProduct.CreateQueryWithParams(HQL, params);
+	   return true;
 	  
 	}
 	public boolean DeleteProduct(String id_P) {
 		ProductService pc = new ProductService();
 		String HQL = "Update Product P Set P.status = 0 Where P.id_P =" + id_P;
-		if (pc.GetStatusByID(Integer.parseInt(id_P)) == false)
-	    {
-		   boolean check = daoProduct.deleteProduct(HQL);
-		   if (check)
-			   return true;
-	    }
-	    return false;
+		Map<String, Object> params = new HashMap<String, Object>();
+		daoProduct.CreateQueryWithParams(HQL, params);
+	    return true;
 	}
 	private boolean GetStatusByID(int productID) {
-		String HQL = "From Product P Where P.id_P=:productID";
-		Product product = daoCart.getProductByID(HQL, productID);
+		Product product = daoProduct.findSingle(Product.class, productID);
 		if (product.getStatus()==0)
 			return true;
 		return false;
