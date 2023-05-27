@@ -62,7 +62,9 @@ public class HomeServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-        
+	    response.setHeader("Content-Security-Policy", "frame-ancestors 'self';");
+	    response.setHeader("X-Frame-Options", "SAMEORIGIN");
+
 		String user="";
         Cookie[] cookies=request.getCookies();
         if(cookies!=null)
