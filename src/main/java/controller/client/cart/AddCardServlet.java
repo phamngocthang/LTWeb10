@@ -15,6 +15,7 @@ import entity.Account;
 import entity.Cart;
 import entity.Product;
 import service.CartService;
+import service.ProductService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -28,6 +29,7 @@ public class AddCardServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 	        Account a = (Account) session.getAttribute("user");
 	        int quantity = Integer.parseInt(request.getParameter("quantity"));
+	        ProductService productService = new ProductService();
 	        CartService cartservice = new CartService();
 	    	if(a == null) {
 	        	String amountCart ="";
@@ -67,14 +69,22 @@ public class AddCardServlet extends HttpServlet {
 	            }
 	            Cookie amountC = new Cookie("amountCart",Integer.toString(amount));
 	        	amountC.setMaxAge(24*60*60);
+	        	amountC.setHttpOnly(true);
 	    	    response.addCookie(amountC);
 	        	session.setAttribute("amountCart",amount);
 		    	request.getRequestDispatcher("managerCart").forward(request, response);
 	        }
-	        else {
+	    	else {
 	        	String userName = a.getUserName();
 	            
 	            Cart cartExisted = cartservice.checkCartExist(userName,productID);
+	            
+	            Product product = productService.getProductByID(Integer.valueOf(productID));
+	            if(product.getStatus() == 0) {
+	            	request.getRequestDispatcher("detail?id="+product.getId_P()+"&brand="+product.getBrand()).forward(request, response);
+	            	return;
+	            }
+	            
 	            int amountExisted;
 	            if(cartExisted != null) {
 	    	       	 amountExisted = cartExisted.getAmount();

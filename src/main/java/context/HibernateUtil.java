@@ -36,7 +36,7 @@ public class HibernateUtil {
 		
 		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
 		pros.put (Environment.USER, "root");
-		pros.put (Environment.PASS, "");
+		pros.put (Environment.PASS, "816570");
 		
 		pros.put (Environment.SHOW_SQL, "true");
 		pros.put(Environment.AUTOCOMMIT, "true");

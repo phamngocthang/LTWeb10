@@ -37,6 +37,9 @@ public class EditAmountCartServlet extends HttpServlet {
         else {
         	amount+=1;
         }
+        if(amount <= 0) {
+        	amount = 1;
+        }
         Account a = (Account) session.getAttribute("user");
         CartService cartservice = new CartService();
         
