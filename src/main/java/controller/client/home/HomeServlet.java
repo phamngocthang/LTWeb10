@@ -66,6 +66,8 @@ public class HomeServlet extends HttpServlet {
 		String csrfToken = UUID.randomUUID().toString();
 		HttpSession session = request.getSession();
 	    session.setAttribute("csrfToken", csrfToken);
+	    response.setHeader("Content-Security-Policy", "frame-ancestors 'self';");
+	    response.setHeader("X-Frame-Options", "SAMEORIGIN");
 		String user="";
         Cookie[] cookies=request.getCookies();
         if(cookies!=null)
@@ -122,6 +124,7 @@ public class HomeServlet extends HttpServlet {
              {
              	amount ="0";
      	    	Cookie amountCart = new Cookie("amountCart", amount);
+     	    	amountCart.setHttpOnly(true);
      	    	amountCart.setMaxAge(24*60*60);
      	    	response.addCookie(amountCart);
              }
@@ -130,6 +133,7 @@ public class HomeServlet extends HttpServlet {
             	 List<Cart> list = cart.getCartCookies(amount);
             	 amount = Integer.toString(list.size());
             	 Cookie amountCart = new Cookie("amountCart", Integer.toString(list.size()));
+            	 amountCart.setHttpOnly(true);
       	    	 amountCart.setMaxAge(24*60*60);
       	    	 response.addCookie(amountCart);
              }

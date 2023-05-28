@@ -23,9 +23,7 @@ import service.CartService;
 public class AddCardServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		String receivedToken = request.getParameter("csrfToken"); // Trích xuất token từ yêu cầu
-		String storedToken = "123Qaz!@#";
-		if (receivedToken != null && receivedToken.equals(storedToken)) {
+		try {
 			String productID = request.getParameter("pid");
 			HttpSession session = request.getSession();
 	        Account a = (Account) session.getAttribute("user");
@@ -89,10 +87,10 @@ public class AddCardServlet extends HttpServlet {
 	    	       	request.getRequestDispatcher("managerCart").forward(request, response);
 	            }
 	        }  
-	       
-	    } else {
-	    	response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found");
-	    }
+		} catch (Exception e) {
+		    request.getRequestDispatcher("Client/error.jsp").forward(request, response);
+
+		}
     }
 
     @Override

@@ -161,14 +161,16 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	        });
 	    }
 	    
-	   	function AddReviews(pID){﻿
+	   	function AddReviews(pID){
+			var userInput =  $("#message").val()﻿ 
+			console.log(DOMPurify.sanitize(userInput))﻿
 	    
 		    $.ajax({
 		        url: location.origin + "/WebApp/AddReviews",
 		        type: "get", //send it through get method
 		        data: {
 		        	//message: document.getElementById("message").value,
-		        	message: $("#message").val(),
+		        	message: DOMPurify.sanitize(userInput), 
 		        	productID: pID
 		        },
 		        success: function (data) {

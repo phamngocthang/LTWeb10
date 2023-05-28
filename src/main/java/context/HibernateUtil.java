@@ -31,12 +31,8 @@ public class HibernateUtil {
 		Configuration conf = new Configuration ();
 		Properties pros = new Properties();
 
-		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
 		pros.put (Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-		
-//		pros.put (Environment.URL, "jdbc:mysql://remotemysql.com/mgyaK3eV1F");
-//		pros.put (Environment.USER, "mgyaK3eV1F");
-//		pros.put (Environment.PASS, "K47f2jh7v4");
 		
 		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
 		pros.put (Environment.USER, "root");
