@@ -9,17 +9,39 @@ import context.HibernateUtil;
 import entity.Category;
 import entity.Subcategory;
 
-public class DaoCategory extends IDAO<Category>{
+public class DaoCategory {
 
-  @Override
-	public List<Category> findAll(String queryString) {
-		// TODO Auto-generated method stub
-	    queryString = "From Category";
-		return super.findAll(queryString);
-	}
-  @Override
-	public int count(String queryName) {
-		// TODO Auto-generated method stub
-		return super.count(queryName);
-	}
+  // get all category with jpa
+  public List<Category> getAllCategory(String HQL) {
+    List<Category> list = new ArrayList<>();
+
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+      list = session.createQuery(HQL, Category.class).getResultList();
+      session.close();
+    } catch (Exception e) {
+    }
+    return list;
+  }
+
+  public List<Subcategory> getAllSubCategory(String HQL) {
+    List<Subcategory> list = new ArrayList<>();
+
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+      list = session.createQuery(HQL, Subcategory.class).getResultList();
+      session.close();
+    } catch (Exception e) {
+    }
+    return list;
+  }
+
+  public Integer countProduct(String HQL) {
+    List<Number> list = new ArrayList<>();
+
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+      list = session.createQuery(HQL, Number.class).getResultList();
+      session.close();
+    } catch (Exception e) {
+    }
+    return list.get(0).intValue();
+  }
 }

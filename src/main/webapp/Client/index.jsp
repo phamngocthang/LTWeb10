@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -36,7 +36,8 @@
     <body>
         <%@ include file="header.jsp" %>
 
-	<!-- Carousel Start -->
+
+            <!-- Carousel Start -->
             <div class="container-fluid mb-3">
                 <div class="row px-xl-5">
                     <div class="col-lg-8">
@@ -191,7 +192,7 @@
                                     <a class="h6 text-decoration-none text-truncate"
                                         href="${pageContext.request.contextPath}/detail?id=${p.id_P}&brand=${p.brand}">${p.name_P}</a>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5>${Double.toString(p.price).substring(0,Double.toString(p.price).length()-2)} VNĐ</h5>
+                                        <h5>${p.price}</h5>
                                         <!-- <h6 class="text-muted ml-2"><del>$123.00</del></h6> -->
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mb-1">
@@ -232,7 +233,7 @@
                                     <a class="h6 text-decoration-none text-truncate"
                                         href="${pageContext.request.contextPath}/detail?id=${p.id_P}&brand=${p.brand}">${p.name_P}</a>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5>${Double.toString(p.price).substring(0,Double.toString(p.price).length()-2)} VNĐ</h5>
+                                        <h5>${p.price}</h5>
                                         <!-- <h6 class="text-muted ml-2"><del>$123.00</del></h6> -->
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mb-1">

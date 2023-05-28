@@ -1,9 +1,7 @@
 package controller.client.account;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import dao.DaoAccount;
 import entity.Account;
 import entity.Cart;
-import service.AccountService;
+import entity.Product;
 import service.CartService;
 
 
@@ -31,10 +29,9 @@ public class LoginServlet extends HttpServlet {
 		request.getRequestDispatcher("Client/Login.jsp").include(request, response);
         String username = request.getParameter("user");
         String password = request.getParameter("pass");
-        
-        
-        AccountService sv = new AccountService();
-        Account a = sv.getAccount(username, password);
+  
+        DaoAccount dao = new DaoAccount();
+        Account a = dao.Login(username, password);
         CartService cartservice = new CartService();
         if(a != null) {
         	String cart = "";

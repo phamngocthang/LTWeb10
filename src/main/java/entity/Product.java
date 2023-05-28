@@ -87,7 +87,7 @@ public class Product implements Serializable {
 		this.subcategory = subcate;
 		this.status = status;
 	}
-	public Product(int id_P, String name, String brand, Category category, String color, String description, Double price, String size, Subcategory subcate, Image img, int status){
+	public Product(int id_P, String name, String brand, Category category, String color, String description, Double price, String size, Subcategory subcate, Image image, int status){
 		this.id_P = id_P;
 		this.name_P = name;
 		this.brand = brand;
@@ -97,7 +97,7 @@ public class Product implements Serializable {
 		this.price = price;
 		this.size = size;
 		this.subcategory = subcate;
-		this.image = img;
+		this.image = image;
 		this.status = status;
 	}
 	

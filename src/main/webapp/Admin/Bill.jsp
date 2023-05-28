@@ -60,7 +60,7 @@
                 <tr class='bg-gray-100 odd:bg-gray-200'>
                   <td class='p-2 pl-4'>${p.idBill}</td>
                   <td class='p-2 pl-4'>${p.account.customer.firstName} ${p.account.customer.lastName}</td>
-                  <td class='p-2 pl-4'>${Double.toString(p.totalPrice).substring(0,Double.toString(p.totalPrice).length()-2)} VNĐ</td>
+                  <td class='p-2 pl-4'>${p.totalPrice}</td>
                   <td class='p-2 pl-4'>${p.date}</td>
                   <td class='p-2 pl-4 text-center'>
                     <a href='BillDetail?billId=${p.idBill}' class='hover:text-yellow-500'>
