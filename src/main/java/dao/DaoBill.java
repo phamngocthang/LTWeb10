@@ -2,7 +2,6 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -19,55 +18,52 @@ import javax.persistence.EntityTransaction;
 import context.HibernateUtil;
 import entity.Bill;
 import entity.Billdetail;
-import entity.Account;
 
-public class DaoBill extends IDAO<Bill>{
-	
-	
-	@Override
-	public int count(String queryName) {
-		// TODO Auto-generated method stub
-		return super.count(queryName);
+public class DaoBill {
+	public List<Bill> getAllBill(String HQL) {
+		List<Bill> list = new ArrayList<>();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			list = session.createQuery(HQL, Bill.class).list();
+			session.close();
+
+		} catch (Exception e) {
+		}
+		return list;
 	}
-	@Override
-	public List<Bill> findWithParams(String queryString, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return super.findWithParams(queryString, params);
+
+	public List<Billdetail> getAllBillDetail(String HQL, Integer idBill) {
+		List<Billdetail> list = new ArrayList<>();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			list = session.createQuery(HQL, Billdetail.class).setParameter("id", idBill).getResultList();
+
+			session.close();
+		} catch (Exception e) {
+		}
+		return list;
 	}
-	@Override
-	public List<Bill> findAll(String queryString) {
-		// TODO Auto-generated method stub
-		queryString = "from Bill";
-		return super.findAll(queryString);
-	}
+
 	public List<Object[]> getTopBill(String HQL) {
 
 		List<Object[]> list = new ArrayList<>();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		list = session.createNativeQuery(HQL).getResultList();
-		session.close();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			list = session.createNativeQuery(HQL).getResultList();
+			session.close();
+		} catch (Exception e) {
+		}
 		return list;
 	}
 	
 	public List<Object[]> getBillInMonth(String HQL) {
 
 		List<Object[]> list = new ArrayList<>();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		list = session.createNativeQuery(HQL).getResultList();
-		session.close();
-		return list;
-	}
-	
-	public int getMaxIDBill(String HQL) {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			int count = (Integer) session.createQuery(HQL).uniqueResult();
-
-			return count++;
+			list = session.createNativeQuery(HQL).getResultList();
+			session.close();
 		} catch (Exception e) {
 		}
-		return -1;
+		return list;
 	}
-	
+
 	public int getSumBill(String HQL) {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			double count1 = ((double) session.createQuery(HQL).uniqueResult());
@@ -79,9 +75,15 @@ public class DaoBill extends IDAO<Bill>{
 		return -1;
 	}
 
-	public int getMaxIDBill() {
-		String HQL = "Select max(B.idBill) from Bill B";
-		return count(HQL);
+	public int getMaxIDBill(String HQL) {
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			int count = (Integer) session.createQuery(HQL).uniqueResult();
+
+			return count++;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return -1;
 	}
 
 	private static java.sql.Date getCurrentDate() {
@@ -89,13 +91,24 @@ public class DaoBill extends IDAO<Bill>{
 		return new java.sql.Date(today.getTime());
 	}
 
-	@Override
-	public void nativeQuery(String HQL, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		super.nativeQuery(HQL, params);
+	public void insertBill(String HQL, String userName, int totalPrice) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		EntityTransaction trans = session.getTransaction();
+		Query query = session.createNativeQuery(HQL);
+		trans.begin();
+		try {
+			query.setParameter("userName", userName);
+			query.setParameter("totalPrice", totalPrice);
+			query.setParameter("date", getCurrentDate());
+			query.executeUpdate();
+			trans.commit();
+		} catch (Exception e) {
+			trans.rollback();
+		} finally {
+			session.close();
+		}
 	}
 
-	/*
 	public void insertBillDeTail(String HQL, int idBill, int productID, int amount) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		EntityTransaction trans = session.getTransaction();
@@ -113,11 +126,22 @@ public class DaoBill extends IDAO<Bill>{
 			session.close();
 		}
 	}
-	*/
-	@Override
-	public Bill findSingleWithParams(String queryName, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return super.findSingleWithParams(queryName, params);
+
+	public Bill getBillByID(String HQL, int id) {
+		Bill bill = new Bill();
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			bill = session.createQuery(HQL, Bill.class).setParameter("id", id).getSingleResult();
+			session.close();
+		} catch (Exception e) {
+		}
+		return bill;
 	}
 
+
+
+	public static void main(String[] args) {
+		DaoBill dao = new DaoBill();
+		// print length
+		System.out.println(dao.getAllBillDetail("From Billdetail where idBill = :id", 3).size());
+	}
 }

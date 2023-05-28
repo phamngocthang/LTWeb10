@@ -37,7 +37,7 @@ public class InsertProduct extends HttpServlet {
 	  int status = 1;
 	  // Insert new product
 	  ProductService productservice = new ProductService();
-	  
+	  //int newid_P = productservice.getCountProduct();
 	  Subcategory newsubcategory = new Subcategory(1);
 	  //Image newimage = new Image(newid_P+1,imgleft, imgcenter, imgright);
 	  Category newcategory = new Category(category);
@@ -45,6 +45,7 @@ public class InsertProduct extends HttpServlet {
 	  boolean checkinsert= productservice.InsertProduct(newproduct);
 	  int maxP = productservice.getMaxIDProduct();
 	  productservice.insertImage(maxP, imgleft, imgcenter, imgright);
+	  
 	  if (checkinsert)
 		  session.setAttribute("checkinsert", checkinsert);
 	  else

@@ -43,16 +43,16 @@ public class BillDetailServlet extends HttpServlet {
     // get bill detail by bill id
     BillService billService = new BillService();
     List<Billdetail> listBillDetail = billService.getAllBillDetails(billId);
-    
     int total = 0;
     for (Billdetail billdetail : listBillDetail) {
 		total += billdetail.getAmount() * billdetail.getProduct().getPrice();
 	}
-    request.setAttribute("total", total);
+    total += 35000;
     
     // print billDetail
     request.setAttribute("billDetail", listBillDetail);
     request.setAttribute("billId", billId);
+    request.setAttribute("total", total);
     request.getRequestDispatcher("Admin/BillDetail.jsp").forward(request, response);
   }
 }

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.*;
 import entity.*;
-import service.CustomerService;
 
 
 /**
@@ -24,8 +23,6 @@ public class MyAccount_CustomerServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		HttpSession session = request.getSession();
-		
         try {
         	DaoCustomer dao = new DaoCustomer();
             String user="";
@@ -43,16 +40,13 @@ public class MyAccount_CustomerServlet extends HttpServlet {
             String email = request.getParameter("email");
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");      
-            CustomerService custsv = new CustomerService();
-            session.setAttribute("checkupdate", true);
-            int a = custsv.UpdateCustomer(user, firstName, lastName, email, address, phone);
+            int a=dao.UpdateCustomer(user, firstName, lastName, email, address, phone); 
             if(a>0)
             {
-            	session.setAttribute("messupdate", true);
+                response.sendRedirect("home");
             }
             else
-            	session.setAttribute("messupdate", false);
-            request.getRequestDispatcher("MyAccount").forward(request, response);
+            	request.getRequestDispatcher("Client/myaccount.jsp").forward(request, response);
         }
         catch(Exception e) {        	
         }               

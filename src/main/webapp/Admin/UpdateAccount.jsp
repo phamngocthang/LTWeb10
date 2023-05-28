@@ -24,13 +24,13 @@
   <input class='hidden' type="checkbox" name="" id="openAdd">
   <div id='addForm'
     class='updateForm bg-white fixed w-[350px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 rounded-md shadow-lg'>
-    <h1 class='font-semibold uppercase text-lg text-center mb-4'>Thêm tài khoản</h1>
+    <h1 class='font-semibold uppercase text-lg text-center mb-4'>Cập Nhật Tài Khoản</h1>
     <form class='' action="updateAccount" method="post">
       <!-- username, password, isadmin checkbox -->
       <div class="flex flex-col gap-2">
         <label class='' for="username">Tên tài khoản</label>
         <input class='p-2 outline rounded-md outline-2 focus:outline-yellow-500' type="text" name="initial_username"
-          id="username" value="${accountdetail.userName}">
+          id="username" value="${accountdetail.userName}" readonly="readonly">
       </div>
       <div class="flex flex-col gap-2">
         <label for="password">Mật khẩu cũ</label>

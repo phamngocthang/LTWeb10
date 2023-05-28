@@ -44,6 +44,7 @@ public class SearchByName extends HttpServlet {
 				+ "                    </div>");
         
         for (Product o : list) {
+        	System.out.println(o.getStatus() == 0);
 			Image img = o.getImage();
 			out.println("<div class=\"col-lg-4 col-md-6 col-sm-6 pb-1\">\r\n"
 					+ "	                        <div class=\"product-item bg-light mb-4\">\r\n"
@@ -78,7 +79,7 @@ public class SearchByName extends HttpServlet {
 		}
     }
 
-    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

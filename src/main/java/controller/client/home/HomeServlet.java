@@ -17,7 +17,6 @@ import dao.DaoCustomer;
 import service.BillService;
 import service.CartService;
 import service.CategoryService;
-import service.CustomerService;
 import service.FavoriteProductService;
 import service.ProductService;
 import entity.Account;
@@ -62,26 +61,22 @@ public class HomeServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-	    response.setHeader("Content-Security-Policy", "frame-ancestors 'self';");
-	    response.setHeader("X-Frame-Options", "SAMEORIGIN");
-
+        
 		String user="";
         Cookie[] cookies=request.getCookies();
-        if(cookies!=null)
+        for(int i=0; i < cookies.length; i++)
         {
-        	for(int i=0; i < cookies.length; i++)
-            {
-        		Cookie cookie=cookies[i];
-        		if(cookie.getName().equals("userName"))
-        			{
-        				user=cookie.getValue();
-        			}
-        	}                    
-        }
+    		Cookie cookie=cookies[i];
+    		if(cookie.getName().equals("userName"))
+    			{
+    				user=cookie.getValue();
+    			}
+    	}        
         HttpSession session = request.getSession();
-        CustomerService custsv = new CustomerService();
-        Customer cus= custsv.getCustomerByID(user); 
+        DaoCustomer dao = new DaoCustomer();
+        Customer cus=dao.getCustomer(user);      
         session.setAttribute("curCustomer", cus);
+		
         // ProductService pService = new ProductService();
         // // Get 4 Recent Product
         // List<Product> list = pService.getRecentProduct();
@@ -108,15 +103,12 @@ public class HomeServlet extends HttpServlet {
         else {
         	 String amount = "";
              Cookie[] arr = request.getCookies();
-             if(arr!=null)
-             {
-            	 for (Cookie o:arr) {
-                  	if (o.getName().equals("Cart")) {
-                  		amount = o.getValue();
-                  		o.setMaxAge(60*24*60);
-                  		response.addCookie(o);
-                  	}
-                  }
+             for (Cookie o:arr) {
+             	if (o.getName().equals("Cart")) {
+             		amount = o.getValue();
+             		o.setMaxAge(60*24*60);
+             		response.addCookie(o);
+             	}
              }
              if (amount.isEmpty())
              {
@@ -142,7 +134,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);       
+        processRequest(request, response);
     }
 
 
@@ -156,4 +148,5 @@ public class HomeServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

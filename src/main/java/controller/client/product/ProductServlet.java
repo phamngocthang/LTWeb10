@@ -43,10 +43,10 @@ public class ProductServlet extends HttpServlet {
 	        String indexP = request.getParameter("index");
 	        int showPage = Integer.parseInt(show);
 			int indexPage = Integer.parseInt(indexP);
+			
 	        int endP = getEndPage(subcateID, show);
-	        
 	        //List<Product> listA = dao.pagingAccount(subcateID, indexPage, showPage);
-	        List<Product> listA = pService.pagingAccount(subcateID, indexPage, showPage);
+	        List<Product> listA = pService.pagingProduct(subcateID, indexPage, showPage);
 	        request.setAttribute("endP", endP);
 			request.setAttribute("listP", listA);
 			
