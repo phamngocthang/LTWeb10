@@ -209,10 +209,8 @@ public class ProductService {
 		daoProduct.CreateQueryWithParams(HQL, params);
 	    return true;
 	}
-	private boolean GetStatusByID(int productID) {
+	public Product getProductByID(int productID) {
 		Product product = daoProduct.findSingle(Product.class, productID);
-		if (product.getStatus()==0)
-			return true;
-		return false;
+		return product;
 	}
 }

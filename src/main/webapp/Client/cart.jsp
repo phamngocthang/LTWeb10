@@ -138,6 +138,11 @@
 			swal("Thông Báo!", "Đặt Hàng Thành Công",
 			"success");
 	}
+	if (status === 'true'){
+		if (checkinsert === 'false')
+			swal("Thông Báo!", "Đặt Hàng Không Thành Công!",
+			"success");
+	}
   	</script>
 </body>
 

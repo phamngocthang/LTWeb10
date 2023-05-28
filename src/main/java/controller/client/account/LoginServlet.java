@@ -65,15 +65,19 @@ public class LoginServlet extends HttpServlet {
 	        		}
 	        	}    
 	        	
-	            // store the Account object as a session attribute
-//	            HttpSession session = request.getSession();
+	        	// store the Account object as a session attribute
 	            session.setAttribute("user", a);   
 	            
+	            // store the Account object as a session attribute
+	            session.setAttribute("userName", a.getUserName());   
 	            // add a cookie that stores the user's email to browser
-	            Cookie c = new Cookie("userName", username);
-	            c.setMaxAge(60 * 60 * 24 * 365 * 3); // set age to 3 years
-	            c.setPath("/");                      // allow entire app to access it
-	            response.addCookie(c);
+//	            Cookie c = new Cookie("userName", username);
+//	            c.setHttpOnly(true);
+//	            c.setMaxAge(60 * 60 * 24 * 365 * 3); // set age to 3 years
+//	            c.setPath("/");                      // allow entire app to access it
+//	            String encodedValue = Base64.getEncoder().encodeToString(username.getBytes());
+//	            c.setValue(encodedValue);
+//	            response.addCookie(c);
 	            
 	            if(a.getIsAdmin() == 0) {
 	            	response.sendRedirect("home");
