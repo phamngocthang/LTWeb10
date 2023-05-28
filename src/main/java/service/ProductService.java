@@ -3,6 +3,7 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.DaoBill;
 import dao.DaoCart;
 import dao.DaoProduct;
 import entity.Image;
@@ -38,7 +39,7 @@ public class ProductService {
 		return list;
 	}
 	
-	public List<Product> pagingAccount(String subcateID, int index, int show)
+	public List<Product> pagingProduct(String subcateID, int index, int show)
 	{
 		List<Product> list = new ArrayList<>();
 		String HQL = "";
@@ -48,7 +49,7 @@ public class ProductService {
     	else {
     		HQL = "From Product P Where P.subcategory=" + subcateID +" Order By P.id_P ASC";
     	}
-		list = daoProduct.pagingAccount(HQL, (index-1)*show, show);
+		list = daoProduct.pagingProduct(HQL, (index-1)*show, show);
 		return list;
 	}
 	
@@ -167,12 +168,27 @@ public class ProductService {
 		
 		return list;
 	}
-	public boolean InsertProduct(Product product, Image img) {
-		boolean check = daoProduct.insertProduct(product, img);
+	public boolean InsertProduct(Product product) {
+		boolean check = daoProduct.insertProduct(product);
 		if (check)
 			return true;
 		return false;
 	}
+	
+	public void insertImage(int idP, String image_mid, String image_left, String image_right) {
+		String HQL = "INSERT INTO Image(id_P, path_middle, path_left, path_right) Values (:id_P, :image_mid, :image_left, :image_right)";
+		daoProduct.insertImage(HQL, idP, image_mid, image_left, image_right);
+	}
+	
+	public int getMaxIDProduct() {
+		String HQL = "Select max(P.id_P) from Product P";
+		DaoBill daobill = new DaoBill();
+		return daobill.getMaxIDBill(HQL);
+	}
+	
+	
+	
+	
 	public boolean UpdateProduct(Product product, Image img) {
 		boolean check = daoProduct.updateProduct(product, img);
 		if (check)

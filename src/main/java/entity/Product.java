@@ -76,7 +76,7 @@ public class Product implements Serializable {
 
 	public Product() {
 	}
-	public Product(String name, String brand, Category category, String color, String description, Double price, String size, Subcategory subcate, Image image, int status){
+	public Product(String name, String brand, Category category, String color, String description, Double price, String size, Subcategory subcate, int status){
 		this.name_P = name;
 		this.brand = brand;
 		this.category = category;
@@ -85,7 +85,6 @@ public class Product implements Serializable {
 		this.price = price;
 		this.size = size;
 		this.subcategory = subcate;
-		this.image = image;
 		this.status = status;
 	}
 	public Product(int id_P, String name, String brand, Category category, String color, String description, Double price, String size, Subcategory subcate, Image image, int status){

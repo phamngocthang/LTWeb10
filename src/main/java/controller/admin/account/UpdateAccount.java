@@ -24,7 +24,7 @@ public class UpdateAccount extends HttpServlet {
 	  String new_password= request.getParameter("new_password");
 	  String re_password= request.getParameter("re_newpassword");
 	  
-	  
+	  System.out.println(user_name);
 	  DaoAccount dao = new DaoAccount();
 	  session.setAttribute("checkupdate", true);
 	  int a = dao.UpdatePassword(user_name, old_password, new_password, re_password);	  

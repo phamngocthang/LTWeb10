@@ -31,9 +31,9 @@
 
               <tr class='bg-gray-100 odd:bg-gray-200'>
                 <td class='p-2 pl-4'>${p.product.name_P}</td>
-                <td class='p-2 pl-4 text-center'>${p.product.price}</td>
+                <td class='p-2 pl-4 text-center'>${Double.toString(p.product.price).substring(0,Double.toString(p.product.price).length()-2)} VNĐ</td>
                 <td class='p-2 pl-4 text-center'>${p.amount}</td>
-                <td class='p-2 pl-4 text-center'>${p.amount * p.product.price} VND</td>
+                <td class='p-2 pl-4 text-center'>${Double.toString(p.amount * p.product.price).substring(0,Double.toString(p.amount * p.product.price).length()-2)} VND</td>
               </tr>
             </c:forEach>
 
@@ -41,11 +41,11 @@
         </table>
         <div class='flex justify-between mt-4'>
           <div>
-            <a class='underline text-gray-500 hover:text-gray-400' href="BillManagement">Trở về trang quản lý hóa đơn</a>
+            <a class='underline text-gray-500 hover:text-gray-400' href="MyAccount">Trở về</a>
           </div>
           <div class='flex justify-end gap-2'>
             <p class='text-xl'>Tổng giá trị</p>
-            <p class='text-3xl font-semibold'>${total } VNĐ</p>
+            <p class='text-3xl font-semibold'>${total} VND</p>
           </div>
         </div>
       </div>

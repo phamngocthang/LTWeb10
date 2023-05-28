@@ -1,4 +1,4 @@
-package controller.admin.bill;
+package controller.client.bill;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,8 +21,8 @@ import service.ProductService;
 import service.ReviewService;
 import service.ShopDetailService;
 
-@WebServlet(name = "BillDetailServet", urlPatterns = { "/BillDetail" })
-public class BillDetailServlet extends HttpServlet {
+@WebServlet(name = "MyBillDetailServet", urlPatterns = { "/MyBillDetail" })
+public class MyBillDetailServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request,
       HttpServletResponse response) throws ServletException, IOException {
@@ -43,16 +43,16 @@ public class BillDetailServlet extends HttpServlet {
     // get bill detail by bill id
     BillService billService = new BillService();
     List<Billdetail> listBillDetail = billService.getAllBillDetails(billId);
+    
     int total = 0;
     for (Billdetail billdetail : listBillDetail) {
 		total += billdetail.getAmount() * billdetail.getProduct().getPrice();
 	}
-    total += 35000;
+    request.setAttribute("total", total);
     
     // print billDetail
     request.setAttribute("billDetail", listBillDetail);
     request.setAttribute("billId", billId);
-    request.setAttribute("total", total);
-    request.getRequestDispatcher("Admin/BillDetail.jsp").forward(request, response);
+    request.getRequestDispatcher("Client/MyBillDetail.jsp").forward(request, response);
   }
 }

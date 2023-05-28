@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +22,7 @@
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Customized Bootstrap Stylesheet -->
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 </head>
@@ -117,9 +118,26 @@
         </div>
     </div>
     <!-- Cart End -->
-
-
+	<input id="check_insert" value="${checkinsert}" hidden /> 
+    <input id="statusmanage" value="${statusmanage}" hidden />
+	
     <%@ include file="footer.jsp"%>
+    
+    <script>
+	  
+		let insert = document.getElementById("check_insert");
+		let checkstatus = document.getElementById("statusmanage");
+		
+		
+		let checkinsert = insert.value;
+		let status = checkstatus.value;
+		
+		if (status === 'true'){
+			if (checkinsert === 'true')
+				swal("Thông Báo!", "Đặt Hàng Thành Công",
+				"success");
+		}
+  	</script>
 </body>
 
 </html>

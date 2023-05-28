@@ -91,7 +91,7 @@ public class DaoProduct {
 		return list;
 	}
 
-	public List<Product> pagingAccount(String HQL, int offset, int limit) {
+	public List<Product> pagingProduct(String HQL, int offset, int limit) {
 		List<Product> list = new ArrayList<>();
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			list = session.createQuery(HQL, Product.class).setFirstResult(offset).setMaxResults(limit).list();
@@ -127,12 +127,12 @@ public class DaoProduct {
 		}
 		return list;
 	}
-	public boolean insertProduct(Product product, Image img) {
+	public boolean insertProduct(Product product) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 			session.getTransaction().begin();
     		session.save(product);
-    		session.save(img);
+    		
     		session.getTransaction().commit();
     		session.close();
     		return true;
@@ -142,6 +142,25 @@ public class DaoProduct {
 			return false;
 		}
 	}
+	public void insertImage(String HQL, int idP, String image_mid, String image_left, String image_right) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		EntityTransaction trans = session.getTransaction();
+		Query query = session.createNativeQuery(HQL);
+		trans.begin();
+		try {
+			query.setParameter("id_P", idP);
+			query.setParameter("image_mid", image_mid);
+			query.setParameter("image_left", image_left);
+			query.setParameter("image_right", image_right);
+			query.executeUpdate();
+			trans.commit();
+		} catch (Exception e) {
+			trans.rollback();
+		} finally {
+			session.close();
+		}
+	}
+	
 	public boolean updateStatus(String HQL) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
     	EntityTransaction trans = session.getTransaction();
