@@ -91,7 +91,6 @@ public class AddCardServlet extends HttpServlet {
 		    request.getRequestDispatcher("Client/error.jsp").forward(request, response);
 
 		}
-		
     }
 
     @Override

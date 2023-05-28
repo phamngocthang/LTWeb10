@@ -65,20 +65,15 @@
                     <p class="mb-4">${detail.description}</p>
                     <div class="d-flex mb-3">
                         <strong class="text-dark mr-3">Sizes:</strong>
-                        <form>
-                            <input type="radio" class="custom-control-input" id="size-1" name="size">
-                            <label class="custom" for="size-1">${detail.size}</label>
-                        </form>
+                        <label class="custom" for="size-1">${detail.size}</label>
                     </div>
                     <div class="d-flex mb-4">
                         <strong class="text-dark mr-3">Colors:</strong>
-                        <form>
-                            <input type="radio" class="custom-control-input" id="color-1" name="color">
-                            <label class="custom" for="color-1">${detail.color}</label>
-                        </form>
+                         <label class="custom" for="color-1">${detail.color}</label>
                     </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
                     	<form action="addCart?pid=${detail.id_P}" method="post">
+                    		<input type="hidden" name="csrfToken" value="123Qaz!@#">
 	                        <div class="input-group quantity mr-3" style="width: 130px; margin-bottom: 15px;">
 		                         <div class="input-group-btn">
 	                                <button type="button" class="btn btn-primary btn-minus">
@@ -190,6 +185,7 @@
 		                                    <h4 class="mb-4">Login to view Reviews</h4>
 		                                    <small>Your email address will not be published. Required fields are marked *</small>
 		                                    <form action="Login" method="get">
+		                                    	<input type="hidden" name="csrfToken" value="123Qaz!@#">
 		                                        <div class="form-group mb-0" style="margin-left:150px; margin-top:20px">
 		                                            <input type="submit" value="   Login  " class="btn btn-primary px-3">
 		                                        </div>

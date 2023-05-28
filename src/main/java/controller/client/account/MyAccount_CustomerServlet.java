@@ -37,7 +37,8 @@ public class MyAccount_CustomerServlet extends HttpServlet {
         			{
         				user=cookie.getValue();
         			}
-        	}                
+        	}          
+            System.out.println(user);
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String email = request.getParameter("email");

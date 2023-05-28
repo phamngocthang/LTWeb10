@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
@@ -19,6 +19,7 @@
 <body>
     <div id="logreg-forms">
         <form class="form-signin" action="${pageContext.request.contextPath}/Login" method="post">
+        	 <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}"><!-- CSRF Token được gửi kèm theo -->
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
             <div class="social-login">
                 <button class="btn facebook-btn social-btn" type="button" onclick="location.href='https://www.facebook.com/dialog/oauth?client_id=3382507702029634&redirect_uri=https://localhost:8999/WebApp/login-facebook'"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
@@ -55,6 +56,9 @@
         		if ("2".equals(err2)) {
         			out.print("<center> <h6 style=\"color: red;\">Signup fail! Username or Password is invalid</h6> </center>");
         			}
+        		if ("3".equals(err2)) {
+        			out.print("<center> <h6 style=\"color: red;\">Signup fail! The password must contain 1 uppercase letter, 1 lowercase letter, 1 number, and be between 6-20 characters long</h6> </center>");
+        			}
 				%>
                 <input name="user_signup" type="text" id="user-name" class="form-control" placeholder="Username" required="" autofocus="">
                 <input name="pass_signup" type="password" id="user-pass" class="form-control" placeholder="Password" required="" autofocus="">
@@ -85,7 +89,7 @@ $(()=>{
     $('#logreg-forms #cancel_signup').click(toggleSignUp);
 })g" target="_blank" style="color:black">Group 10</a>
     </p>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha384-xBuQ/xzmlsLoJpyjoggmTEz8OWUFM0/RC5BsqQBDX2v5cMvDHcMakNTNrHIW2I5f" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="js/login.js"></script>
 </body>

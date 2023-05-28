@@ -44,18 +44,16 @@
                     <a class="breadcrumb-item text-dark" href="#">Shop</a>
                     <span class="breadcrumb-item active">Shop List</span>
                 </nav>
-                <div class="col-lg-4 col-6 text-left" style="margin-left: 500px;">
-                <form action="">
-                    <div class="input-group">
-                        <input oninput="searchByName(this)" id="searchname" type="text" class="form-control" placeholder="Search for products">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                <div class="col-lg-4 col-6 text-left" style="margin-left: 500px;">      
+                  <div class="input-group">
+                      <input oninput="searchByName(this)" id="searchname" type="text" class="form-control" placeholder="Search for products" maxlength="10">
+                      <div class="input-group-append">
+                          <span class="input-group-text bg-transparent text-primary">
+                              <i class="fa fa-search"></i>
+                          </span>
+                      </div>
+                  </div>
+            	</div>
             </div>
         </div>
     </div>
@@ -69,84 +67,78 @@
             <div class="col-lg-3 col-md-4">
             	<!-- Catagory Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by Category</span></h5>
-                <div class="bg-light p-4 mb-30">
-                    <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-all" ${subcateID == -1 ?"checked":""} onclick='window.location.href="shop?subcateID=-1&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-all">All Product</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-1" ${subcateID == 1 ?"checked":""} onclick='window.location.href="shop?subcateID=1&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-1">Giày Sandals Nam</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-2" ${subcateID == 2 ?"checked":""} onclick='window.location.href="shop?subcateID=2&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-2">Giày Lười Nam</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-3" ${subcateID == 3 ?"checked":""} onclick='window.location.href="shop?subcateID=3&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-3">Giày Sneaker Nam</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-4" ${subcateID == 4 ?"checked":""} onclick='window.location.href="shop?subcateID=4&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-4">Giày Thể Thao Nam</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-5" ${subcateID == 5 ?"checked":""} onclick='window.location.href="shop?subcateID=5&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-5">Giày Cao Gót Nữ</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-6" ${subcateID == 6 ?"checked":""} onclick='window.location.href="shop?subcateID=6&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-6">Giày Sneaker Nữ</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-7" ${subcateID == 7 ?"checked":""} onclick='window.location.href="shop?subcateID=7&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-7">Giày Thể Thao Nữ</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="radio" name="radiocate" class="custom-control-input" id="cate-8" ${subcateID == 8 ?"checked":""} onclick='window.location.href="shop?subcateID=8&index=1&showP=3"'>
-                            <label class="custom-control-label" for="cate-8">Giày Đế Bệ Nữ</label>
-                        </div>
-                    </form>
+                <div class="bg-light p-4 mb-30">          
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-all" ${subcateID == -1 ?"checked":""} onclick='window.location.href="shop?subcateID=-1&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-all">All Product</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-1" ${subcateID == 1 ?"checked":""} onclick='window.location.href="shop?subcateID=1&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-1">Giày Sandals Nam</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-2" ${subcateID == 2 ?"checked":""} onclick='window.location.href="shop?subcateID=2&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-2">Giày Lười Nam</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-3" ${subcateID == 3 ?"checked":""} onclick='window.location.href="shop?subcateID=3&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-3">Giày Sneaker Nam</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-4" ${subcateID == 4 ?"checked":""} onclick='window.location.href="shop?subcateID=4&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-4">Giày Thể Thao Nam</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-5" ${subcateID == 5 ?"checked":""} onclick='window.location.href="shop?subcateID=5&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-5">Giày Cao Gót Nữ</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-6" ${subcateID == 6 ?"checked":""} onclick='window.location.href="shop?subcateID=6&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-6">Giày Sneaker Nữ</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-7" ${subcateID == 7 ?"checked":""} onclick='window.location.href="shop?subcateID=7&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-7">Giày Thể Thao Nữ</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="radio" name="radiocate" class="custom-control-input" id="cate-8" ${subcateID == 8 ?"checked":""} onclick='window.location.href="shop?subcateID=8&index=1&showP=3"'>
+                       <label class="custom-control-label" for="cate-8">Giày Đế Bệ Nữ</label>
+                   </div>  
                 </div>
                 <!-- Price End -->
                 <!-- Price Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
                 <div class="bg-light p-4 mb-30">
-                    <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1" onclick="SearchByPrice(1, 3)">
-                            <label class="custom-control-label" for="price-1">Dưới 300k</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2" onclick="SearchByPrice(1, 3)">
-                            <label class="custom-control-label" for="price-2">300k - 800k</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3" onclick="SearchByPrice(1, 3)">
-                            <label class="custom-control-label" for="price-3">Trên 800k</label>
-                        </div>
-                    </form>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="checkbox" class="custom-control-input" id="price-1" onclick="SearchByPrice(1, 3)">
+                       <label class="custom-control-label" for="price-1">Dưới 300k</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="checkbox" class="custom-control-input" id="price-2" onclick="SearchByPrice(1, 3)">
+                       <label class="custom-control-label" for="price-2">300k - 800k</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="checkbox" class="custom-control-input" id="price-3" onclick="SearchByPrice(1, 3)">
+                       <label class="custom-control-label" for="price-3">Trên 800k</label>
+                   </div>
                 </div>
                 <!-- Price End -->
                 
                 <!-- Color Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
                 <div class="bg-light p-4 mb-30">
-                    <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-1" onclick="SearchByPrice(1, 3)">
-                            <label class="custom-control-label" for="color-1">Black</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-2" onclick="SearchByPrice(1, 3)">
-                            <label class="custom-control-label" for="color-2">White</label>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-3" onclick="SearchByPrice(1, 3)">
-                            <label class="custom-control-label" for="color-3">Blue</label>
-                        </div>
-                    </form>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="checkbox" class="custom-control-input" id="color-1" onclick="SearchByPrice(1, 3)">
+                       <label class="custom-control-label" for="color-1">Black</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="checkbox" class="custom-control-input" id="color-2" onclick="SearchByPrice(1, 3)">
+                       <label class="custom-control-label" for="color-2">White</label>
+                   </div>
+                   <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                       <input type="checkbox" class="custom-control-input" id="color-3" onclick="SearchByPrice(1, 3)">
+                       <label class="custom-control-label" for="color-3">Blue</label>
+                   </div>
                 </div>
                 <!-- Color End -->
             </div>
@@ -235,7 +227,7 @@
         </div>
     </div>
 	<!-- Shop End -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
 
     <%@ include file="footer.jsp" %>>
 </body>
