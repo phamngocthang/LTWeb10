@@ -242,7 +242,7 @@
 <script>
     	function SearchByPrice(indexp, showp){
    	   	 $.ajax({
-   	            url: location.origin + "/SearchProductByPrice",
+   	            url: location.origin + "/WebApp/SearchProductByPrice",
    	            type: "get", //send it through get method
    	            data: {
    	            	price1: document.getElementById("price-1").checked.toString(),
@@ -285,7 +285,7 @@
             	document.getElementById("color-2").checked = false;
             	document.getElementById("color-3").checked = false;
    	         $.ajax({
-   	             url: location.origin + "/SearchByName",
+   	             url: location.origin + "/WebApp/SearchByName",
    	             type: "get", //send it through get method
    	             data: {
    	                 txt: txtSearch
