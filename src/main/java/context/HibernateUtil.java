@@ -34,9 +34,9 @@ public class HibernateUtil {
 		pros.put (Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
 		pros.put (Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
 		
-		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/db_shopshoes");
+		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
 		pros.put (Environment.USER, "root");
-		pros.put (Environment.PASS, "mchien2002");
+		pros.put (Environment.PASS, "816570");
 		
 //		pros.put (Environment.URL, "jdbc:mysql://localhost:3306/ltweb");
 //		pros.put (Environment.USER, "root");

@@ -66,6 +66,7 @@ public class LoginServlet extends HttpServlet {
             
             // add a cookie that stores the user's email to browser
             Cookie c = new Cookie("userName", username);
+            c.setHttpOnly(true);
             c.setMaxAge(60 * 60 * 24 * 365 * 3); // set age to 3 years
             c.setPath("/");                      // allow entire app to access it
             response.addCookie(c);

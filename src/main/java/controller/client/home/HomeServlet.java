@@ -122,6 +122,7 @@ public class HomeServlet extends HttpServlet {
              {
              	amount ="0";
      	    	Cookie amountCart = new Cookie("amountCart", amount);
+     	    	amountCart.setHttpOnly(true);
      	    	amountCart.setMaxAge(24*60*60);
      	    	response.addCookie(amountCart);
              }
@@ -130,6 +131,7 @@ public class HomeServlet extends HttpServlet {
             	 List<Cart> list = cart.getCartCookies(amount);
             	 amount = Integer.toString(list.size());
             	 Cookie amountCart = new Cookie("amountCart", Integer.toString(list.size()));
+            	 amountCart.setHttpOnly(true);
       	    	 amountCart.setMaxAge(24*60*60);
       	    	 response.addCookie(amountCart);
              }
