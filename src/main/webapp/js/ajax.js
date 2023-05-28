@@ -36,7 +36,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 				return;
 			}﻿
 	        $.ajax({
-	            url: location.origin + "/AddCartAjax",
+	            url: location.origin + "/WebApp/AddCartAjax",
 	            type: "get", //send it through get method
 	            data: {
 	            	productID: pID
@@ -61,7 +61,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	    }
 	    function AddFavoriteProductAjax(pID){﻿
 	        $.ajax({
-	            url: location.origin + "/addFavoriteProduct",
+	            url: location.origin + "/WebApp/addFavoriteProduct",
 	            type: "get", //send it through get method
 	            data: {
 	            	productID: pID
@@ -87,7 +87,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	    function EditCart(pID, isSub, amount){﻿
 	    
 		    $.ajax({
-		        url: location.origin + "/EditCart",
+		        url: location.origin + "/WebApp/EditCart",
 		        type: "get", //send it through get method
 		        data: {
 		        	//message: document.getElementById("message").value,
@@ -115,7 +115,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 		function DeleteCart(pID){﻿
 	    
 		    $.ajax({
-		        url: location.origin + "/deleteCart",
+		        url: location.origin + "/WebApp/deleteCart",
 		        type: "get", //send it through get method
 		        data: {
 		        	//message: document.getElementById("message").value,
@@ -140,7 +140,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 
 		function DelFavoriteProductAjax(pID){﻿
 	        $.ajax({
-	            url: location.origin + "/deleteFavoriteProduct",
+	            url: location.origin + "/WebApp/deleteFavoriteProduct",
 	            type: "get", //send it through get method
 	            data: {
 	            	productID: pID
@@ -164,7 +164,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	   	function AddReviews(pID){﻿
 	    
 		    $.ajax({
-		        url: location.origin + "/AddReviews",
+		        url: location.origin + "/WebApp/AddReviews",
 		        type: "get", //send it through get method
 		        data: {
 		        	//message: document.getElementById("message").value,

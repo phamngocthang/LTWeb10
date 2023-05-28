@@ -72,8 +72,8 @@
          <span class="bg-secondary pr-3" style="font-size: x-large;">${mess1}</span>
     </div>
 	<!-- Shop End -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
     <%@ include file="footer.jsp" %>>
 </body>
 
