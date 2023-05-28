@@ -21,9 +21,8 @@
         <form class="form-signin" action="${pageContext.request.contextPath}/Login" method="post">
             <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
             <div class="social-login">
-                <button class="btn facebook-btn social-btn" type="button" onclick="location.href='https://www.facebook.com/dialog/oauth?client_id=3382507702029634&redirect_uri=https://localhost:8999/WebApp/login-facebook'"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-                <button class="btn google-btn social-btn" type="button" onclick="location.href='https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=https://nhom10-app.herokuapp.com/login-google&response_type=code&client_id=998202632275-0a5fp9m07oq440p1c6bec8g3t47itono.apps.googleusercontent.com&approval_prompt=force';"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
-                <!--<button class="btn google-btn social-btn" type="button" onclick="location.href='https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=https://localhost:8999/WebApp/login-google&response_type=code&client_id=998202632275-0a5fp9m07oq440p1c6bec8g3t47itono.apps.googleusercontent.com&approval_prompt=force';"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>-->
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
             </div>
             	<%
             	String err = request.getParameter("err");
@@ -48,7 +47,14 @@
                 <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
             </form>
             
-            <form action="${pageContext.request.contextPath}/Signup" method="post" class="form-signup">                
+            <form action="${pageContext.request.contextPath}/Signup" method="post" class="form-signup">
+                <div class="social-login">
+                    <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
+                </div>
+                <div class="social-login">
+                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
+                </div>
+                
                 <p style="text-align:center">OR</p>
                 <%
                 String err2 = request.getParameter("err2");
@@ -83,7 +89,7 @@ $(()=>{
     $('#logreg-forms #cancel_reset').click(toggleResetPswd);
     $('#logreg-forms #btn-signup').click(toggleSignUp);
     $('#logreg-forms #cancel_signup').click(toggleSignUp);
-})g" target="_blank" style="color:black">Group 10</a>
+})g" target="_blank" style="color:black">By Artin</a>
     </p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

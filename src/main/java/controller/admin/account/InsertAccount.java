@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DaoAccount;
-import service.AccountService;
-import service.CustomerService;
 
 @WebServlet("/InsertAccount")
 public class InsertAccount extends HttpServlet {
@@ -27,16 +25,14 @@ public class InsertAccount extends HttpServlet {
       String isAdmin_ = request.getParameter("isAdmin");
       
       if (isAdmin_!=null)
-    	  isAdmin=1;
-      else 
     	  isAdmin=0;
+      else 
+    	  isAdmin=1;
 	 
+      DaoAccount dao = new DaoAccount();
       session.setAttribute("checkinsert", true);
-      AccountService svacc = new AccountService();
-      int a = svacc.Signup(username, password, password, isAdmin);
-      CustomerService svcus = new CustomerService();
-      svcus.InsertCustomer(username);
-      
+      int a= dao.Signup(username, password, password, isAdmin);
+      dao.InsertCustomer(username);
       if(a>0)
     	  session.setAttribute("messinsert", true);
       else

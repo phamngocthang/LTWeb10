@@ -1,10 +1,9 @@
 package service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
 
 import dao.DaoCart;
 import dao.DaoProduct;
@@ -18,44 +17,36 @@ public class CartService {
 	DaoProduct daoProduct = new DaoProduct();
 	public void editAmountCart(String userName, String productID, int amount) {
         String HQL = "Update Cart c set c.amount=:amount Where c.account='"+ userName+"' and c.product=" + productID;
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("amount", amount);
-        daoCart.CreateQueryWithParams(HQL, params);
+        daoCart.editAmountCart(HQL, amount);
+  
     }
-	
 	public void deleteCart(int productID, String userName) {
-        String HQL = "Delete From Cart Where id_P=" + Integer.toString(productID) + " and userName='" + userName+ "'";
-        Map<String, Object> params = new HashMap<String, Object>();
-        daoCart.nativeQuery(HQL, params);
+        String HQL = "Delete From Cart c Where c.product=" + Integer.toString(productID) + " and c.account='" + userName+ "'";
+        daoCart.deleteCart(HQL);
     }
 	
 	public void deleteCartByUser(String userName) {
-        String HQL = "Delete From Cart Where userName='" + userName +"'";
-        Map<String, Object> params = new HashMap<String, Object>();
-        daoCart.nativeQuery(HQL, params);
+        String HQL = "Delete From Cart c Where c.account='" + userName +"'";
+        daoCart.deleteCart(HQL);
     }
 	
 	public void insertCart(String userName, String productID, int amount) {
         String HQL = "INSERT INTO Cart(userName, id_P, amount) Values (:userName, :productID, :amount)";
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("userName", userName);
-        params.put("productID", productID);
-        params.put("amount", amount);
-        daoCart.nativeQuery(HQL, params);
+       daoCart.insertCart(HQL, userName, productID, amount);
   
     }
 	public Cart checkCartExist(String userName,String productID) {
 		String HQL = "From Cart C Where C.account='" + userName +"' And C.product=" + productID;
-		Map<String, Object> params = new HashMap<String, Object>();
-		Cart cart = daoCart.findSingleWithParams(HQL, params);
-	    return cart;
+		Cart cart = daoCart.getCart(HQL, userName, productID);
+		return cart;
+	       
 	}
 	
 	
 	public List<Cart> getCartByUserName(String userName) {
 		List<Cart> cart = new ArrayList<>();
 		String HQL = "From Cart C Where C.account='" + userName + "'";
-		cart = daoCart.findAll(HQL);
+		cart = daoCart.getCartByUserName(HQL);
 		return cart;
 	       
 	}
@@ -64,20 +55,23 @@ public class CartService {
 		List<Product> product = new ArrayList<>();
 		for (Cart c : listCart) {
 			String HQL = "From Product P Where P.id_P=:productID";
-			Product p = daoProduct.findSingle(Product.class, c.getProduct().getId_P());
+			Product p = daoCart.getProductByID(HQL, c.getProduct().getId_P());
 			product.add(p);
 		}
 		return product;
 	}
 	
 	public int getCountCart(String userName) {
-		String HQL = "select count(C) from Cart C Where C.account='"+ userName + "'";
-		return daoCart.count(HQL);
+		String HQL = "";
+
+		HQL = "select count(C) from Cart C Where C.account='"+ userName + "'";
+		return daoProduct.getCountProduct(HQL);
 	}
 	public List<Product> getProductCookies(List<Cart> cart) {
 		List<Product> product = new ArrayList<>();
 		for (Cart c : cart) {
-			Product p = daoProduct.findSingle(Product.class, c.getProduct().getId_P());
+			String HQL = "From Product P Where P.id_P=:productID";
+			Product p = daoCart.getProductByID(HQL, c.getProduct().getId_P());
 			product.add(p);
 		}
 		return product;

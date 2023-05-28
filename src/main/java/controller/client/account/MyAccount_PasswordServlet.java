@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.*;
 import entity.*;
-import service.AccountService;
-import service.CustomerService;
 
 
 /**
@@ -25,8 +23,6 @@ public class MyAccount_PasswordServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		HttpSession session = request.getSession();
-		
 		String user="";
         Cookie[] cookies=request.getCookies();
         for(int i=0; i < cookies.length; i++)
@@ -41,16 +37,14 @@ public class MyAccount_PasswordServlet extends HttpServlet {
         String newPass1=request.getParameter("newpass1");
         String newPass2=request.getParameter("newpass2");
         
-        AccountService accsv = new AccountService();
-        session.setAttribute("checkupdate", true);
-        int a = accsv.UpdatePassword(user, oldPass, newPass1, newPass2);
+        DaoAccount dao = new DaoAccount();
+        int a=dao.UpdatePassword(user, oldPass, newPass1, newPass2);
         if(a>0)
         {
-        	session.setAttribute("messupdate", true);
+        	response.sendRedirect("home");
         }
         else
-        	session.setAttribute("messupdate", false);
-        request.getRequestDispatcher("MyAccount").forward(request, response);
+        	request.getRequestDispatcher("Client/myaccount.jsp").forward(request, response);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

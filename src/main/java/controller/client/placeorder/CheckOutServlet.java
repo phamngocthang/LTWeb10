@@ -17,7 +17,6 @@ import entity.Cart;
 import entity.Customer;
 import entity.Product;
 import service.CartService;
-import service.CustomerService;
 
 /**
  * Servlet implementation class LoginServlet
@@ -33,9 +32,8 @@ public class CheckOutServlet extends HttpServlet {
         	response.sendRedirect("Login");
         	return;
         }	
-        CustomerService custsv = new CustomerService();
-        Customer cust = custsv.getCustomerByID(a.getUserName());
-
+        DaoAccount dao = new DaoAccount();
+        Customer cust = dao.getCustomer(a.getUserName());
         session.setAttribute("Customer", cust);
         request.getRequestDispatcher("Client/checkout.jsp").forward(request, response);
         /*

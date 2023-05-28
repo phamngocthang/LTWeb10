@@ -2,7 +2,6 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -20,44 +19,106 @@ import context.HibernateUtil;
 import entity.Cart;
 import entity.Product;
 
-public class DaoCart extends IDAO<Cart>{
-	@Override
-	public int count(String queryName) {
-		// TODO Auto-generated method stub
-		return super.count(queryName);
+public class DaoCart {
+	public Cart getCart(String HQL, String userName, String productID) {
+		Cart cart = new Cart();
+    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
+    		cart = session.createQuery(HQL, Cart.class).uniqueResult();
+    		session.close();
+		} catch (Exception e) {
+		}
+    	return cart;
 	}
-	@Override
-	public Cart findSingleWithParams(String queryName, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return super.findSingleWithParams(queryName, params);
+	public Product getProductByID(String HQL,int productID) {
+		Product product = new Product();
+    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
+    		product = session.createQuery(HQL, Product.class).setParameter("productID", productID).uniqueResult();
+    		
+    		session.close();
+    		
+    		
+		} catch (Exception e) {
+		}
+    	return product;
 	}
-	@Override
-	public void CreateQueryWithParams(String queryName, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		super.CreateQueryWithParams(queryName, params);
-	}
-
-
-	@Override
-	public Cart findSingle(Class<Cart> type, Object key) {
-		// TODO Auto-generated method stub
-		return super.findSingle(type, key);
-	}
-	@Override
-	public List<Cart> findAll(String queryString) {
-		// TODO Auto-generated method stub
-		return super.findAll(queryString);
+	public List<Cart> getCartByUserName(String HQL) {
+		List<Cart> cart = new ArrayList<>();
+    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
+    		cart = session.createQuery(HQL, Cart.class).list();
+    		session.close();
+		} catch (Exception e) {
+		}
+    	return cart;
 	}
 	
-	@Override
-	public void nativeQuery(String HQL, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		try {
-			super.nativeQuery(HQL, params);
+	public List<Product> getProductByID(String HQL) {
+		List<Product> product = new ArrayList<>();
+    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
+    		product = session.createQuery(HQL).list();
+    		
+    		session.close();
+    		
+    		
+		} catch (Exception e) {
 		}
-		catch (Exception e) {
-			System.out.println(e.getMessage());
+    	return product;
+	}
+	
+	public void deleteCart(String HQL) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+    	EntityTransaction trans = session.getTransaction();
+    	Query query = session.createQuery(HQL);
+    	trans.begin();
+    	try {
+    		
+    		query.executeUpdate();
+        	trans.commit();
+    	}
+    	catch (Exception e) {
+			trans.rollback();
+		}
+    	finally {
+			session.close();
 		}
 	}
 	
+	public void editAmountCart(String HQL, int amount) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+    	EntityTransaction trans = session.getTransaction();
+    	Query query = session.createQuery(HQL);
+    	trans.begin();
+    	try {
+    		
+    		query.setParameter("amount", amount);
+    		
+    		query.executeUpdate();
+        	trans.commit();
+    	}
+    	catch (Exception e) {
+			trans.rollback();
+		}
+    	finally {
+			session.close();
+		}
+	}
+	
+	public void insertCart(String HQL, String userName, String productID, int amount) {
+    	Session session = HibernateUtil.getSessionFactory().openSession();
+    	EntityTransaction trans = session.getTransaction();
+    	Query query = session.createNativeQuery(HQL);
+    	trans.begin();
+    	try {
+    		query.setParameter("userName", userName);
+    		query.setParameter("productID", productID);
+    		query.setParameter("amount", amount);
+    		query.executeUpdate();
+        	trans.commit();
+    	}
+    	catch (Exception e) {
+			trans.rollback();
+		}
+    	finally {
+			session.close();
+		}
+	}
 }

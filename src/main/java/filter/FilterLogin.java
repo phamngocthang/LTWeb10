@@ -29,7 +29,6 @@ public class FilterLogin implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
 		Account a = (Account) session.getAttribute("user");
-        
 		
         if(a != null && (a.getIsAdmin() == 1)) {
         	chain.doFilter(request, response);
