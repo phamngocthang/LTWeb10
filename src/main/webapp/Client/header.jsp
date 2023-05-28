@@ -55,9 +55,12 @@
             </div>
             <div class="col-lg-4 col-6 text-right">
             	<c:if test="${sessionScope.user == null }">
-            		<div class="btn-group mx-2">
-                    	<button type="button" class="btn btn-primary" data-toggle="dropdown" onclick="location.href='Login';" >Login</button>
-                	</div>
+            		<form action="${pageContext.request.contextPath}/Login" method="post">
+					    <input type="hidden" name="csrfToken" value="${sessionScope.csrfToken}">
+					    <div class="btn-group mx-2">
+					        <button type="submit" class="btn btn-primary">Login</button>
+					    </div>
+					</form>
             	</c:if>
                 
                 <c:if test="${sessionScope.user != null }">

@@ -3,6 +3,7 @@ package controller.client.home;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,9 +63,11 @@ public class HomeServlet extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		String csrfToken = UUID.randomUUID().toString();
+		HttpSession session = request.getSession();
+	    session.setAttribute("csrfToken", csrfToken);
 	    response.setHeader("Content-Security-Policy", "frame-ancestors 'self';");
 	    response.setHeader("X-Frame-Options", "SAMEORIGIN");
-
 		String user="";
         Cookie[] cookies=request.getCookies();
         if(cookies!=null)
@@ -78,7 +81,6 @@ public class HomeServlet extends HttpServlet {
         			}
         	}                    
         }
-        HttpSession session = request.getSession();
         CustomerService custsv = new CustomerService();
         Customer cus= custsv.getCustomerByID(user); 
         session.setAttribute("curCustomer", cus);

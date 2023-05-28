@@ -3,7 +3,9 @@
   
   import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+
   
   import javax.servlet.ServletException; 
   import javax.servlet.annotation.WebServlet; 
@@ -28,23 +30,35 @@ public class DetailProductServlet extends HttpServlet {
 		{
 		  response.setContentType("text/html;charset=UTF-8"); 
 		  ShopDetailService dp = new ShopDetailService(); 
-		  int id = Integer.parseInt(request.getParameter("id"));
-		  String brand = request.getParameter("brand"); 
-		  Product detail = dp.getProductByID(id); 
-	      // Get 5 Recent Product
-	      List<Product> list = dp.getAllProductByBrand(brand, id);
-	      
-	      // Get FeedBack
-	      ReviewService reviewService = new ReviewService();
-	      List<Feedback> fb = reviewService.showReview(id);
-	      //int countFeedBack = reviewService.countFBByPID(id);
-	      System.out.print(brand);
-		  
-		  request.setAttribute("listNP", list);
-		  request.setAttribute("detail", detail);
-		  request.setAttribute("feedback", fb);
-		  //session.setAttribute("countfeedback", countFeedBack);
-		  request.getRequestDispatcher("Client/detail.jsp").forward(request, response);
+		  String text_id = request.getParameter("id");
+		  try {
+			      int id = Integer.parseInt(text_id);
+			      String brand = request.getParameter("brand"); 
+				  ArrayList<String> brands = new ArrayList<>();
+				  brands.add("Adidas");
+				  brands.add("Puma");
+				  brands.add("Nike");
+				  if (brands.contains(brand)) {
+					  Product detail = dp.getProductByID(id);
+				      // Get 5 Recent Product
+				      List<Product> list = dp.getAllProductByBrand(brand, id);
+				      
+				      // Get FeedBack
+				      ReviewService reviewService = new ReviewService();
+				      List<Feedback> fb = reviewService.showReview(id);
+				      System.out.print(brand);
+					  
+					  request.setAttribute("listNP", list);
+					  request.setAttribute("detail", detail);
+					  request.setAttribute("feedback", fb);
+					  request.getRequestDispatcher("Client/detail.jsp").forward(request, response);
+					  
+				  } else {
+					  response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found");
+				  }
+			} catch (NumberFormatException e) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found");
+			}
 		}
 		  
 		  @Override protected void doGet(HttpServletRequest request,
